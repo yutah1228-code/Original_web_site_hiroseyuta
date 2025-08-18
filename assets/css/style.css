@@ -1,3 +1,8 @@
+@charset "UTF-8";
+
+* {
+    font-family: sans-serif;
+}
 /* ヘッダースタイリング */
 .header {
   height: 80px;
@@ -114,4 +119,40 @@
 
 .nav.open {
   right: 0;      /* クリックされたら、画面内にスライドイン */
+}
+
+.main1{
+  width: 100vw;
+  height: 93vh;
+  /* /*消す予定 */
+  background-color: yellow;
+  margin-top: 50px;
+
+  
+}
+
+.main2{
+  width: 100vw;
+  height: 30vh;
+  display: flex;
+}
+
+.gaiyou{
+  border: solid black 3px;
+  margin: 10px 30px;
+  width: 95vw;
+  height: 30vh;
+  background-image: url(/assets/img/530678560_2005189683349741_7609845033930916312_n.jpg);
+}
+.gaiyou_photo{
+  width:20vw ;
+  height:40vh ;
+  /* 後で消す予定 */
+  background-color: antiquewhite;
+}
+
+.start{
+  width: 100vw;
+  height: 93vh;
+
 }
