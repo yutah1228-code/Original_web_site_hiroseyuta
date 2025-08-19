@@ -127,14 +127,15 @@
   /* /*消す予定 */
   background-color: yellow;
   margin-top: 50px;
-
+  background-image: url(../img/531984937_1065672889014416_53595589730337324_n.jpg);
   
 }
 
 .main2{
   width: 100vw;
-  height: 30vh;
-  display: flex;
+  background-image:url(/assets/img/531984937_1065672889014416_53595589730337324_n.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .gaiyou{
@@ -156,3 +157,116 @@
   height: 93vh;
 
 }
+
+.pressToStart{
+  border: 5px solid pink;
+  height: 100px;
+  width: 100vw;
+  position: fixed;
+  top: 700px;
+
+
+}
+
+.hazimeru a{
+  /* position: fixed;
+  width: 1000px;
+  height:100px ;
+  background-color: transparent; 
+  border: none;      
+  font-size: 100px;
+  letter-spacing: 10px;
+  font-weight: bolder;
+  /* color: transparent; */
+  /* color: red;
+  border: 3px blue solid;
+  text-decoration: none;
+  text-decoration-color: gold;
+  top: 2000px;
+  left: 35vw;
+  z-index: 1000; */ 
+  
+  
+
+}
+
+#enemy_hp{
+  width: 200px;
+  height: 400px;
+  background-color: antiquewhite;
+
+
+
+}
+
+.mikata{
+  width: 200px;
+  height: 400px;
+  background-image: url(/assets/img/530537444_749750834336152_7863546310926926073_n.png);
+  background-size: cover;
+  
+  color: red;
+
+}
+
+.game_main{
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-image: url(/assets/img/530556201_740928238647808_5784113294969287064_n.jpg);
+
+}
+
+.mikata_HP{
+  
+}
+
+.rog_box{
+  width: 500px;
+  height: 400px;
+  background-color: aquamarine;
+  
+  
+
+}
+
+.command_all{
+  
+}
+
+.blanc{
+  background-color: blueviolet;
+  width: 100vw;
+  height: 50vh;
+
+
+}
+
+.command_list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  
+}
+
+.enemy_hp{
+  margin-top: 10px;
+  font-weight: bold;
+}
+  
+.inventory_box{
+  max-height: 160px;
+  overflow-y: auto;
+  border: 2px;
+}
+
+#inventory_list{
+  list-style-type: disc;
+}
+#inventory_list li{
+display: flex;
+justify-content: space-between;
+}
+
