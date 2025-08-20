@@ -199,13 +199,15 @@
 
 }
 
-.mikata{
+#player_hp{
   width: 200px;
   height: 400px;
   background-image: url(/assets/img/530537444_749750834336152_7863546310926926073_n.png);
   background-size: cover;
   
   color: red;
+  margin-top: 10px;
+  font-weight: bold;
 
 }
 
@@ -237,7 +239,6 @@
 }
 
 .blanc{
-  background-color: blueviolet;
   width: 100vw;
   height: 50vh;
 
@@ -270,3 +271,18 @@ display: flex;
 justify-content: space-between;
 }
 
+.command_all{
+  display: none;
+}
+
+.command_all.is_open{
+  display: block;
+}
+
+.battle_btn{
+  margin: 8px 0;
+padding: 8px 16px;
+border-radius: 8px;
+border: 1px solid black;
+cursor: pointer;
+}
