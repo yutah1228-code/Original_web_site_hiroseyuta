@@ -3,45 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HOME</title>
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="header">
-        <div class="header__container">
-            <div class="header_text">
-            <h1 class="header__logo"><a href="/">アルカナ・サーガ</a></h1>
-            <h2 class="header_sblogo">Arcana-saga</h2>
-            </div>
-            <button type="button" class="hamburger">
-                <span></span>
-            </button>
-            <nav class="nav">
-                <ul class="nav__list">
-                    <li class="nav__item"><a href="./rekisi.html">RPGの歴史</a></li>
-                    <li class="nav__item"><a href="./play.html">HOW TO PLAY</a></li>
-                    <li class="nav__item"><a href="./kyara.html">キャラクター紹介</a></li>
-                    
-            </nav>
-        </div>
-    </header>
+  <div class="header__container">
+    <div class="header_text">
+      <h1 class="header__logo"><a href="/">アルカナ・サーガ</a></h1>
+      <h2 class="header_sblogo">Arcana-saga</h2>
+    </div>
+
+    <button type="button" class="hamburger" aria-expanded="false" aria-controls="global-nav">
+      <span></span>
+    </button>
+
+    <nav class="nav" id="global-nav">
+      <ul class="nav__list">
+        <li class="nav__item"><a href="./rekisi.html">RPG</a></li>
+        
+        <li class="nav__item"><a href="./kyara.html">character</a></li>
+      </ul> 
+    </nav>
+  </div>
+</header>
 
     <main>
-        <div class="main1">
+         <div class="main1">
             <!-- <img class="start" src="./assets/img/531984937_1065672889014416_53595589730337324_n.jpg" alt=""> -->
-            <div class="pressToStart">
+            
                 <button class="hazimeru">
                         <a href="./game.html">PRESS TO START</a>
                 </button>
-            </div>/
-        </div>
+            </div>
+        
         
     </main>
 
     <footer>
 
     </footer>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.getElementById('global-nav');
+  if (!hamburger || !nav) return;
+
+  hamburger.addEventListener('click', () => {
+    const opened = hamburger.classList.toggle('open');
+    nav.classList.toggle('open', opened);
+    hamburger.setAttribute('aria-expanded', opened ? 'true' : 'false');
+  });
+});
+</script>
 
 
 

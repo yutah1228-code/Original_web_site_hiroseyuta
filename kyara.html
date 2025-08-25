@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>character</title>
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="chara">
     </head>
 <body>
     <header class="header">
@@ -22,17 +23,162 @@
             <nav class="nav">
                 <ul class="nav__list">
                     <li class="nav__item"><a href="./index.html">HOME</a></li>
-                    <li class="nav__item"><a href="./rekisi.html">RPGの歴史</a></li>
-                    <li class="nav__item"><a href="./play.html">HOW TO PLAY</a></li>
+                    <li class="nav__item"><a href="./rekisi.html">RPG</a></li>
+                    
                     
             </nav>
         </div>
     </header>
 
-    <div gaiyou_photo>
-        <a href="./assets/img/530678560_2005189683349741_7609845033930916312_n.jpg"></a>
-    </div>
-    <script src="./assets/js/script.js"></script>
+    <main class="character_list">
+        <div class="flame">
+            <div class="none"></div>
+            <div class="character_one">
+                <div class="one_detale" >
+                    <div class="one_preview">
+                <img src="./assets/img/one_big.jpg" alt="クレス全身像">
+            </div>
+                </div>
+                <p class="one_story">＜クレス＞<br>かつて王国の未来を背負う存在として人々に慕われていた王子。しかし、王国は突如として勃発した反乱に飲み込まれ、玉座も家族も奪われてしまった。今や彼は“王子”という名を隠し、追われる身として各地を放浪する。
+
+反乱軍の追手から逃れるために粗末な鎧を纏い、民兵や冒険者に紛れて生き延びるが、その瞳には失われた祖国を取り戻す強い決意が宿っている。剣の腕前は幼少期から磨かれ、護衛隊長にすら一目置かれていたが、戦いの経験不足ゆえにまだ荒削り。しかし、その純粋さと強靭な意志は、やがて仲間を導く光となる。
+
+彼の存在を知る者は少なく、そしてその血筋を狙う影は絶えない。
+追われる亡国の王子は、自らの使命と、奪われた王国を取り戻す運命に向かって歩み出すのだった。</p>
+            </div>
+            
+            <div class="character_two">
+                <div class="two_detale">coming soon
+                    <div class="two_preview">
+                <img src="./assets/img/two_big.jpg" alt="メルディ全身像">
+            </div>
+                </div>
+                <p class="two_story">＜メルディ＞<br>
+                    由緒ある名門貴族の娘として生まれ、幼い頃から一流の魔術師となるべく厳しい英才教育を受けてきた。しかしその教育はあまりにも苛烈で、失敗を重ねるたびに「才能がない」と言い聞かされ、自らもそう信じ込むようになってしまう。
+
+心をすり減らす日々に耐えきれず、彼女はついに屋敷を飛び出し、貴族の地位を捨てて放浪の旅へ。その身なりに残る気品と魔術の素養を隠すように、ひっそりと身を潜めている。
+
+だが、彼女が「自分には才能がない」と思い込んでいるのは大きな誤解であり、むしろその潜在能力はかつての誰よりも高く、歴史に名を残す大魔導師すら凌ぐ可能性を秘めている。本人だけがまだ、その事実に気づいていないのだ。
+
+その未熟さと揺らぎを抱えながらも、彼女の旅はやがて仲間との出会いを通じて、自らの真価を知る運命へと導かれていく。
+                </p>
+            </div>
+            
+            
+            <div class="character_three">
+                <div class="three_detale">coming soon
+                    <div class="three_preview">
+                <img src="./assets/img/three_big.jpg" alt="ジーク全身像">
+            </div>
+                </div>
+                <p class="three_story">＜ジーク＞
+                    戦乱の中で親を失い、孤児として過酷な日々を生き抜いていた少年は、やがて敵国の王子に拾われる。そこで与えられたのは救いではなく、徹底した暗殺術の教育だった。感情を殺し、任務を遂行するための「道具」として育てられ、彼は影の中で数々の標的を葬ってきた。
+
+冷徹さと確かな技量を持ち、命じられればどんな汚れ仕事にも迷いなく刃を振るう。しかし、心の奥底では燻る疑念がある――本当に自分が進んできた道は正しかったのか、と。命を奪うたびにその思いは深まり、やがて揺らぎとなって彼を苛む。
+
+彼は未だ暗殺者として生きるしか術を知らない。だが、その胸に芽生えた迷いこそが、彼をただの「道具」から人間へと導く光になりつつあった。</p>
+            </div>
+            </div>
+            
+            </div>
+
+        </div>
+        
+    </main>
+
+
+    
+
+<script>
+       
+
+
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector(".nav");
+
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("open");
+        nav.classList.toggle("open");
+    });
+
+    </script>
+
+   <script>
+// 名前ホバーで本文だけタイプライター表示
+document.addEventListener("DOMContentLoaded", () => {
+  // 1) 既存の <p class="*_story"> を「名前」「本文」に自動分割
+  const paragraphs = document.querySelectorAll('p.one_story, p.two_story, p.three_story');
+
+  paragraphs.forEach(p => {
+    const html = p.innerHTML.trim();
+    let nameHTML = "";
+    let bodyHTML = "";
+
+    // 基本は <br> で分割。無ければ全角の「＞」でフォールバック
+    const brIdx = html.indexOf('<br');
+    if (brIdx !== -1){
+      nameHTML = html.slice(0, brIdx).trim();
+      bodyHTML = html.slice(html.indexOf('>', brIdx)+1).trim();
+    }else{
+      const mark = '＞';
+      const i = html.indexOf(mark);
+      if (i !== -1){
+        nameHTML = html.slice(0, i+1).trim();
+        bodyHTML = html.slice(i+1).trim();
+      }else{
+        // どうしても区切れない場合は先頭の語句を名前扱いにしておく
+        nameHTML = '＜名前＞';
+        bodyHTML = html;
+      }
+    }
+
+    // 再構築（本文は空で保持。元本文は data-full に保存）
+    p.innerHTML = `
+      <span class="story-name" tabindex="0">${nameHTML}</span><br>
+      <span class="story-body typewriter-cursor" data-full="${encodeURIComponent(bodyHTML)}"></span>
+    `;
+  });
+
+  // 2) タイプライター本体（本文のみ）
+  function typeWriter(bodyEl, text, speed = 20){
+    // 既に開始済みなら何もしない（何度も流さない仕様）
+    if (bodyEl.dataset.started === '1') return;
+    bodyEl.dataset.started = '1';
+
+    let i = 0;
+    function tick(){
+      if (i < text.length){
+        bodyEl.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(tick, speed);
+      }else{
+        bodyEl.classList.remove('typewriter-cursor'); // 終了でカーソル消す
+      }
+    }
+    tick();
+  }
+
+  // 3) 名前へのホバー/フォーカス/タップで発火
+  document.querySelectorAll('.story-name').forEach(nameEl => {
+    const bodyEl = nameEl.parentElement.querySelector('.story-body');
+    const fullText = () => decodeURIComponent(bodyEl.dataset.full || '');
+
+    // マウス
+    nameEl.addEventListener('mouseenter', () => typeWriter(bodyEl, fullText(), 60));
+    // キーボード
+    nameEl.addEventListener('focus',      () => typeWriter(bodyEl, fullText(), 60));
+    // タッチ（スマホ等）
+    nameEl.addEventListener('click',      () => typeWriter(bodyEl, fullText(), 60));
+  });
+});
+</script>
+
+    
+    
 
 </body>
+
+<footer class="chara_footer">
+    
+</footer>
 </html>

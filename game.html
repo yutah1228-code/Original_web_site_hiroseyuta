@@ -3,17 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>game</title>
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="game_main">
-        <a class="game_picture" href=""></a>
         
-        <div class="blanc"></div>
+        
+        <div class="blanc">
+            <!-- レベルアップダイアログ（初期は非表示） -->
+<div id="lvup_overlay" class="overlay" aria-hidden="true">
+  <div class="lvup_modal" role="dialog" aria-modal="true" aria-labelledby="lvup_title">
+    <h3 id="lvup_title" class="lvup_title">レベルアップ！</h3>
+
+    <div class="lvup_body">
+      <div class="lv_row">
+        <span class="lv_label">レベル</span>
+        <span class="lv_val"><span id="lv_from">1</span> → <b id="lv_to">2</b></span>
+      </div>
+
+      <div class="lv_row"><span class="lv_label">最大HP</span>
+        <span class="lv_val"><span id="hp_from">100</span> → <b id="hp_to">105</b></span>
+      </div>
+
+      <div class="lv_row"><span class="lv_label">力(STR)</span>
+        <span class="lv_val"><span id="str_from">9</span> → <b id="str_to">10</b></span>
+      </div>
+
+      <div class="lv_row"><span class="lv_label">魔力(MAG)</span>
+        <span class="lv_val"><span id="mag_from">3</span> → <b id="mag_to">4</b></span>
+      </div>
+
+      <div class="lv_row"><span class="lv_label">素早さ(AGL)</span>
+        <span class="lv_val"><span id="agl_from">10</span> → <b id="agl_to">11</b></span>
+      </div>
+
+      <div class="lv_row"><span class="lv_label">防御(GRD)</span>
+        <span class="lv_val"><span id="grd_from">9</span> → <b id="grd_to">10</b></span>
+      </div>
+
+      <div class="lv_row"><span class="lv_label">運(LUCK)</span>
+        <span class="lv_val"><span id="luk_from">10</span> → <b id="luk_to">11</b></span>
+      </div>
+
+      <div class="lv_row gains">
+        <span class="lv_label">成長判定</span>
+        <span class="lv_val" id="lv_gains">—</span>
+      </div>
+    </div>
+
+    <div class="lvup_actions">
+      <button id="lv_ok_btn" class="lv_ok_btn" type="button">OK</button>
+    </div>
+  </div>
+</div>
+
+            <button id="shop_btn" class="shop_btn" type="button"></button>
+
+<button id="back_index" >
+  
+</button>
+
+<!-- ショップ本体 -->
+<div id="shop_box" class="shop_box" type="button" aria-hidden="true">
+  <div class="shop_header">
+    <div class="shop_title">ショップ</div>
+    <div>
+      <button id="shop_tab_buy"  type="button" class="is-active">買う</button>
+      <button id="shop_tab_sell" type="button">売る</button>
+    </div>
+    <button id="shop_close" class="shop_close" type="button">閉じる</button>
+  </div>
+
+  <div class="shop_wallet">所持金：<b id="shop_gold">0G</b></div>
+
+  <!-- 商品一覧（JSで中身を描画） -->
+  <ul id="shop_list" class="shop_list"></ul>
+</div>
+        </div>
         <div class="command_list">
-            <div id="enemy_hp"></div>
+            
+            <div id="enemy_hp">
+              <span id="enemy_hp_text"></span>
+            <div class="game_picture" id="enemy_picture" role="img" aria-label="敵"></div>
+            </div>
 
             <div class="rog_box">
         <ul>
@@ -24,6 +99,7 @@
     
     <button id="battle_toggle" class="battle_btn">戦う</button>
     <div class="command_all">
+        <button id="status_btn" class="status_btn">ステータス</button>
         <div class="command_1">
         <button id="command1">攻撃</button>
         <button id="command2">防御</button>

@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RPG</title>
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
-<body>
-    </head>
-<body>
+<body class="history">
     <header class="header">
         <div class="header__container">
             <div class="header_text">
@@ -22,17 +21,244 @@
             <nav class="nav">
                 <ul class="nav__list">
                     <li class="nav__item"><a href="./index.html">HOME</a></li>
-                    <li class="nav__item"><a href="./play.html">HOW TO PLAY</a></li>
-                    <li class="nav__item"><a href="./kyara.html">キャラクター紹介</a></li>
                     
+                    <li class="nav__item"><a href="./kyara.html">character</a></li>
+                    </ul>
             </nav>
         </div>
     </header>
+    <main class="rain-layout">
+  
+  <div class="lane" id="lane-left" aria-hidden="true"></div>
 
-    <div gaiyou_photo>
-        <a href="./assets/img/530678560_2005189683349741_7609845033930916312_n.jpg"></a>
-    </div>
-    <script src="./assets/js/script.js"></script>
+  <section class="details" id="details" aria-live="polite">
+  <h2 id="details-title">項目を選択してください</h2>
+  <div id="details-body" class="dialogue-box" role="dialog" aria-label="解説ウィンドウ">
+    <div class="dialogue-name" id="dialogue-name">INFO</div>
+    <div class="dialogue-text" id="dialogue-text">左右のボタンにカーソルを合わせるとここに詳細が表示されます。</div>
+    <div class="next-indicator" id="next-indicator">▶</div>
+  </div>
+</section>
+  
+
+
+  <div class="lane" id="lane-right" aria-hidden="true"></div>
+</main>
+<footer class="history_foot">
+
+</footer>
+
+
+    
+       
+
+<script>
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector(".nav");
+
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("open");
+        nav.classList.toggle("open");
+    });
+
+    
+
+    
+
+    
+/* ====== データ（例） ======
+   ボタンの表示名と、クリック時に中央へ出す本文。 */
+const TOPICS = [
+  {label:"起源", text:"1970年代はじめ、戦争を模擬するウォーゲームが流行していました。その中で「個々のキャラクターを演じる」要素が加わったことでストーリー性のある遊びへと進化した。1974年にはダンジョンズ&ドラゴンズという世界初の商業的テーブルトークRPGが発表された。このゲームはプレイヤーが冒険者となり、ダンジョン探索やモンスターとの戦闘を通じて成長していくスタイルが確立されていった。後にコンピュータに移植される形でウィザードリィ、ウルティマといったゲームが登場した。"},
+  {label:"ダンジョンズ＆ドラゴンズ", text:"「ダンジョンズ＆ドラゴンズ」は、1974年に誕生した世界初のテーブルトークRPG（ロールプレイングゲーム）です。プレイヤーは戦士や魔法使いなどのキャラクターとなり、仲間と協力して冒険や探索、戦闘に挑みます。ゲームマスターが物語や世界を導き、サイコロの出目が冒険の行方を左右するため、同じシナリオでも毎回異なるドラマが生まれるのが魅力です。「Dungeons & Dragons（通称D&D）」は、剣と魔法の世界を舞台にした協力型ストーリーテリングRPGです。プレイヤーはエルフの魔術師やドワーフの戦士などを演じ、ダンジョン探索やモンスター討伐、王国を揺るがす陰謀に挑みます。ダイスの出目と想像力が織りなす物語は、世界に一つだけの冒険譚として語り継がれます。1974年の登場以来、数多のファンタジー作品やゲームに影響を与え、今日もなお世界中でプレイされ続ける“RPGの原点”です。"},
+  {label:"ウィザードリィ", text:"『ウィザードリィ』は、1981年にアメリカで誕生したコンピュータRPGの草分け的作品です。プレイヤーは冒険者たちを率いて、謎と危険に満ちたダンジョンへ挑みます。パーティ編成、職業や魔法の選択、ターン制バトルなどのシステムは、後のRPGに大きな影響を与えました。その難易度の高さとシビアなゲーム設計は当時のプレイヤーを熱狂させ、日本を含む世界中で大きな支持を集めました。『Wizardry』は、ダンジョン探索型RPGの金字塔です。プレイヤーは最大6人のパーティを組み、数々の罠やモンスターが待ち受ける地下迷宮に挑戦します。キャラクターが死亡したり消滅するなど、容赦ないシステムが生み出す緊張感こそが本作の真骨頂です。その奥深いキャラクターメイク、ターン制戦闘、ランダム要素が織りなす冒険は、後の『ドラゴンクエスト』や『ファイナルファンタジー』といった名作RPGの基盤となりました。"},
+  {label:"ウルティマ", text:"『ウルティマ』は、1981年にリチャード・ギャリオット（通称ロード・ブリティッシュ）が開発したコンピュータRPGシリーズです。プレイヤーは広大なファンタジー世界を自由に冒険し、街や村で人々と交流し、モンスターと戦いながら物語を進めていきます。当時としては革新的なオープンワールド的な要素を備え、コンピュータRPGに新たな可能性を示しました。"},
+  {label:"ドラゴンクエスト", text:"『ドラゴンクエスト』は、1986年に日本で誕生した国民的ロールプレイングゲーム（RPG）です。プレイヤーは勇者となり、仲間とともにモンスターを倒しながら世界を救う冒険へ旅立ちます。わかりやすい操作、親しみやすい物語、そして鳥山明のキャラクターデザインとすぎやまこういちの音楽が融合し、多くの人にRPGの魅力を広めました。『ドラゴンクエスト』は、RPGを日本の家庭用ゲーム機文化に定着させた記念碑的シリーズです。シンプルながら奥深いターン制バトル、魅力的な仲間との冒険、心に残るシナリオが特徴。シリーズを重ねるごとに「転職システム」や「モンスター育成」など新たな要素を取り入れつつも、初心者から熟練者まで楽しめる王道RPGとして進化し続けています。"},
+  {label:"ファイナルファンタジー", text:"『ファイナルファンタジー』は、1987年にスクウェア（現スクウェア・エニックス）から発売されたロールプレイングゲームです。壮大な物語、魅力的なキャラクター、美しい音楽を特色とし、シリーズごとに革新的なシステムや演出を導入しながら発展してきました。現在ではナンバリング作品を中心に、映画・アニメ・スピンオフ作品など幅広いメディア展開を行う、世界的に人気のシリーズです。"},
+  {label:"ゼルダの伝説", text:"『ゼルダの伝説』は、1986年に任天堂から登場したアクションアドベンチャーゲームです。プレイヤーは主人公リンクとなり、広大な世界を探索しながらモンスターを倒し、謎を解き、さらわれたゼルダ姫を救うために冒険します。自由度の高い探索、パズル要素、ダンジョン攻略といったシステムは、アクションRPGの基盤を築き、ゲーム史に大きな影響を与えました。『The Legend of Zelda』は、“冒険する楽しさ”を体現した任天堂の代表的シリーズです。広大なフィールド探索、個性豊かなダンジョン、そして知恵と勇気を試す謎解きが特徴。シリーズごとに「時のオカリナ」や「ブレス オブ ザ ワイルド」のような革新的なシステムを導入し、常にアクションアドベンチャーの新境地を切り開いてきました。リンクとゼルダ姫、そして宿敵ガノンとの戦いを軸に描かれる壮大な物語は、世代を超えて愛されています。"},
+  {label:"ダークソウル", text:"『ダークソウル』は、フロム・ソフトウェアが2011年に発売したアクションRPGです。プレイヤーは呪われた不死者となり、崩壊しつつある世界を探索しながら数多の強敵と戦い、過酷な試練を乗り越えていきます。「死んで覚える」高難度のゲームデザインと、重厚で謎めいた世界観が特徴で、世界的に高い評価を受けました。『Dark Souls』は、緊張感あふれる戦闘と探索の楽しさを極限まで突き詰めたアクションRPGです。圧倒的なスケールのダンジョンがシームレスに繋がる独特のマップ構造、死と再生を繰り返すことで学習し成長していくプレイ体験、そして断片的に語られる神話的な物語――そのすべてが融合し、唯一無二の“ソウル体験”を形作っています。「挑戦する喜び」をテーマに掲げ、世界中のプレイヤーに衝撃と達成感を与え続けてきた名作です。"},
+  {label:"ファイアーエムブレム", text:"『ファイアーエムブレム』は、1990年に任天堂から発売されたシミュレーションRPGの草分け的作品です。プレイヤーは王国の騎士団や軍を指揮し、仲間とともに戦略を練りながらターン制バトルを繰り広げます。キャラクターごとに成長や人間関係が描かれ、死亡した仲間が復活しない「ロストシステム」が大きな特徴となっています。『Fire Emblem』は、“ドラマと戦略”を融合させた名作シミュレーションRPGシリーズです。剣・槍・斧の三すくみや職業ごとの特性を活かした戦術性、そして仲間たちの絆が織りなす物語が魅力。一人ひとりのキャラクターに名前と物語が与えられ、戦場での決断がその命運を左右する重みが、プレイヤーに強烈な没入感を与えます。最新作に至るまで「愛と戦い」をテーマに進化を続け、戦略ゲームの代名詞として世界中で親しまれています。"},
+  {label:"スーパーロボット大戦", text:"『スーパーロボット大戦』は、1991年に誕生したシミュレーションRPGシリーズです。アニメ作品に登場する数多くのロボットやキャラクターが作品の枠を超えて集結し、オリジナルストーリーのもとで共演・共闘します。戦略性の高いシミュレーションバトルと、夢のクロスオーバーが融合した独自のゲーム体験が魅力で、長年にわたり多くのファンを魅了してきました。『スーパーロボット大戦』（通称スパロボ）は、ロボットアニメの“お祭り”とも呼ばれる名作シミュレーションRPGシリーズです。マジンガーZや機動戦士ガンダム、新世紀エヴァンゲリオンなど、多彩な作品の機体やキャラクターが一堂に会し、オリジナルの戦場で共闘・競演を果たします。独自の戦闘アニメーション、必殺技の演出、そして「作品の垣根を超えた夢の共演」が最大の魅力です。シリーズを通じて、オリジナルキャラクターたちの物語も描かれ、ゲーム独自の世界観を深めてきました。"},
+  {label:"World of Warcraft", text:"『World of Warcraft』は、Blizzard Entertainment が2004年にサービスを開始したオンラインRPG（MMORPG）です。ファンタジー世界「アゼロス」を舞台に、プレイヤーは人間やオーク、エルフなど多様な種族と職業からキャラクターを選び、仲間とともに冒険を繰り広げます。広大なフィールド探索、ダンジョン攻略、対人戦（PvP）など豊富なコンテンツが用意され、世界中で数千万人以上がプレイした史上最大級のオンラインゲームとして知られています。『World of Warcraft』（通称WoW）は、MMORPGというジャンルを世界的に普及させた金字塔です。「ウォークラフト」シリーズの世界観を継承しつつ、種族やクラスごとの個性、ギルド活動、壮大なレイドバトルといった要素を導入。数々の拡張パックによって新たな大陸や種族、ストーリーが追加され、常に進化を続けてきました。その規模と自由度、そしてプレイヤー同士が築くコミュニティ体験は、MMORPGのスタンダードを築いたと言っても過言ではありません。"},
+  {label:"スカイリム", text:"『The Elder Scrolls V: Skyrim』（スカイリム）は、2011年にBethesda Game Studiosが発売したオープンワールドRPGです。舞台は北方の地「スカイリム」。プレイヤーは“ドラゴンボーン”として、自由に世界を探索し、戦い、冒険を楽しむことができます。広大なフィールド、数えきれないクエスト、膨大なキャラクターメイク要素が用意され、プレイヤーごとに異なる物語が生まれるのが最大の魅力です。『Skyrim』は、オープンワールドRPGの金字塔と称される作品です。ドラゴンの復活をめぐる壮大なメインストーリーに加え、数百にも及ぶサブクエストやギルド活動、無数のダンジョン探索が用意されており、どのように冒険するかはすべてプレイヤーの自由。魔法・鍛冶・錬金術・暗殺など多様なプレイスタイルに対応し、さらに膨大なMOD文化によって長年にわたり愛され続けています。"},
+  {label:"ウィッチャー", text:"『ウィッチャー』は、ポーランドの作家アンドレイ・サプコフスキの小説を原作としたアクションRPGシリーズで、CD PROJEKT REDによって開発されました。プレイヤーは“ウィッチャー”と呼ばれる怪物狩りの剣士ゲラルトとなり、中世ヨーロッパ風のダークファンタジー世界を旅します。選択と結果が物語を大きく変える重厚なシナリオ、道徳的に揺さぶられる決断、そして奥深い戦闘システムが高く評価され、世界中で数々の賞を受賞しました。『The Witcher』シリーズは、モンスター退治や政治的陰謀、複雑な人間関係を描く大人向けRPGの金字塔です。特に『ウィッチャー3 ワイルドハント』（2015）は、膨大なクエストと緻密な世界構築、プレイヤーの選択が数十時間後に影響する深い分岐シナリオで高い評価を得ました。その完成度は「史上最高のRPGのひとつ」と称され、拡張パックも含めて今なお多くのファンに愛され続けています。"},
+  {label:"キャラクター", text:"RPGにおけるキャラクターは、プレイヤーの分身であり物語を彩る存在です。勇者や魔法使い、盗賊など多彩な職業を持ち、戦闘や冒険を通して成長していきます。彼らの個性や背景、仲間との関係性が、プレイヤーの選択によって変化することで、唯一無二の物語が紡がれていきます。RPGキャラクターは、単なる戦闘の駒ではなく、世界観やストーリーを支える重要な存在です。一人ひとりに設定されたバックストーリーや特技、性格が冒険を深みのあるものにし、プレイヤーは彼らを“仲間”として共に戦うことになります。仲間の絆、別れ、成長の過程は、多くのプレイヤーにとって忘れられない体験となり、作品を超えて語り継がれることも少なくありません。"},
+  {label:"経験値", text:"経験値（EXP）は、RPGにおけるキャラクター成長の指標です。敵を倒したり、クエストを達成することで獲得でき、一定の値に達するとキャラクターは「レベルアップ」して能力が向上します。この仕組みにより、プレイヤーは努力や冒険の成果を実感しながら物語を進められるのです。RPGの経験値は、冒険の積み重ねを数値化した成長システムです。単に戦闘を重ねるだけでなく、探索や交渉、選択によっても獲得できる場合があり、ゲームごとにその意味合いや設計は異なります。経験値はプレイヤーに「次の成長」への動機を与え、強大な敵へ挑むための準備段階を演出する重要な要素です。成長の実感こそがRPGの醍醐味であり、経験値はその中心にあると言えるでしょう。"},
+  {label:"ジャンル", text:"RPG（ロールプレイングゲーム）は、プレイヤーがキャラクターとなり、物語や冒険を体験するゲームジャンルです。キャラクターの成長や仲間との絆、選択によって変わる物語などが特徴で、幅広いサブジャンルが存在します。ファンタジーやSFなど舞台設定も多彩で、プレイヤーに「自分だけの物語」を味わわせてくれるのがRPGの魅力です。RPGにはさまざまなスタイルがあり、以下のように分類されます。 •	テーブルトークRPG（TRPG）サイコロと会話を通じて物語を進める、RPGの原点。『ダンジョンズ＆ドラゴンズ』が代表例。	•	コンピュータRPG（CRPG）コンピュータ上で遊ぶRPG全般。『ウィザードリィ』『ウルティマ』から始まり、PC・家庭用ゲーム機に広がった。•	JRPG（日本式RPG） 物語性やキャラクター性を重視したスタイル。『ドラゴンクエスト』『ファイナルファンタジー』などが代表例。•	WRPG（西洋RPG）自由度の高い世界探索やプレイヤーの選択を重視するスタイル。『スカイリム』『ウィッチャー』などが有名。•	アクションRPG（ARPG）戦闘にアクション要素を取り入れたRPG。『ゼルダの伝説』『ダークソウル』など。•	MMORPG多数のプレイヤーが同じ世界で冒険するオンラインRPG。『FFXI』『World of Warcraft』などが代表的。•	戦略・シミュレーションRPG（SRPG）戦術性を重視し、部隊やキャラクターを指揮するスタイル。『ファイアーエムブレム』『スーパーロボット大戦』が有名。"},
+  {label:"探索", text:"RPGの探索は、物語を進めるためだけでなく、プレイヤー自身が未知の世界を冒険する体験そのものです。街や村で人々と交流したり、ダンジョンで宝物を発見したり、秘密のエリアを見つけることで、物語はより豊かに広がっていきます。探索は単なる移動ではなく、「発見の喜び」と「危険との緊張感」を味わわせてくれるRPGの大きな魅力のひとつです。RPGにおける探索は、戦闘や成長と並ぶ重要な柱です。ダンジョンの奥深くで待ち受ける強敵や、何気ない寄り道の先で手に入る強力な装備、あるいは隠されたストーリーイベント――これらは探索を通じてしか得られない体験です。プレイヤーの好奇心と勇気が試され、世界の隅々を調べることで、ゲームの世界観やキャラクターの物語が一層深まります。"},
+  {label:"戦闘", text:"RPGの戦闘は、冒険の緊張感と達成感を生み出す中心的な要素です。プレイヤーはキャラクターの特性やスキルを駆使して敵と戦い、戦略を練りながら勝利を目指します。戦闘に勝利することで経験値や装備を獲得し、キャラクターの成長や物語の進行につながるのが魅力です。RPGにおける戦闘システムは作品ごとに大きく異なり、ジャンルの個性を際立たせます。ターン制バトルは戦術性を重視し、一手ごとの選択が勝敗を分ける緊張感を演出します。一方、アクションRPGではリアルタイムでの操作と反応が求められ、没入感の高いバトル体験を提供します。戦闘は単なる勝敗の判定ではなく、キャラクターの成長や世界観の理解を深める舞台であり、RPGの奥深さを象徴する要素です。"},
+  {label:"仲間…パーティー", text:"RPGの仲間やパーティは、プレイヤーの冒険を支える大切な存在です。勇者を助ける戦士や魔法使い、回復役の僧侶など、役割の異なる仲間と協力することで強敵に立ち向かうことができます。一緒に戦い、共に旅する仲間たちの存在が、冒険をよりドラマチックで感情豊かなものにします。RPGにおけるパーティシステムは、単なる戦力の組み合わせにとどまらず、物語を深く彩る要素です。仲間一人ひとりには個性的な性格や背景があり、戦闘での役割だけでなく、物語上のドラマやプレイヤーとの感情的な結びつきを生み出します。パーティメンバーの組み合わせを戦略的に選ぶことで戦闘の幅が広がり、同時に仲間同士の絆や成長を見守ることができるのはRPGならではの魅力です。"},
+  {label:"自由度", text:"RPGの自由度とは、プレイヤーが自分の思い描く冒険を選び取れる幅の広さを指します。戦う敵や進む道、育て方や仲間の選び方などを自分で決められることで、プレイヤーごとに異なる物語が体験できます。この「自由に遊べる余地」があるからこそ、RPGは長く愛され続けるゲームジャンルとなっているのです。RPGにおける自由度は、単なる選択肢の多さではなく、プレイヤーの決断が世界やキャラクターに影響を与える“体験の深み”を意味します。たとえば、オープンワールドRPGでは目的地に向かう前に寄り道して世界を探索でき、シナリオ重視のRPGでは選択肢が後の展開に影響を及ぼすこともあります。戦闘スタイル、キャラクタービルド、仲間との関係性――それらを自由に組み合わせられることで、RPGは一人ひとりに“自分だけの冒険”を提供します。"},
+  {label:"世界観", text:"RPGにおける世界観は、プレイヤーが冒険を体験するための舞台であり、ゲーム全体の雰囲気を決定づける重要な要素です。ファンタジーやSFなど多彩な設定が存在し、街や村、人々の暮らし、歴史や神話までが細かく作り込まれることで、プレイヤーは物語の登場人物としてその世界に没入できます。RPGの世界観は、単なる背景設定にとどまらず、プレイヤーの行動や選択に影響を与える“もう一人の登場人物”とも言えます。王国や帝国の興亡、神々や古代文明の伝承、民族や種族の対立などが物語の核となり、戦闘や探索の意味を深めます。また、環境音や音楽、建築様式などの細部に至るまで作り込まれることで、プレイヤーは「その世界に生きている」感覚を味わうことができます。"},
+  {label:"ティアリングサーガ", text:"『ティアリングサーガ ユトナ英雄戦記』は、2001年にプレイステーション向けに発売されたシミュレーションRPGです。剣と魔法のファンタジー世界を舞台に、若き王子や仲間たちが戦乱に挑む壮大な物語が描かれます。戦術マップ上で仲間を指揮して戦い、育成やクラスチェンジによって成長させるシステムは、プレイヤーに高い戦略性とドラマ性を提供します。『ティアリングサーガ』は、『ファイアーエムブレム』シリーズの生みの親である加賀昭三氏が手がけた作品で、その系譜を色濃く受け継いだシミュレーションRPGです。多彩なキャラクターが織りなす群像劇、仲間の生死が物語や戦力に直結する緊張感、そして戦略性の高いターン制バトルが特徴。仲間の育成や選択によって物語が変化する奥深さは、コアなRPGファンの心を掴み続けています。"}
+  // 必要分だけ複製して総数を稼いでもOK
+];
+// 片側15個×2 = 30個にするため、データをループで使い回す
+function repeatTopics(n){ const out=[]; for(let i=0;i<n;i++) out.push(TOPICS[i % TOPICS.length]); return out; }
+
+const leftLane  = document.getElementById('lane-left');
+const rightLane = document.getElementById('lane-right');
+const detailsTitle = document.getElementById('details-title');
+const detailsBody  = document.getElementById('details-body');
+
+function respawn(b, laneEl, delay = 2000){
+  setTimeout(() => {
+    const nx = Math.random() * (laneEl.clientWidth - 120);
+    const ndur = 6 + Math.random() * 6;
+    const ndelay = Math.random() * 4;
+
+    b.style.setProperty('--x', `${nx}px`);
+    b.style.setProperty('--dur', `${ndur}s`);
+    b.style.setProperty('--delay', `${ndelay}s`);
+
+    // アニメーションをリセット
+    b.style.animation = 'none';
+    void b.offsetHeight; // reflow
+
+    b.style.animation = `fall linear forwards`;
+    b.style.animationDuration = `${ndur}s`;
+    b.style.animationDelay = `${ndelay}s`;
+    b.style.top = '-3rem';
+
+    // 再表示
+    b.style.display = 'inline-block';
+  }, delay);
+}
+
+// ボタン生成
+function spawnButtons(laneEl, count){
+  const laneWidth = laneEl.clientWidth || 300;
+  const topics = repeatTopics(count);
+
+  topics.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'fall-btn';
+    b.textContent = t.label;
+
+    // 位置・速度・遅延をランダムに
+    const x = Math.random() * (laneWidth - 120);           // 左右位置
+    const dur = 10 + Math.random() * 10;                     // 6〜12秒で落下
+    const delay = Math.random() * 4;                        // 0〜6秒遅延
+
+    b.style.setProperty('--x', `${x}px`);
+    b.style.setProperty('--dur', `${dur}s`);
+    b.style.setProperty('--delay', `${delay}s`);
+
+    // クリックで中央に詳細を表示
+    b.addEventListener('mouseenter', (e) => {
+      detailsTitle.textContent = t.label;
+      detailsBody.textContent  = t.text;
+
+      b.style.display = "none";
+      // クリック感
+      b.animate([{transform:'scale(1.0)'},{transform:'scale(0.96)'},{transform:'scale(1.0)'}],
+                {duration:200, easing:'ease-out'});
+                respawn(b, laneEl, 2000);
+
+                
+                
+    });
+    b.addEventListener('animationend', () => {
+  respawn(b, laneEl, 0); // すぐに再出現してまた落とす
+});
+
+    
+    
+
+    laneEl.appendChild(b);
+  });
+}
+
+
+
+// 片側15個ずつ生成（合計30）
+spawnButtons(leftLane, 22);
+spawnButtons(rightLane, 22);
+
+// 画面リサイズ時に左右位置の乱数範囲が変わるため、
+// 一度全ボタンのXを更新（アニメは継続）
+window.addEventListener('resize', () => {
+  [leftLane, rightLane].forEach(laneEl => {
+    const w = laneEl.clientWidth || 300;
+    laneEl.querySelectorAll('.fall-btn').forEach(b => {
+      const nx = Math.random() * (w - 120);
+      b.style.setProperty('--x', `${nx}px`);
+    });
+  });
+});
+
+
+// ==== RPG風タイプライター ====
+const dlgNameEl  = document.getElementById('dialogue-name');
+const dlgTextEl  = document.getElementById('dialogue-text');
+const nextEl     = document.getElementById('next-indicator');
+
+let typerState = { typing:false, pageIdx:0, pages:[], speed:18, fast:false };
+
+// 長文を適度にページ分割（約120〜160文字で句読点優先）
+function paginate(text, min=120, max=160){
+  const pages = [];
+  let buf = '';
+  for(const ch of text){
+    buf += ch;
+    const len = buf.length;
+    const isBreak = (len >= min && /[。．！!？?]\s*$/.test(buf)) || len >= max;
+    if(isBreak){
+      pages.push(buf.trim());
+      buf = '';
+    }
+  }
+  if(buf.trim()) pages.push(buf.trim());
+  return pages.length ? pages : [''];
+}
+
+async function typePage(str){
+  typerState.typing = true;
+  dlgTextEl.textContent = '';
+  nextEl.style.opacity = 0;
+
+  for(let i=0;i<str.length;i++){
+    // 早送り中はまとめて出す
+    if(typerState.fast){ dlgTextEl.textContent = str; break; }
+    dlgTextEl.textContent += str[i];
+    await new Promise(r => setTimeout(r, typerState.speed));
+  }
+  typerState.typing = false;
+  nextEl.style.opacity = 1;
+  typerState.fast = false;
+}
+
+// ページを開始
+async function showRPG(label, text){
+  detailsTitle.textContent = label;
+  dlgNameEl.textContent = label; // 名前札に同じラベルを表示（不要なら固定文言に）
+  typerState.pages = paginate(text);
+  typerState.pageIdx = 0;
+  await typePage(typerState.pages[0]);
+}
+
+// クリック/タップで「早送り or 次ページ」
+document.getElementById('details-body').addEventListener('click', async () => {
+  if(typerState.typing){
+    typerState.fast = true; // 今のページを即表示
+    return;
+  }
+  // 次ページへ
+  if(typerState.pageIdx < typerState.pages.length - 1){
+    typerState.pageIdx++;
+    await typePage(typerState.pages[typerState.pageIdx]);
+  }
+});
+
+// キーボードでも進めたい場合（Enter/Space）
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' || e.key === ' '){
+    document.getElementById('details-body').click();
+  }
+});
+</script>
+
+    
 
 </body>
 </html>
