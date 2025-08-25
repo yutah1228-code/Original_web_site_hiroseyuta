@@ -1,9 +1,8 @@
 @charset "UTF-8";
-
 * {
     font-family: sans-serif;
 }
-/* ヘッダースタイリング */
+
 .header {
   height: 80px;
   background-color: black;
@@ -60,6 +59,9 @@
   text-shadow: 0 0 10px rgba(107,209,255,.65), 0 0 20px rgba(107,209,255,.35);
   opacity:.95;
 }
+:root{
+  --rpg-gold:#f3d37a;
+}
 
 
 .hamburger span,
@@ -78,14 +80,9 @@
 .hamburger span{ top: 50%; transform: translateY(-50%); }
 .hamburger span::before{ top: -10px; }
 .hamburger span::after{  top:  10px; }
-
 .hamburger.open span{ background: transparent; }
 .hamburger.open span::before{ transform: translateY(10px) rotate(45deg); }
 .hamburger.open span::after{  transform: translateY(-10px) rotate(-45deg); }
-
-
-
-
 
 .nav {
   position: fixed;
@@ -95,7 +92,7 @@
   height: calc(100vh - 80px);
   padding: 50px 0;
   border-top: #fff 1px solid;
-  transform: translateX(100%);   /* 初期は画面外 */
+  transform: translateX(100%);   
   transition: transform .4s ease;
   z-index: 9500;
   background-color: rgba(0, 0, 0,.50);
@@ -149,49 +146,26 @@
   bottom: 0;
 }
 
-
-
 .nav.open{ transform: translateX(0); }
 
 .main1{
   width: 100vw;
   height: 94vh;
-  /* /*消す予定 */
-  background-color: yellow;
   margin-top: 50px;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(/assets/img/534141943_1489188055516121_4720035660244435714_n.jpg);
   display: flex;
-  align-items:end;    /* 縦中央 */
+  align-items:end;    
   justify-content: center;
-  
-  
 }
 
 
-
-.gaiyou{
-  border: solid black 3px;
-  margin: 10px 30px;
-  width: 95vw;
-  height: 30vh;
-  background-image: url(/assets/img/530678560_2005189683349741_7609845033930916312_n.jpg);
-}
-.gaiyou_photo{
-  width:20vw ;
-  height:40vh ;
-  /* 後で消す予定 */
-  background-color: antiquewhite;
-}
 
 .start{
   width: 100vw;
   height: 93vh;
-
 }
-
-
 
 .hazimeru  {
   position: relative;
@@ -209,7 +183,6 @@
   background:transparent;
 }
 
-
 .hazimeru a{
   font-family: "Press Start 2P",monospace !important;
   font-size: clamp(50px,2vw,20px);
@@ -217,10 +190,9 @@
   text-decoration: none;
   display: inline-block;
   animation: rpg-blink 1.2s steps(2, jump-none) infinite;
-  
   text-shadow:
-    0 3px 8px rgba(0,0,0,.7),              /* 影 */
-    0 0 8px rgba(255,215,0,.7),            /* ゴールドの外光 */
+    0 3px 8px rgba(0,0,0,.7),              
+    0 0 8px rgba(255,215,0,.7),            
     0 0 16px rgba(255,215,0,.5);
     letter-spacing: 0.2em;
 }
@@ -228,10 +200,6 @@
 #enemy_hp{
   width: 200px;
   height: 400px;
-  
-
-
-
 }
 
 #player_hp{
@@ -239,14 +207,12 @@
   height: 400px;
   background-image: url(/assets/img/530537444_749750834336152_7863546310926926073_n.png);
   background-size: cover;
-  
   color: red;
   margin-top: 10px;
   font-weight: bold;
   position: fixed;
   right: 100px;
   top: 500px;
-
 }
 
 .game_main{
@@ -254,13 +220,7 @@
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
-
   background-image: url(/assets/img/530556201_740928238647808_5784113294969287064_n.jpg);
-
-}
-
-.mikata_HP{
-  
 }
 
 .rog_box{
@@ -274,25 +234,15 @@
   position: fixed;
   top: 10px;
   left: 100px;
-
-  
-  
-
 }
 
 .game.html{
   font-size: 100px;
 }
 
-.command_all{
-  
-}
-
 .blanc{
   width: 100vw;
   height: 50vh;
-
-
 }
 
 .command_list{
@@ -303,7 +253,7 @@
 
 .enemy_hp{
   position: absolute;
-  left: 60px;   /* お好みの位置 */
+  left: 60px;   
   top:  700px;
   width: 260px;
   height: 260px;
@@ -327,22 +277,20 @@
 
 #inventory_list{
   list-style-type: disc;
-  
 }
 #inventory_list li{
-display: flex;
-justify-content: space-between;
-
+  display: flex;
+  justify-content: space-between;
 }
 
 .command_all{
   display: none;
   margin: 8px 0;
-padding: 8px 16px;
-border-radius: 8px;
-position: fixed;
-top: 550px;
-right: 370px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  position: fixed;
+  top: 550px;
+  right: 370px;
 }
 
 .command_all.is-open{
@@ -351,25 +299,27 @@ right: 370px;
 
 .battle_btn{
   margin: 8px 0;
-padding: 8px 16px;
-border-radius: 8px;
-border: 1px solid black;
-cursor: pointer;
-position: fixed;
-top: 500px;
-right: 400px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid black;
+  cursor: pointer;
+  position: fixed;
+  top: 500px;
+  right: 400px;
 }
 
-.status_box{ display:none; 
+.status_box{ 
+  display:none; 
   position: fixed;
   top: 500px;
   right: 550px;
   background-color:rgba(0, 0, 0,.20) ;
 }
+
 .status_box.is-open{ display:block; }
+
 .status_btn{ margin:8px 0; }
 
-/* ===== shop ===== */
 #shop_btn { 
   position: fixed;
   top: 10px;
@@ -380,7 +330,7 @@ right: 400px;
   height: 70px;
   background-image: url(/assets/img/shop.jpg);
   background-size: cover;
- }
+}
 
 .shop_box {
   display: none;
@@ -396,6 +346,7 @@ right: 400px;
   position: fixed;
   right: 10px;
 }
+
 .shop_box.is-open { display: block; }
 
 .shop_header {
@@ -403,13 +354,14 @@ right: 400px;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 6px;
-  
 }
+
 .shop_title { font-weight: 600; }
 
 .shop_wallet { margin: 6px 0; color: #555; }
 
 .shop_list { list-style: none; padding-left: 0; margin: 0; }
+
 .shop_list li {
   padding: 6px 0;
   display: flex;
@@ -418,9 +370,11 @@ right: 400px;
   border-top: 1px dashed #ddd;
   width: 150px;
 }
+
 .shop_list li:first-child { border-top: none; }
 
 .shop_item_name { font-weight: 600; }
+
 .shop_item_price { font-size: 10px; color: #555; }
 
 .shop_buy, .shop_close {
@@ -429,16 +383,17 @@ right: 400px;
   cursor: pointer;
 }
 
-/* ===== Level-Up Modal ===== */
+
 .overlay {
   position: fixed;
   inset: 0;
-  display: none;              /* 初期は消しておく */
+  display: none;              
   align-items: center;
   justify-content: center;
   background: rgba(0,0,0,.5);
   z-index: 9999;
 }
+
 .overlay.is-open { display: flex; }
 
 .lvup_modal {
@@ -466,23 +421,24 @@ right: 400px;
   
 }
 .lv_label { color: #555; min-width: 120px; }
+
 .lv_val b { font-weight: 700; }
+
 .lv_row.gains { margin-top: 8px; color: #444; }
 
 .lvup_actions { text-align: right; margin-top: 12px; }
+
 .lv_ok_btn { padding: 6px 12px; border-radius: 8px; cursor: pointer; }
 
 .game_picture {
-  width: 240px;          /* 好きなサイズに調整 */
+  width: 240px;         
   height: 240px;
   margin: 0 !important;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; /* 元画像比率維持で収める */
+  background-size: cover; 
   position: fixed;
   top: 650px;
-  
-
   margin: 180px 0 16px;
 }
 
@@ -490,10 +446,10 @@ right: 400px;
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 9000;                  /* ゲームUIの上、オーバーレイ(9999)より下 */
+  z-index: 9000;                  
   width: 70px;
   height: 70px;
-  padding: 0;                     /* 余白で白く見えるのを防ぐ */
+  padding: 0;                     
   border: none;
   background: transparent url(/assets/img/return.png) no-repeat center / cover;
   appearance: none;
@@ -517,9 +473,6 @@ right: 400px;
   background-image: url(/assets/img/broun.jpg);
   background-size: cover;
   margin: 0 auto;
-  
-
-  
 }
 
 .character_list{
@@ -527,82 +480,77 @@ right: 400px;
 }
 
 .character_one{
-  width: 100%;           /* ← 812pxやvwは使わない */
+  width: 100%;           
   height: 25vh;
   display: flex;
-  align-items: stretch;   /* 子を縦いっぱいに */
-  gap: 12px;              /* すき間。不要なら0 */
-  padding: 0;             /* 余白を消したい場合 */
+  align-items: stretch;   
+  gap: 12px;             
+  padding: 0;             
   box-sizing: border-box;
   border: 1px black solid;
 }
 
 .character_two{
-  width: 100%;           /* ← 812pxやvwは使わない */
+  width: 100%;           
   height: 25vh;
   display: flex;
-  align-items: stretch;   /* 子を縦いっぱいに */
-  gap: 12px;              /* すき間。不要なら0 */
-  padding: 0;             /* 余白を消したい場合 */
+  align-items: stretch;   
+  gap: 12px;             
+  padding: 0;             
   box-sizing: border-box;
   flex-direction: row-reverse;
   border: 1px black solid;
 }
+
 .character_three{
-  width: 100%;           /* ← 812pxやvwは使わない */
+  width: 100%;           
   height: 25vh;
   display: flex;
-  align-items: stretch;   /* 子を縦いっぱいに */
-  gap: 12px;              /* すき間。不要なら0 */
-  padding: 0;             /* 余白を消したい場合 */
+  align-items: stretch;   
+  gap: 12px;            
+  padding: 0;      
   box-sizing: border-box;
   border: 1px black solid;
 }
 
-
-
 .one_detale{
   position: relative;
-  flex: 0 0 30%;          /* ← 割合で幅を確保 */
+  flex: 0 0 30%;          
   height: 100%;
   background-image: url(/assets/img/one.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;  /* 画像を欠けさせたくない場合 */
-  /* background-size: cover;  画面を埋めたい＆トリミングOKならこちら */
+  background-size: contain;  
   cursor: pointer; 
-
 }
 
-/* 大きな画像（初期は非表示） */
 .one_preview {
   position: absolute;
-  top: 0;
-  right: 90%;         /* サムネの右横に出す例 */
+  top: 200;
+  right: 90%;         
   margin-left: 20px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
   z-index: 1000;
 }
+
 .one_preview img {
-  max-width: 200px;   /* 出す画像の大きさを調整 */
+  max-width: 200px;  
   height: auto;
   border: 2px solid #333;
   background: #fff;
 }
 
-/* hoverで表示 */
 .one_detale:hover .one_preview {
   opacity: 1;
 }
 
 .one_story{
-  flex: 1 1 auto;         /* ← 残りを全部使う */
+  flex: 1 1 auto;      
   height: 100%;
-  margin: 0;              /* pのデフォルト余白を消す */
-  padding: 12px;          /* 中の余白。不要なら0 */
-  
+  margin: 0;            
+  padding: 12px;        
   overflow: auto; 
 }
 
@@ -618,25 +566,21 @@ right: 400px;
 
 .two_detale{
   position: relative;
-  flex: 0 0 30%;          /* ← 割合で幅を確保 */
+  flex: 0 0 30%;       
   height: 100%;
   background-image: url(/assets/img/magic.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;  /* 画像を欠けさせたくない場合 */
-  /* background-size: cover;  画面を埋めたい＆トリミングOKならこちら */
+  background-size: contain;  
   text-align: center;
   font-size: 30px;
   cursor: pointer;
-
-
 }
 
-/* 大きな画像（初期は非表示） */
 .two_preview {
   position: absolute;
   top: -80px;
-  left: 80%;         /* サムネの右横に出す例 */
+  left: 80%;        
   margin-left: 20px;
   opacity: 0;
   pointer-events: none;
@@ -644,88 +588,83 @@ right: 400px;
   z-index: 1000;
 }
 .two_preview img {
-  max-width: 200px;   /* 出す画像の大きさを調整 */
+  max-width: 200px;   
   height: auto;
   border: 2px solid #333;
   background: #fff;
 }
 
-/* hoverで表示 */
 .two_detale:hover .two_preview {
   opacity: 1;
 }
 
 .two_story{
-  flex: 1 1 auto;         /* ← 残りを全部使う */
+  flex: 1 1 auto;         
   height: 100%;
-  margin: 0;              /* pのデフォルト余白を消す */
-  padding: 12px;          /* 中の余白。不要なら0 */
-  
+  margin: 0;             
+  padding: 12px;          
   overflow: auto; 
 }
 
 .three_detale{
   position: relative;
-  flex: 0 0 30%;          /* ← 割合で幅を確保 */
+  flex: 0 0 30%;         
   height: 100%;
   background-image: url(/assets/img/three.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;  /* 画像を欠けさせたくない場合 */
-  /* background-size: cover;  画面を埋めたい＆トリミングOKならこちら */
+  background-size: contain; 
   cursor: pointer;
   text-align: center;
   font-size: 30px;
-
 }
-/* 大きな画像（初期は非表示） */
+
 .three_preview {
   position: absolute;
   top: -80px;
-  right: 90%;         /* サムネの右横に出す例 */
+  right: 90%;         
   margin-left: 20px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
   z-index: 1000;
 }
+
 .three_preview img {
-  max-width: 200px;   /* 出す画像の大きさを調整 */
+  max-width: 200px;   
   height: auto;
   border: 2px solid #333;
   background: #fff;
 }
 
-/* hoverで表示 */
 .three_detale:hover .three_preview {
   opacity: 1;
 }
 
 .three_story{
-  flex: 1 1 auto;         /* ← 残りを全部使う */
+  flex: 1 1 auto;        
   height: 100%;
-  margin: 0;              /* pのデフォルト余白を消す */
-  padding: 12px;          /* 中の余白。不要なら0 */
-  
+  margin: 0;            
+  padding: 12px;          
   overflow: auto; 
 }
 
-/* 名前＝トリガー */
 .story-name{
   cursor: pointer;
   font-weight: 700;
   text-underline-offset: 3px;
 }
+
 .story-name:hover,
 .story-name:focus{
   text-decoration: underline;
 }
 
-/* タイプ中の点滅カーソル（任意） */
 .typewriter-cursor::after{
   content: "|";
   animation: blink 1s infinite;
 }
+
 @keyframes blink{
   0%,50%{opacity:1}
   50.01%,100%{opacity:0}
@@ -746,12 +685,8 @@ right: 400px;
   background-size: cover;
 }
 
-
-
-
-/* ===== レイアウト ===== */
 .rain-layout{
-  --header-h: 64px;            /* ヘッダー高（必要に応じて調整） */
+  --header-h: 64px;            
   display: grid;
   grid-template-columns: 1fr minmax(320px, 720px) 1fr;
   gap: clamp(12px,3vw,28px);
@@ -761,13 +696,11 @@ right: 400px;
   padding-top: 80px;
 }
 
-/* 左右レーン（落下領域） */
 .lane{
   position: relative;
   overflow: hidden;
 }
 
-/* 中央の詳細パネル */
 .details{
   background-image: url(/assets/img/530678560_2005189683349741_7609845033930916312_n.jpg);
   color: #333;
@@ -782,10 +715,9 @@ right: 400px;
   font-size: clamp(20px,2.2vw,28px);
 }
 
-/* ===== ボタン ===== */
 .fall-btn{
-  position: absolute;       /* レーン内で絶対配置 */
-  top: -3rem;               /* 画面外から開始 */
+  position: absolute;       
+  top: -3rem;              
   transform: translateY(0);
   padding: 9px 14px;
   border: none;
@@ -799,26 +731,21 @@ right: 400px;
   white-space: nowrap;
   user-select: none;
   animation: fall linear forwards;
-  /* 変化をCSS変数で与える（JSから設定） */
   left: var(--x, 8px);
   animation-duration: var(--dur, 7s);
   animation-delay: var(--delay, 0s);
 }
 
-/* ホバー時の軽い演出 */
 .fall-btn:hover{ filter: brightness(1.06); transform: translateY(0) scale(1.025); }
 
-/* 上→下 の落下アニメーション */
 @keyframes fall{
   to{ transform: translateY(110vh); }
 }
 
-/* モバイル調整 */
 @media (max-width: 640px){
   .rain-layout{ grid-template-columns: 1fr; }
-  .lane{ display: none; }                /* 狭い画面ではレーン非表示にして可読性を確保 */
+  .lane{ display: none; }               
 }
-
 
 .history_foot{
   background-color:rgba(0,0,0,.60);
@@ -847,41 +774,52 @@ right: 400px;
   top: 80px;
 }
 
- .dialogue-box{
-    position: relative;
-    background: rgba(0,0,0,0.75);
-    color: #f5f5f5;
-    border: 4px solid #fff;
-    border-radius: 12px;
-    padding: 16px 20px 28px;
-    line-height: 1.85;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-    font-family: 'Press Start 2P','MedievalSharp', system-ui, sans-serif;
-    letter-spacing: .5px;
-    min-height: 140px;
-  }
-  .dialogue-name{
-    position:absolute;
-    top:-14px; left:16px;
-    background:#222; color:#fff;
-    border:3px solid #fff; border-radius:8px;
-    padding:2px 10px; font-size:12px;
-  }
-  .dialogue-text{ white-space: pre-wrap; word-break: break-word; }
-  .next-indicator{
-    position:absolute; right:14px; bottom:8px;
-    font-size:12px; opacity:.0; animation: blink 1s steps(2,end) infinite;
-    user-select:none;
-  }
-  @keyframes blink { 0%,49%{opacity:0;} 50%,100%{opacity:1;} }
-  /* ボタンにフォーカスでEnter連打対応したい場合の見栄え */
-  .fall-btn:focus-visible{ outline: 3px solid #fff; outline-offset: 4px; }
-
-  .game_picture[data-enemy="ドラゴン"] {
-  width: 500px;   /* 好みで調整 */
-  height: 500px;  /* 好みで調整 */
-  top: auto;
+.dialogue-box{
+  position: relative;
+  background: rgba(0,0,0,0.75);
+  color: #f5f5f5;
+  border: 4px solid #fff;
+  border-radius: 12px;
+  padding: 16px 20px 28px;
+  line-height: 1.85;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  font-family: 'Press Start 2P','MedievalSharp', system-ui,sans-serif;
+  letter-spacing: .5px;
+  min-height: 140px;
 }
 
+.dialogue-name{
+  position:absolute;
+  top:-14px; left:16px;
+  background:#222; color:#fff;
+  border:3px solid #fff; border-radius:8px;
+  padding:2px 10px; font-size:12px;
+}
+
+.dialogue-text{ white-space: pre-wrap; word-break: break-word; }
+
+.next-indicator{
+  position:absolute; right:14px; bottom:8px;
+  font-size:12px; opacity:.0; animation: blink 1s steps(2,end)infinite;
+  user-select:none;
+}
+
+@keyframes blink { 0%,49%{opacity:0;} 50%,100%{opacity:1;} }
+
+.fall-btn:focus-visible{ outline: 3px solid #fff; outline-offset: 4px; }
+
+.game_picture[data-enemy="ドラゴン"] {
+width: 500px;   
+height: 500px;  
+top: auto;
+}
+
+
+html, body { height: 100%; }
+body {
+  min-height: 100dvh;       /* モバイル対応 */
+  display: flex;
+  flex-direction: column;
+}
 
 
