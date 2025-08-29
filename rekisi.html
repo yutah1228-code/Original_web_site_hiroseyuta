@@ -13,7 +13,6 @@
         <div class="header__container">
             <div class="header_text">
             <h1 class="header__logo"><a href="/" class="rpg-title">RPGの歴史</a></h1>
-            
             </div>
             <button type="button" class="hamburger">
                 <span></span>
@@ -21,16 +20,13 @@
             <nav class="nav">
                 <ul class="nav__list">
                     <li class="nav__item"><a href="./index.html">HOME</a></li>
-                    
                     <li class="nav__item"><a href="./kyara.html">character</a></li>
-                    </ul>
+                </ul>
             </nav>
         </div>
     </header>
-    <main class="rain-layout">
-  
+<main class="rain-layout">
   <div class="lane" id="lane-left" aria-hidden="true"></div>
-
   <section class="details" id="details" aria-live="polite">
   <h2 id="details-title">項目を選択してください</h2>
   <div id="details-body" class="dialogue-box" role="dialog" aria-label="解説ウィンドウ">
@@ -45,29 +41,16 @@
   <div class="lane" id="lane-right" aria-hidden="true"></div>
 </main>
 <footer class="history_foot">
-
+@2025 hiroseyuta RPG
 </footer>
-
-
-    
-       
-
 <script>
     const hamburger = document.querySelector(".hamburger");
     const nav = document.querySelector(".nav");
-
     hamburger.addEventListener("click", () => {
         hamburger.classList.toggle("open");
         nav.classList.toggle("open");
     });
 
-    
-
-    
-
-    
-/* ====== データ（例） ======
-   ボタンの表示名と、クリック時に中央へ出す本文。 */
 const TOPICS = [
   {label:"起源", text:"1970年代はじめ、戦争を模擬するウォーゲームが流行していました。その中で「個々のキャラクターを演じる」要素が加わったことでストーリー性のある遊びへと進化した。1974年にはダンジョンズ&ドラゴンズという世界初の商業的テーブルトークRPGが発表された。このゲームはプレイヤーが冒険者となり、ダンジョン探索やモンスターとの戦闘を通じて成長していくスタイルが確立されていった。後にコンピュータに移植される形でウィザードリィ、ウルティマといったゲームが登場した。"},
   {label:"ダンジョンズ＆ドラゴンズ", text:"「ダンジョンズ＆ドラゴンズ」は、1974年に誕生した世界初のテーブルトークRPG（ロールプレイングゲーム）です。プレイヤーは戦士や魔法使いなどのキャラクターとなり、仲間と協力して冒険や探索、戦闘に挑みます。ゲームマスターが物語や世界を導き、サイコロの出目が冒険の行方を左右するため、同じシナリオでも毎回異なるドラマが生まれるのが魅力です。「Dungeons & Dragons（通称D&D）」は、剣と魔法の世界を舞台にした協力型ストーリーテリングRPGです。プレイヤーはエルフの魔術師やドワーフの戦士などを演じ、ダンジョン探索やモンスター討伐、王国を揺るがす陰謀に挑みます。ダイスの出目と想像力が織りなす物語は、世界に一つだけの冒険譚として語り継がれます。1974年の登場以来、数多のファンタジー作品やゲームに影響を与え、今日もなお世界中でプレイされ続ける“RPGの原点”です。"},
@@ -91,41 +74,34 @@ const TOPICS = [
   {label:"自由度", text:"RPGの自由度とは、プレイヤーが自分の思い描く冒険を選び取れる幅の広さを指します。戦う敵や進む道、育て方や仲間の選び方などを自分で決められることで、プレイヤーごとに異なる物語が体験できます。この「自由に遊べる余地」があるからこそ、RPGは長く愛され続けるゲームジャンルとなっているのです。RPGにおける自由度は、単なる選択肢の多さではなく、プレイヤーの決断が世界やキャラクターに影響を与える“体験の深み”を意味します。たとえば、オープンワールドRPGでは目的地に向かう前に寄り道して世界を探索でき、シナリオ重視のRPGでは選択肢が後の展開に影響を及ぼすこともあります。戦闘スタイル、キャラクタービルド、仲間との関係性――それらを自由に組み合わせられることで、RPGは一人ひとりに“自分だけの冒険”を提供します。"},
   {label:"世界観", text:"RPGにおける世界観は、プレイヤーが冒険を体験するための舞台であり、ゲーム全体の雰囲気を決定づける重要な要素です。ファンタジーやSFなど多彩な設定が存在し、街や村、人々の暮らし、歴史や神話までが細かく作り込まれることで、プレイヤーは物語の登場人物としてその世界に没入できます。RPGの世界観は、単なる背景設定にとどまらず、プレイヤーの行動や選択に影響を与える“もう一人の登場人物”とも言えます。王国や帝国の興亡、神々や古代文明の伝承、民族や種族の対立などが物語の核となり、戦闘や探索の意味を深めます。また、環境音や音楽、建築様式などの細部に至るまで作り込まれることで、プレイヤーは「その世界に生きている」感覚を味わうことができます。"},
   {label:"ティアリングサーガ", text:"『ティアリングサーガ ユトナ英雄戦記』は、2001年にプレイステーション向けに発売されたシミュレーションRPGです。剣と魔法のファンタジー世界を舞台に、若き王子や仲間たちが戦乱に挑む壮大な物語が描かれます。戦術マップ上で仲間を指揮して戦い、育成やクラスチェンジによって成長させるシステムは、プレイヤーに高い戦略性とドラマ性を提供します。『ティアリングサーガ』は、『ファイアーエムブレム』シリーズの生みの親である加賀昭三氏が手がけた作品で、その系譜を色濃く受け継いだシミュレーションRPGです。多彩なキャラクターが織りなす群像劇、仲間の生死が物語や戦力に直結する緊張感、そして戦略性の高いターン制バトルが特徴。仲間の育成や選択によって物語が変化する奥深さは、コアなRPGファンの心を掴み続けています。"}
-  // 必要分だけ複製して総数を稼いでもOK
 ];
-// 片側15個×2 = 30個にするため、データをループで使い回す
-function repeatTopics(n){ const out=[]; for(let i=0;i<n;i++) out.push(TOPICS[i % TOPICS.length]); return out; }
 
+function repeatTopics(n){ const out=[]; for(let i=0;i<n;i++) out.push(TOPICS[i % TOPICS.length]); return out; }
 const leftLane  = document.getElementById('lane-left');
 const rightLane = document.getElementById('lane-right');
 const detailsTitle = document.getElementById('details-title');
 const detailsBody  = document.getElementById('details-body');
-
 function respawn(b, laneEl, delay = 2000){
   setTimeout(() => {
     const nx = Math.random() * (laneEl.clientWidth - 120);
     const ndur = 6 + Math.random() * 6;
     const ndelay = Math.random() * 4;
-
     b.style.setProperty('--x', `${nx}px`);
     b.style.setProperty('--dur', `${ndur}s`);
     b.style.setProperty('--delay', `${ndelay}s`);
 
-    // アニメーションをリセット
     b.style.animation = 'none';
-    void b.offsetHeight; // reflow
+    void b.offsetHeight; 
 
     b.style.animation = `fall linear forwards`;
     b.style.animationDuration = `${ndur}s`;
     b.style.animationDelay = `${ndelay}s`;
     b.style.top = '-3rem';
 
-    // 再表示
     b.style.display = 'inline-block';
   }, delay);
 }
 
-// ボタン生成
 function spawnButtons(laneEl, count){
   const laneWidth = laneEl.clientWidth || 300;
   const topics = repeatTopics(count);
@@ -135,48 +111,33 @@ function spawnButtons(laneEl, count){
     b.className = 'fall-btn';
     b.textContent = t.label;
 
-    // 位置・速度・遅延をランダムに
-    const x = Math.random() * (laneWidth - 120);           // 左右位置
-    const dur = 10 + Math.random() * 10;                     // 6〜12秒で落下
-    const delay = Math.random() * 4;                        // 0〜6秒遅延
+    const x = Math.random() * (laneWidth - 120);           
+    const dur = 10 + Math.random() * 10;                     
+    const delay = Math.random() * 4;                        
 
     b.style.setProperty('--x', `${x}px`);
     b.style.setProperty('--dur', `${dur}s`);
     b.style.setProperty('--delay', `${delay}s`);
 
-    // クリックで中央に詳細を表示
     b.addEventListener('mouseenter', (e) => {
       detailsTitle.textContent = t.label;
       detailsBody.textContent  = t.text;
 
       b.style.display = "none";
-      // クリック感
       b.animate([{transform:'scale(1.0)'},{transform:'scale(0.96)'},{transform:'scale(1.0)'}],
                 {duration:200, easing:'ease-out'});
                 respawn(b, laneEl, 2000);
-
-                
-                
     });
     b.addEventListener('animationend', () => {
-  respawn(b, laneEl, 0); // すぐに再出現してまた落とす
+  respawn(b, laneEl, 0); 
 });
-
-    
-    
-
     laneEl.appendChild(b);
   });
 }
 
-
-
-// 片側15個ずつ生成（合計30）
 spawnButtons(leftLane, 22);
 spawnButtons(rightLane, 22);
 
-// 画面リサイズ時に左右位置の乱数範囲が変わるため、
-// 一度全ボタンのXを更新（アニメは継続）
 window.addEventListener('resize', () => {
   [leftLane, rightLane].forEach(laneEl => {
     const w = laneEl.clientWidth || 300;
@@ -187,15 +148,12 @@ window.addEventListener('resize', () => {
   });
 });
 
-
-// ==== RPG風タイプライター ====
 const dlgNameEl  = document.getElementById('dialogue-name');
 const dlgTextEl  = document.getElementById('dialogue-text');
 const nextEl     = document.getElementById('next-indicator');
 
 let typerState = { typing:false, pageIdx:0, pages:[], speed:18, fast:false };
 
-// 長文を適度にページ分割（約120〜160文字で句読点優先）
 function paginate(text, min=120, max=160){
   const pages = [];
   let buf = '';
@@ -218,7 +176,6 @@ async function typePage(str){
   nextEl.style.opacity = 0;
 
   for(let i=0;i<str.length;i++){
-    // 早送り中はまとめて出す
     if(typerState.fast){ dlgTextEl.textContent = str; break; }
     dlgTextEl.textContent += str[i];
     await new Promise(r => setTimeout(r, typerState.speed));
@@ -228,37 +185,30 @@ async function typePage(str){
   typerState.fast = false;
 }
 
-// ページを開始
 async function showRPG(label, text){
   detailsTitle.textContent = label;
-  dlgNameEl.textContent = label; // 名前札に同じラベルを表示（不要なら固定文言に）
+  dlgNameEl.textContent = label; 
   typerState.pages = paginate(text);
   typerState.pageIdx = 0;
   await typePage(typerState.pages[0]);
 }
 
-// クリック/タップで「早送り or 次ページ」
 document.getElementById('details-body').addEventListener('click', async () => {
   if(typerState.typing){
-    typerState.fast = true; // 今のページを即表示
+    typerState.fast = true; 
     return;
   }
-  // 次ページへ
   if(typerState.pageIdx < typerState.pages.length - 1){
     typerState.pageIdx++;
     await typePage(typerState.pages[typerState.pageIdx]);
   }
 });
 
-// キーボードでも進めたい場合（Enter/Space）
 document.addEventListener('keydown', (e) => {
   if(e.key === 'Enter' || e.key === ' '){
     document.getElementById('details-body').click();
   }
 });
 </script>
-
-    
-
 </body>
 </html>

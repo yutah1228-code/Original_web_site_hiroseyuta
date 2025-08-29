@@ -213,6 +213,7 @@
   position: fixed;
   right: 100px;
   top: 500px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
 }
 
 .game_main{
@@ -291,6 +292,7 @@
   position: fixed;
   top: 550px;
   right: 370px;
+  z-index: 2000;
 }
 
 .command_all.is-open{
@@ -306,6 +308,7 @@
   position: fixed;
   top: 500px;
   right: 400px;
+  z-index: 2000;
 }
 
 .status_box{ 
@@ -334,17 +337,18 @@
 
 .shop_box {
   display: none;
-  margin: 8px 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background: #fff;
-  line-height: 1.7;
-  font-size: 10px;
+  position: fixed; 
+  right: 10px; 
+  top: 10px;
+  width: 200px; 
   height: 370px;
-  width: 200px;
-  position: fixed;
-  right: 10px;
+  background: #fff; 
+  border: 1px solid #ccc; 
+  border-radius: 10px;
+  padding: 10px; 
+  line-height: 1.7; 
+  font-size: 10px; 
+  z-index: 9000;
 }
 
 .shop_box.is-open { display: block; }
@@ -373,6 +377,28 @@
 
 .shop_list li:first-child { border-top: none; }
 
+.shop_detail { 
+  margin-top:10px; 
+  padding:10px; 
+  border:1px solid #ccc; 
+  border-radius:8px; 
+  background:#fff; 
+  font-size:10px; 
+  line-height:1.5; 
+  height:90px; 
+}
+.shop_detail_name { 
+  font-weight:700; 
+  margin-bottom:4px; 
+}
+.shop_detail_price { 
+  color:#555; 
+  margin-bottom:4px; 
+}
+.shop_detail_effect {
+  margin-top:6px;
+  color:#2a5; }
+
 .shop_item_name { font-weight: 600; }
 
 .shop_item_price { font-size: 10px; color: #555; }
@@ -385,7 +411,7 @@
 
 
 .overlay {
-  position: fixed;
+  position: fixed; 
   inset: 0;
   display: none;              
   align-items: center;
@@ -404,8 +430,14 @@
   max-width: 90vw;
   box-shadow: 0 10px 30px rgba(0,0,0,.2);
   font-size: 14px;
-  
 }
+
+.overlay-panel {
+  background: #fff; padding: 16px 20px; border-radius: 12px;
+  min-width: 280px; max-width: 90vw; box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  font-size: 14px;
+}
+
 .lvup_title {
   font-size: 18px;
   margin: 0 0 8px;
@@ -433,13 +465,11 @@
 .game_picture {
   width: 240px;         
   height: 240px;
-  margin: 0 !important;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; 
   position: fixed;
   top: 650px;
-  margin: 180px 0 16px;
 }
 
 #back_index{
@@ -457,14 +487,204 @@
   cursor: pointer;
 }
 
+.go_title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.go_msg { margin-bottom: 12px; color: #555; }
+.go_actions { display:flex; gap:8px; justify-content:center; }
+
 #enemy_hp_text {
   display: block;
   margin-bottom: 6px;
-  color: #fff;
+  color: red;
   font-weight: 700;
   text-shadow: 0 1px 2px rgba(0,0,0,.6);
   position: fixed;
   top: 500px;
+  z-index: 2000;
+}
+
+.index_foot{
+  width: 100vw;
+  height:25px;
+  background-color:rgba(0,0,0,.60);
+  position: fixed;
+  bottom: 0px;
+  color: white;
+  text-align: right ;
+}
+
+@media (max-width: 768px) {
+  .header__container {
+    padding: 0 20px;
+  }
+
+  .header__logo a {
+    font-size: 20px;
+  }
+
+  .header_sblogo.rpg-sub {
+    font-size: 12px;
+  }
+
+  .nav {
+    width: 60%; /* デスクトップ20% → モバイルでは広め */
+  }
+
+  .nav__item a {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  .hazimeru a {
+    font-size: clamp(24px, 6vw, 40px);
+    letter-spacing: 0.1em;
+  }
+
+  .game_picture {
+    width: 160px;
+    height: 160px;
+    top: auto;
+    bottom: 20px;
+  }
+
+  #player_hp {
+    right: 20px;
+    top: auto;
+    bottom: 120px;
+    width: 140px;
+    height: 280px;
+  }
+
+  .enemy_hp {
+    left: 20px;
+    top: auto;
+    bottom: 120px;
+    width: 160px;
+    height: 160px;
+  }
+
+  .rog_box {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .shop_box {
+    width: 80%;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .main1{
+    background-image: url(/assets/img/back1.jpg);
+background-size: contain;
+height: 79vh;
+  }
+
+  .index_foot{
+    height: 16vh;
+    
+  }
+
+}
+
+
+/* スマホ向け: 480px以下 */
+@media (max-width: 480px) {
+  .header {
+    height: 60px;
+  }
+
+  .hamburger {
+    width: 40px;
+    height: 60px;
+  }
+
+  .nav {
+    width: 80%;
+    padding: 20px 0;
+  }
+
+  .hazimeru a {
+    font-size: 20px;
+  }
+
+  .command_all, 
+  .battle_btn, 
+  .status_box, 
+  .inventory_box {
+    right: 10px;
+    left: 10px;
+    width: auto;
+    position: fixed;
+  }
+
+  #back_index {
+    width: 50px;
+    height: 50px;
+  }
+
+  .inventory_box{
+    width: 270px;
+    position: fixed;
+    top: 470px;
+    left: 12px;
+  }
+  .shop_detail{
+    height: 120px;
+  }
+}
+
+#enemy_picture{
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: contain;          /* ← cover を確実に上書き */
+  width: clamp(160px, 22vw, 240px);  /* デスクトップの見た目を保ちつつ可変 */
+  aspect-ratio: 1 / 1;               /* 正方形の見栄えで安定 */
+  /* 位置は既存の .game_picture の fixed を引き継ぐ */
+}
+
+/* 念のためボスでも拡大しない */
+#enemy_picture.is-boss{
+  background-size: contain !important;
+  transform:scale(2)!important;
+  bottom: 80px;
+
+}
+
+/* セレクタ修正：HTMLは id="enemy_hp" なので #enemy_hp にする */
+@media (max-width: 768px){
+  /* ここは .enemy_hp ではなく #enemy_hp にする */
+  #enemy_hp{
+    left: 20px;
+    top: auto;
+    bottom: 120px;
+    width: 160px;
+    height: 160px;
+    position: fixed; /* 既存に合わせる */
+    z-index: 2;
+  }
+
+  /* 敵画像のモバイルサイズ（常に contain で収まる） */
+  #enemy_picture{
+    width: 160px;
+    height: 160px;
+    top: auto;
+    bottom: 20px;
+    background-size: contain;
+  }
+}
+
+/* さらに小さい端末 */
+@media (max-width: 480px){
+  #enemy_picture{
+    width: 160px;
+    height: 160px;
+  }
+  #enemy_hp{
+    width: 140px;
+    height: 140px;
+    bottom: 110px;
+  }
 }
 
 .flame{
@@ -526,7 +746,6 @@
 
 .one_preview {
   position: absolute;
-  top: 200;
   right: 90%;         
   margin-left: 20px;
   opacity: 0;
@@ -555,7 +774,7 @@
 }
 
 .none{
-  width: 100vw;
+  width: 100%;
   height: 80px;
 }
 
@@ -670,15 +889,122 @@
   50.01%,100%{opacity:0}
 }
 
-.chara_footer{
+.chara_foot{
   background-color:rgba(0,0,0,.60);
   height: 20vh;
+  color: white;
+  text-align: right ;
 }
 
 .chara{
   background-image: url(/assets/img/view2.jpg);
   background-size: cover;
 }
+
+.img-overlay{
+  position: fixed; inset: 0; display: none;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,.65);
+  z-index: 10000;
+}
+.img-overlay.is-open{ display: flex; }
+
+.img-modal{
+  position: relative;
+  margin: 0; padding: 12px;
+  background: #111; border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  max-width: 92vw; max-height: 90vh;
+  display: grid; gap: 8px; place-items: center;
+}
+
+#status_viewer_img{
+  max-width: 90vw; max-height: 80vh;
+  width: auto; height: auto; display: block;
+  border-radius: 8px;
+}
+
+.img-caption{
+  color: #eee; font-size: 14px; text-align: center;
+}
+
+.img-close{
+  position: absolute; top: 6px; right: 8px;
+  width: 32px; height: 32px;
+  border: none; border-radius: 9999px;
+  background: #fff; color: #111; font-size: 20px; line-height: 32px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+.img-close:hover{ filter: brightness(0.95); }
+
+/* タイプライター用のカーソル（点滅） */
+.typewriter-cursor {
+  position: relative;
+}
+.typewriter-cursor::after {
+  content: "";
+  display: inline-block;
+  width: 0.6ch;
+  height: 1em;
+  vertical-align: -0.2em;
+  margin-left: 2px;
+  animation: caret-blink 1s step-end infinite;
+  border-right: 2px solid currentColor;
+}
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* モーダルの開閉（最低限） */
+.img-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.6);
+  z-index: 1000;
+}
+.img-overlay.is-open {
+  display: flex;
+}
+.img-modal {
+  background: #111;
+  padding: 12px;
+  border-radius: 8px;
+  max-width: min(90vw, 960px);
+  max-height: 90vh;
+}
+.img-modal img {
+  display: block;
+  max-width: 100%;
+  max-height: 70vh;
+  height: auto;
+  margin: 0 auto 8px;
+}
+.img-caption {
+  color: #fff;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.img-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 24px;
+  line-height: 1;
+  background: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* ハンバーガー開閉の一例（必要に応じて調整） */
+.nav { display: none; }
+.nav.open { display: block; }
+.hamburger.open span { transform: rotate(90deg); }
 
 .history{
   background-image: url(/assets/img/view3.jpg);
@@ -742,14 +1068,13 @@
   to{ transform: translateY(110vh); }
 }
 
-@media (max-width: 640px){
-  .rain-layout{ grid-template-columns: 1fr; }
-  .lane{ display: none; }               
-}
+
 
 .history_foot{
   background-color:rgba(0,0,0,.60);
   height: 60px;
+  color: white;
+  text-align: right ;
 }
 
 :root{
@@ -817,9 +1142,283 @@ top: auto;
 
 html, body { height: 100%; }
 body {
-  min-height: 100dvh;       /* モバイル対応 */
+  min-height: 100dvh;       
   display: flex;
   flex-direction: column;
 }
+
+
+
+.game_foot{
+  width: 100vw;
+  height:25px;
+  background-color:rgba(0,0,0,.60);
+  position: fixed;
+  bottom: 0px;
+  color: white;
+  text-align: right ;
+}
+
+@media (max-width: 768px) {
+  .rog_box{
+    width: 270px;
+    position: fixed;
+    left: 33%;
+    font-size: 15px;
+    padding: 0px;
+    top: 50px;
+  }
+  #shop_btn{
+    width: 60px;
+    height: 60px;
+  }
+  #back_index{
+    width: 40px;
+    height: 40px;
+  }
+  .shop_box{
+    width: 140px;
+    position: fixed;
+    left: 50%;
+  }
+  .shop_header{
+    height: 50px;
+  }
+  #shop_tab_buy{
+    width: 50px;
+    height: 20px;
+    font-size: 9px;
+  }
+  #shop_tab_sell{
+    width: 50px;
+    height: 20px;
+    font-size: 9px;
+  }
+  .shop_title{
+    display: none;
+  }
+  .shop_wallet{
+    font-size: 9px;
+  }
+  .shop_buy{
+    position: fixed;
+    right: 10px;
+  }
+  .shop_sell{
+    position: fixed;
+    right: 10px;
+    
+  }
+
+  #battle_toggle{
+    width: 75px;
+    height: 40px;
+    font-size: 12px;
+    left: 40%;
+  }
+
+  .battle_btn{
+    top: 70%;
+  }
+
+
+  .command_all{
+    width: 120px;
+    font-size: 12px;
+    left: 35%;
+    top: 75%;
+  }
+
+  #status_box{
+    width: 130px;
+    position: fixed;
+    left: 68%;
+    top: 8%;
+    font-size: 11px;
+  }
+
+  #player_hp{
+    position: fixed;
+    top: 67%;
+    font-size: 13px;
+  }
+  #enemy_hp_text{
+    position: fixed;
+    top: 68%;
+    font-size: 13px;
+  }
+
+
+
+}
+
+@media (max-width: 680px){
+
+  /* 土台：ページを上下2段（上:details / 下:落下場） */
+  html, body { height: 100%; }
+  body.history{
+    min-height: 100svh;    /* アドレスバー対策 */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main.rain-layout{
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: 1fr;                     /* 1カラム */
+    grid-template-rows: minmax(44vh, 55svh) minmax(40vh, 45svh);
+    gap: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  /* 上段：detailsを全幅 */
+  .details{
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr; /* タイトル + 本文 */
+    gap: 10px;
+    font-size: 13px;
+  }
+  .dialogue-box{
+    height: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* name / text / next */
+    gap: 8px;
+  }
+  .dialogue-text{ overflow: auto; }
+
+  /* 下段：左右レーンを同じエリアに“重ねて”落下場にする */
+  #lane-left,
+  #lane-right{
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+  }
+  .lane{
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    border-radius: 10px;
+    margin-bottom: env(safe-area-inset-bottom, 8px);
+  }
+
+  /* 落下ボタン（未定義なら有効化） */
+  .fall-btn{
+    position: absolute;
+    top: -3rem;
+    left: var(--x, 8px);
+    transform: translateY(0);
+    padding: 10px 16px;                /* タップしやすく */
+    border: none;
+    border-radius: 9999px;
+    background-image: url(/assets/img/view4.jpg);
+    background-size: cover;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 6px 16px rgba(0,0,0,.18);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+
+    animation: fall linear forwards;
+    animation-duration: var(--dur, 8s);
+    animation-delay: var(--delay, 0s);
+    
+  }
+  @keyframes fall{
+    from { top: -3rem; }
+    to   { top: calc(100% + 3rem); } /* レーン外まで落下 */
+  }
+
+  /* モバイルでの余白・はみ出し抑制の小ワザ */
+  .history_foot{
+    padding: 12px 16px;
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    text-align: center;   /* 下端の空白を感じにくく */
+    height: auto;         /* 固定高は避ける */
+  }
+}
+
+@media (max-width: 768px){
+  /* 3つの行を縦に積む（row→column） */
+  .character_one,
+  .character_two,
+  .character_three{
+    height: auto;               /* 25vhを解除 */
+    min-height: 0;
+    flex-direction: column;     /* ← ここがポイント */
+    gap: 8px;
+  }
+
+  /* 画像ブロックは横幅いっぱい・高さを比率で */
+  .one_detale, .two_detale, .three_detale{
+    flex: 0 0 auto;
+    width: 100%;
+    height: clamp(180px, 35svh, 320px); /* 画面高に応じて可変 */
+    background-size: contain;
+  }
+
+  /* テキストは下に回す。内スクロールで収める */
+  .one_story, .two_story, .three_story{
+    flex: 0 1 auto;
+    max-height: 45svh;          /* 画面からはみ出さない上限 */
+    overflow: auto;
+    font-size: 14px;
+  }
+
+  /* 余白控えめにして全体を1画面に寄せる */
+  .none{ height: 16px; }
+
+  /* ホバー前提のプレビューはモバイルで封印
+     （クリックでモーダルはJSがやってくれる） */
+  .one_preview, .two_preview, .three_preview{ display: none; }
+
+  /* 反転行を解除（左右入れ替えは狭いと読みづらい） */
+  .character_two{ flex-direction: column; }
+}
+
+
+@media (max-width: 480px){
+  .flame{ width: 94vw; gap: 8px; }
+
+  .one_detale, .two_detale, .three_detale{
+    height: clamp(160px, 38svh, 280px);
+    font-size: 16px;
+  }
+  .one_story, .two_story, .three_story{
+    font-size: 13px;
+    padding: 10px;
+    max-height: 50svh;          /* 指で読み進めやすい高さ */
+  }
+
+  .chara_foot{
+    height: auto;               /* 20vh固定はやめる */
+    padding: 12px 16px;
+    text-align: center;
+    z-index: 10000;
+  }
+  .none{
+    height: 60px;
+  }
+  .nav.open{
+    position: fixed;
+    top: 60px;
+    height: 100%;
+  }
+}
+
+
+
+
+
+  
 
 

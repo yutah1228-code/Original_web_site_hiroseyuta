@@ -1,183 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>character</title>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>character</title>
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 <body class="chara">
-    
-    <header class="header">
-        <div class="header__container">
-            <div class="header_text">
-            <h1 class="header__logo"><a href="/" class="rpg-title">キャラクター詳細</a></h1>
-            
-            </div>
-            <button type="button" class="hamburger">
-                <span></span>
-            </button>
-            <nav class="nav">
-                <ul class="nav__list">
-                    <li class="nav__item"><a href="./index.html">HOME</a></li>
-                    <li class="nav__item"><a href="./rekisi.html">RPG</a></li>
-                </ul>
-                    
-            </nav>
+  <header class="header">
+    <div class="header__container">
+      <div class="header_text">
+        <h1 class="header__logo"><a href="/" class="rpg-title">キャラクター詳細</a></h1>
+      </div>
+      <button type="button" class="hamburger" aria-label="メニューを開閉">
+        <span></span>
+      </button>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="./index.html">HOME</a></li>
+          <li class="nav__item"><a href="./rekisi.html">RPG</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="character_list">
+    <div class="flame">
+      <div class="none"></div>
+
+      <!-- クレス -->
+      <div class="character_one">
+        <div class="one_detale" data-name="クレス" data-status-src="./assets/img/st1.png">
+          <div class="one_preview">
+            <img src="./assets/img/one_big.jpg" alt="クレス全身像" data-status-src="./assets/img/st1.png">
+          </div>
         </div>
-    </header>
-
-    <main class="character_list">
-        <div class="flame">
-            <div class="none"></div>
-            <div class="character_one">
-                <div class="one_detale" >
-                    <div class="one_preview">
-                <img src="./assets/img/one_big.jpg" alt="クレス全身像">
-            </div>
-                </div>
-                <p class="one_story">＜クレス＞<br>かつて王国の未来を背負う存在として人々に慕われていた王子。しかし、王国は突如として勃発した反乱に飲み込まれ、玉座も家族も奪われてしまった。今や彼は“王子”という名を隠し、追われる身として各地を放浪する。
-
+        <p class="one_story">
+          <span class="story-name" tabindex="0">＜クレス＞</span><br>
+          <span class="story-body typewriter-cursor"
+                data-full="かつて王国の未来を背負う存在として人々に慕われていた王子。しかし、王国は突如として勃発した反乱に飲み込まれ、玉座も家族も奪われてしまった。今や彼は“王子”という名を隠し、追われる身として各地を放浪する。
 反乱軍の追手から逃れるために粗末な鎧を纏い、民兵や冒険者に紛れて生き延びるが、その瞳には失われた祖国を取り戻す強い決意が宿っている。剣の腕前は幼少期から磨かれ、護衛隊長にすら一目置かれていたが、戦いの経験不足ゆえにまだ荒削り。しかし、その純粋さと強靭な意志は、やがて仲間を導く光となる。
-
 彼の存在を知る者は少なく、そしてその血筋を狙う影は絶えない。
-追われる亡国の王子は、自らの使命と、奪われた王国を取り戻す運命に向かって歩み出すのだった。</p>
-            </div>
-            
-            <div class="character_two">
-                <div class="two_detale">coming soon
-                    <div class="two_preview">
-                <img src="./assets/img/two_big.jpg" alt="メルディ全身像">
-            </div>
-                </div>
-                <p class="two_story">＜メルディ＞<br>
-                    由緒ある名門貴族の娘として生まれ、幼い頃から一流の魔術師となるべく厳しい英才教育を受けてきた。しかしその教育はあまりにも苛烈で、失敗を重ねるたびに「才能がない」と言い聞かされ、自らもそう信じ込むようになってしまう。
+追われる亡国の王子は、自らの使命と、奪われた王国を取り戻す運命に向かって歩み出すのだった。"></span>
+        </p>
+      </div>
 
-心をすり減らす日々に耐えきれず、彼女はついに屋敷を飛び出し、貴族の地位を捨てて放浪の旅へ。その身なりに残る気品と魔術の素養を隠すように、ひっそりと身を潜めている。
-
-だが、彼女が「自分には才能がない」と思い込んでいるのは大きな誤解であり、むしろその潜在能力はかつての誰よりも高く、歴史に名を残す大魔導師すら凌ぐ可能性を秘めている。本人だけがまだ、その事実に気づいていないのだ。
-
-その未熟さと揺らぎを抱えながらも、彼女の旅はやがて仲間との出会いを通じて、自らの真価を知る運命へと導かれていく。
-                </p>
-            </div>
-            
-            
-            <div class="character_three">
-                <div class="three_detale">coming soon
-                    <div class="three_preview">
-                <img src="./assets/img/three_big.jpg" alt="ジーク全身像">
-            </div>
-                </div>
-                <p class="three_story">＜ジーク＞
-                    戦乱の中で親を失い、孤児として過酷な日々を生き抜いていた少年は、やがて敵国の王子に拾われる。そこで与えられたのは救いではなく、徹底した暗殺術の教育だった。感情を殺し、任務を遂行するための「道具」として育てられ、彼は影の中で数々の標的を葬ってきた。
-
-冷徹さと確かな技量を持ち、命じられればどんな汚れ仕事にも迷いなく刃を振るう。しかし、心の奥底では燻る疑念がある――本当に自分が進んできた道は正しかったのか、と。命を奪うたびにその思いは深まり、やがて揺らぎとなって彼を苛む。
-
-彼は未だ暗殺者として生きるしか術を知らない。だが、その胸に芽生えた迷いこそが、彼をただの「道具」から人間へと導く光になりつつあった。</p>
-            </div>
-            </div>
-            
-            </div>
-
+      <!-- メルディ -->
+      <div class="character_two">
+        <div class="two_detale" data-name="メルディ" data-status-src="./assets/img/st2.png">
+          comming soon
+          <div class="two_preview">
+            <img src="./assets/img/two_big.jpg" alt="メルディ全身像" data-status-src="./assets/img/st2.png">
+          </div>
         </div>
-        
-    </main>
+        <p class="two_story">
+          <span class="story-name" tabindex="0">＜メルディ＞</span><br>
+          <span class="story-body typewriter-cursor"
+                data-full="由緒ある名門貴族の娘として生まれ、幼い頃から一流の魔術師となるべく厳しい英才教育を受けてきた。しかしその教育はあまりにも苛烈で、失敗を重ねるたびに「才能がない」と言い聞かされ、自らもそう信じ込むようになってしまう。
+心をすり減らす日々に耐えきれず、彼女はついに屋敷を飛び出し、貴族の地位を捨てて放浪の旅へ。その身なりに残る気品と魔術の素養を隠すように、ひっそりと身を潜めている。
+だが、彼女が「自分には才能がない」と思い込んでいるのは大きな誤解であり、むしろその潜在能力はかつての誰よりも高く、歴史に名を残す大魔導師すら凌ぐ可能性を秘めている。本人だけがまだ、その事実に気づいていないのだ。
+その未熟さと揺らぎを抱えながらも、彼女の旅はやがて仲間との出会いを通じて、自らの真価を知る運命へと導かれていく。"></span>
+        </p>
+      </div>
 
+      <!-- ジーク -->
+      <div class="character_three">
+        <div class="three_detale" data-name="ジーク" data-status-src="./assets/img/st3.png">
+          comming soon
+          <div class="three_preview">
+            <img src="./assets/img/three_big.jpg" alt="ジーク全身像" data-status-src="./assets/img/st3.png">
+          </div>
+        </div>
+        <p class="three_story">
+          <span class="story-name" tabindex="0">＜ジーク＞</span><br>
+          <span class="story-body typewriter-cursor"
+                data-full="戦乱の中で親を失い、孤児として過酷な日々を生き抜いていた少年は、やがて敵国の王子に拾われる。そこで与えられたのは救いではなく、徹底した暗殺術の教育だった。感情を殺し、任務を遂行するための「道具」として育てられ、彼は影の中で数々の標的を葬ってきた。
+冷徹さと確かな技量を持ち、命じられればどんな汚れ仕事にも迷いなく刃を振るう。しかし、心の奥底では燻る疑念がある――本当に自分が進んできた道は正しかったのか、と。命を奪うたびにその思いは深まり、やがて揺らぎとなって彼を苛む。
+彼は未だ暗殺者として生きるしか術を知らない。だが、その胸に芽生えた迷いこそが、彼をただの「道具」から人間へと導く光になりつつあった。"></span>
+        </p>
+      </div>
 
-    
+    </div>
+  </main>
 
+  <!-- ステータス画像モーダル -->
+  <div id="status_viewer" class="img-overlay" aria-hidden="true">
+    <figure class="img-modal" role="dialog" aria-modal="true" aria-labelledby="status_viewer_caption">
+      <button type="button" id="status_close" class="img-close" aria-label="閉じる">×</button>
+      <img id="status_viewer_img" alt="ステータス画像">
+      <figcaption id="status_viewer_caption" class="img-caption"></figcaption>
+    </figure>
+  </div>
+
+  <footer class="chara_foot">
+    @2025 hiroseyuta RPG
+  </footer>
 <script>
-       
-
-
-    const hamburger = document.querySelector(".hamburger");
-    const nav = document.querySelector(".nav");
-
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("open");
-        nav.classList.toggle("open");
-    });
-
-    </script>
-
-   <script>
-// 名前ホバーで本文だけタイプライター表示
+// ハンバーガー開閉
 document.addEventListener("DOMContentLoaded", () => {
-  // 1) 既存の <p class="*_story"> を「名前」「本文」に自動分割
-  const paragraphs = document.querySelectorAll('p.one_story, p.two_story, p.three_story');
+  const hamburger = document.querySelector(".hamburger");
+  const nav = document.querySelector(".nav");
+  if (hamburger && nav) {
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      nav.classList.toggle("open");
+    });
+  }
+});
 
-  paragraphs.forEach(p => {
-    const html = p.innerHTML.trim();
-    let nameHTML = "";
-    let bodyHTML = "";
-
-    // 基本は <br> で分割。無ければ全角の「＞」でフォールバック
-    const brIdx = html.indexOf('<br');
-    if (brIdx !== -1){
-      nameHTML = html.slice(0, brIdx).trim();
-      bodyHTML = html.slice(html.indexOf('>', brIdx)+1).trim();
-    }else{
-      const mark = '＞';
-      const i = html.indexOf(mark);
-      if (i !== -1){
-        nameHTML = html.slice(0, i+1).trim();
-        bodyHTML = html.slice(i+1).trim();
-      }else{
-        // どうしても区切れない場合は先頭の語句を名前扱いにしておく
-        nameHTML = '＜名前＞';
-        bodyHTML = html;
-      }
-    }
-
-    // 再構築（本文は空で保持。元本文は data-full に保存）
-    p.innerHTML = `
-      <span class="story-name" tabindex="0">${nameHTML}</span><br>
-      <span class="story-body typewriter-cursor" data-full="${encodeURIComponent(bodyHTML)}"></span>
-    `;
-  });
-
-  // 2) タイプライター本体（本文のみ）
-  function typeWriter(bodyEl, text, speed = 20){
-    // 既に開始済みなら何もしない（何度も流さない仕様）
-    if (bodyEl.dataset.started === '1') return;
-    bodyEl.dataset.started = '1';
-
+// ストーリー：タイプライター
+document.addEventListener("DOMContentLoaded", () => {
+  function typeWriter(bodyEl, text, speed = 60) {
+    if (!bodyEl || bodyEl.dataset.started === "1") return;
+    bodyEl.dataset.started = "1";
     let i = 0;
-    function tick(){
-      if (i < text.length){
-        bodyEl.innerHTML += text.charAt(i);
+    (function tick() {
+      if (i < text.length) {
+        bodyEl.textContent += text.charAt(i);
         i++;
         setTimeout(tick, speed);
-      }else{
-        bodyEl.classList.remove('typewriter-cursor'); // 終了でカーソル消す
+      } else {
+        bodyEl.classList.remove("typewriter-cursor");
       }
-    }
-    tick();
+    })();
   }
 
-  // 3) 名前へのホバー/フォーカス/タップで発火
-  document.querySelectorAll('.story-name').forEach(nameEl => {
-    const bodyEl = nameEl.parentElement.querySelector('.story-body');
-    const fullText = () => decodeURIComponent(bodyEl.dataset.full || '');
+  document.querySelectorAll(".story-name").forEach((nameEl) => {
+    const bodyEl = nameEl.parentElement?.querySelector(".story-body");
+    if (!bodyEl) return;
 
-    // マウス
-    nameEl.addEventListener('mouseenter', () => typeWriter(bodyEl, fullText(), 60));
-    // キーボード
-    nameEl.addEventListener('focus',      () => typeWriter(bodyEl, fullText(), 60));
-    // タッチ（スマホ等）
-    nameEl.addEventListener('click',      () => typeWriter(bodyEl, fullText(), 60));
+    const full = bodyEl.getAttribute("data-full") || "";
+    const start = () => typeWriter(bodyEl, full, 60);
+
+    nameEl.addEventListener("mouseenter", start);
+    nameEl.addEventListener("focus", start);
+    nameEl.addEventListener("click", start);
+  });
+});
+
+// ステータス画像モーダル
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay  = document.getElementById("status_viewer");
+  const imgEl    = document.getElementById("status_viewer_img");
+  const capEl    = document.getElementById("status_viewer_caption");
+  const closeBtn = document.getElementById("status_close");
+
+  if (!overlay || !imgEl || !capEl || !closeBtn) return;
+
+  function openViewer(src, caption) {
+    if (!src) return;
+    imgEl.src = src;
+    imgEl.alt = caption ? `${caption}のステータス画像` : "ステータス画像";
+    capEl.textContent = caption || "";
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
+  }
+
+  function closeViewer() {
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+    imgEl.src = "";
+  }
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeViewer();
+  });
+  closeBtn.addEventListener("click", closeViewer);
+  document.addEventListener("keydown", (e) => {
+    if (overlay.classList.contains("is-open") && e.key === "Escape") closeViewer();
+  });
+
+  document.addEventListener("click", (e) => {
+    const clickTarget = e.target;
+    if (!(clickTarget instanceof Element)) return;
+
+    const clickable = clickTarget.closest(
+      ".one_detale, .two_detale, .three_detale, .one_preview img, .two_preview img, .three_preview img"
+    );
+    if (!clickable) return;
+
+    const container = clickable.closest(".one_detale, .two_detale, .three_detale");
+    const src = clickTarget.getAttribute("data-status-src") || container?.getAttribute("data-status-src");
+    const name = container?.getAttribute("data-name") || "";
+    if (src) openViewer(src, name ? `＜${name}＞` : "");
   });
 });
 </script>
-
-<footer class="chara_footer">
-    
-</footer>
-    
-
 </body>
-
-
 </html>

@@ -1,145 +1,152 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const backBtn = document.getElementById("back_index");
-  if (backBtn) {
-    backBtn.addEventListener("click", () => {
-      window.location.href = "index.html";
-    });
-  }
-});
-const enemyHP1=document.getElementById("enemy_hp");
-const attackBtn=document.getElementById("command1");
-const guardBtn=document.getElementById("command2");
-const spellBtn=document.getElementById("command3");
-const itemBtn=document.getElementById("command4");
-const logList=document.querySelector(".rog_box ul");
-const inventoryBox=document.querySelector(".inventory_box");
-const battleToggleBtn=document.getElementById("battle_toggle");
-const commandPanel=document.querySelector(".command_all");
-const statusBtn = document.getElementById("status_btn");
-const DROP_RATE=0.3;
-const DROP_TABLE=[
-  {name:"薬草",weight:50},
-  {name:"癒しの果実",weight:10},
-  {name:"魔力丸",weight:10},
-  {name:"レイピア",weight:2},
+// ===== 初期DOM参照 =====
+const backBtn          = document.getElementById("back_index");
+const enemyHPBox       = document.getElementById("enemy_hp");
+const enemyHPText      = document.getElementById("enemy_hp_text");
+const enemyPicture     = document.getElementById("enemy_picture");
+const playerHPBox      = document.getElementById("player_hp");
+
+const attackBtn        = document.getElementById("command1");
+const guardBtn         = document.getElementById("command2");
+const spellBtn         = document.getElementById("command3");
+const itemBtn          = document.getElementById("command4");
+
+const logList          = document.querySelector(".rog_box ul");
+const inventoryBox     = document.querySelector(".inventory_box");
+const inventoryList    = document.getElementById("inventory_list");
+
+const battleToggleBtn  = document.getElementById("battle_toggle");
+const commandPanel     = document.querySelector(".command_all");
+const statusBtn        = document.getElementById("status_btn");
+const statusBox        = document.getElementById("status_box");
+
+const lvupOverlay      = document.getElementById("lvup_overlay");
+const lvOkBtn          = document.getElementById("lv_ok_btn");
+
+const shopBtn          = document.getElementById("shop_btn");
+const shopBox          = document.getElementById("shop_box");
+const shopCloseBtn     = document.getElementById("shop_close");
+const shopTabBuy       = document.getElementById("shop_tab_buy");
+const shopTabSell      = document.getElementById("shop_tab_sell");
+const shopList         = document.getElementById("shop_list");
+const shopGoldLabel    = document.getElementById("shop_gold");
+const sdName           = document.getElementById("sd_name");
+const sdPrice          = document.getElementById("sd_price");
+const sdDesc           = document.getElementById("sd_desc");
+const sdEffect         = document.getElementById("sd_effect");
+
+const goOverlay        = document.getElementById("gameover_overlay");
+const goRetry          = document.getElementById("go_retry");
+const goClose          = document.getElementById("go_close");
+const goIndex          = document.getElementById("go_index");
+
+// ===== ユーティリティ =====
+const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+// ===== 定数・データ =====
+const DROP_RATE = 0.3;
+const DROP_TABLE = [
+  { name: "薬草",       weight: 50 },
+  { name: "癒しの果実", weight: 10 },
+  { name: "魔力丸",     weight: 10 },
+  { name: "レイピア",   weight: 2  },
 ];
-// 敵と味方の初期ステータス
-let enemyHP=100;
-let playerHP=100;
-let playerMaxMP=30;
-let playerMP=playerMaxMP;
-const SPELL_COST=5;
-let isGuarding=false;
-let playerLevel=1;
-let playerExp=0;
-let playerNextExp=10;
-let playerMaxHP=100;
-const stats={HP:100,STR:12,MAG:6,AGL:12,GRD:10,LUCK:10};
-const GROWTH={HP:0.7,STR:0.8,MAG:0.4,AGL:0.7,GRD:0.8,LUCK:0.6};
-// 装備
-const EQUIP = { weapon: null,armor:null }; 
-const EQUIP_BONUS = {
-  weapon: {
-    "レイピア": { STR: 5 },   
-  },
-  armor:{
-    "棘の鎧":{GRD:5},
-  }
-};
-// ログ表示
-const addLog=(message,{maxEntries=100}={})=>{
-  const logList=document.querySelector(".rog_box ul")
-  if(!logList){return;
-  }else{
-  const li=document.createElement("li");
-  li.textContent=String(message);
-  logList.appendChild(li);
-  }
-while(logList.children.length>maxEntries){
-  logList.removeChild(logList.firstElementChild);
-}
-const parent=document.querySelector(".rog_box");
-if(parent){
-  parent.scrollTop=parent.scrollHeight;
-}
-};
-// 敵画像
+
 const IMG_BASE = "./assets/img/";
 const ENEMY_IMAGES = {
   "スライム": `${IMG_BASE}slime.png`,
   "ゴブリン": `${IMG_BASE}gobrin.png`,
-  _default:   `${IMG_BASE}slime.png`, 
+  _default:   `${IMG_BASE}slime.png`,
 };
-const enemyPicture=document.querySelector(".game_picture");
-let stage=1;
-let currentEnemy=null;
-const ENEMY_NAMES=["スライム","ゴブリン"];
-const BOSS_STAGE = 30;
+
+const ENEMY_NAMES = ["スライム", "ゴブリン"];
+const BOSS_STAGE  = 30;
 const BOSS = {
   name: "ドラゴン",
-  hp: 600,
-  atkMin: 15,
-  atkMax: 35,
-  agl: 18,
-  img: `${IMG_BASE}boss.png`, // assets/img/boss.png を用意
+  hp: 600, atkMin: 15, atkMax: 35, agl: 18,
+  img: `${IMG_BASE}boss.png`,
 };
-// 商品テーブル
+
 const SHOP_ITEMS = [
   { key: "herb",   name: "薬草",       price: 50  },
   { key: "fruit",  name: "癒しの果実", price: 100 },
   { key: "mana",   name: "魔力丸",     price: 150 },
   { key: "rapier", name: "レイピア",   price: 500 },
-  { key: "thorn", name: "棘の鎧",   price: 1000 },
+  { key: "thorn",  name: "棘の鎧",     price: 1000 },
 ];
-const INV = new Map(); // name -> count
 const SHOP_DETAIL = {
-  herb:  { desc: "シンプルな回復薬。", effect: "HPを20回復（即時）" },
-  fruit: { desc: "みずみずしい果実。", effect: "HPを50回復（即時）" },
-  mana:  { desc: "濃縮された魔力の玉。", effect: "MPを20回復（即時）" },
+  herb:  { desc: "シンプルな回復薬。",     effect: "HPを20回復（即時）" },
+  fruit: { desc: "みずみずしい果実。",     effect: "HPを50回復（即時）" },
+  mana:  { desc: "濃縮された魔力の玉。",   effect: "MPを20回復（即時）" },
   rapier:{ desc: "細身の剣。扱いやすい。", effect: "装備でSTR+5（武器）" },
-  thorn:{ desc: "返しの生えた鎧。", effect: "被ダメージの一部を反射(防具)" }
+  thorn: { desc: "返しの生えた鎧。",       effect: "被ダメージの一部を反射(防具)" }
 };
-let SHOP_MODE = "buy"; 
 
-// ゴールド
-let gold = 500; 
-function ensureGoldUI(){
-}
-function updateGoldUI(){
-  const box = document.getElementById("status_box");
-  if (box && box.classList.contains("is-open")) updateStatusUI();
-}
+// ===== 進行状態 =====
+let gold         = 500;
+let enemyHP      = 100;
+let playerHP     = 100;
+let playerMaxHP  = 100;
 
-// ゴールド変化
-function getGoldReward(enemy, stage){
-  const s = stage || 1;
-  const base = 5 + s * 5;     
-  const variance = rand(0, 4); 
-  return base + variance;
-}
+let playerMaxMP  = 30;
+let playerMP     = playerMaxMP;
+const SPELL_COST = 5;
 
-// ステータス
-function ensureStatusBox(){
-  let box = document.getElementById("status_box");
-  if (!box) {
-    box = document.createElement("div");
-    box.id = "status_box";
-    box.className = "status_box";
-    const host = document.querySelector(".command_list") 
-    const enemyHpNode = document.getElementById("enemy_hp");
-    host.insertBefore(box, (enemyHpNode ? enemyHpNode.nextSibling : host.firstChild));
+let isGuarding   = false;
+let playerLevel  = 1;
+let playerExp    = 0;
+let playerNextExp= 10;
+
+const stats   = { HP:100, STR:12, MAG:6, AGL:12, GRD:10, LUCK:10 };
+const GROWTH  = { HP:0.7, STR:0.8, MAG:0.4, AGL:0.7, GRD:0.8, LUCK:0.6 };
+
+const EQUIP = { weapon: null, armor: null };
+const EQUIP_BONUS = {
+  weapon: { "レイピア": { STR: 5 } },
+  armor:  { "棘の鎧":   { GRD: 5 } },
+};
+
+let SHOP_MODE = "buy";
+const INV = new Map();  // name -> count
+
+let stage = 1;
+let currentEnemy = null;
+
+// ===== 汎用ログ =====
+function addLog(message, { maxEntries = 100 } = {}) {
+  if (!logList) return;
+  const li = document.createElement("li");
+  li.textContent = String(message);
+  logList.appendChild(li);
+  while (logList.children.length > maxEntries) {
+    logList.removeChild(logList.firstElementChild);
   }
-  return box;
+  const parent = document.querySelector(".rog_box");
+  if (parent) parent.scrollTop = parent.scrollHeight;
 }
 
-function formatLine(label, value){
+// alert乗っ取り（ログに流す）
+window.alert = (msg) => addLog(msg);
+
+// ===== HP/MP表示 =====
+function updateEnemyHP() {
+  if (enemyHPText) enemyHPText.textContent = "敵のHP:" + enemyHP;
+}
+function updatePlayerHP() {
+  if (playerHPBox) playerHPBox.textContent = "あなたのHP:" + playerHP + "/" + playerMaxHP;
+  if (playerHP <= 0) { disableCommands(); showGameOver(); }
+}
+function updatePlayerMP() {
+  refreshStatusIfOpen();
+}
+
+// ===== ステータスUI =====
+function formatLine(label, value) {
   return `<div><span style="display:inline-block;min-width:90px;color:#555;">${label}</span>${value}</div>`;
 }
 
-function updateStatusUI(){
-  const box = ensureStatusBox();
+function updateStatusUI() {
+  if (!statusBox) return;
 
-  // 条件?真:偽
   const lv    = (typeof playerLevel    === "number") ? playerLevel    : 1;
   const exp   = (typeof playerExp      === "number") ? playerExp      : 0;
   const next  = (typeof playerNextExp  === "number") ? playerNextExp  : 10;
@@ -158,10 +165,9 @@ function updateStatusUI(){
   html += formatLine("レベル", `Lv.${lv}`);
   html += formatLine("経験値", `${exp}/${next}`);
   html += formatLine("HP", `${playerHP}/${hpMax}`);
-  if (mp !== null && mpMax !== null) {
-    html += formatLine("MP", `${mp}/${mpMax}`);
-  }
+  if (mp !== null && mpMax !== null) html += formatLine("MP", `${mp}/${mpMax}`);
   html += formatLine("所持金", `${gold}G`);
+
   if (STR !== null || MAG !== null || AGL !== null || GRD !== null || LUCK !== null) {
     html += `<div style="margin-top:6px;color:#555;">— 能力値 —</div>`;
     if (STR !== null)  html += formatLine("STR（力）",  STR);
@@ -170,120 +176,50 @@ function updateStatusUI(){
     if (GRD !== null)  html += formatLine("GRD（防）",  GRD);
     if (LUCK !== null) html += formatLine("LUCK（運）", LUCK);
   }
-  // 装備表示（EQUIP がまだ未定義でも落ちないようにガード）
-  const weaponName = (typeof EQUIP !== "undefined" && EQUIP && EQUIP.weapon) ? EQUIP.weapon : "—";
+
+  const weaponName = (EQUIP && EQUIP.weapon) ? EQUIP.weapon : "—";
+  const armorName  = (EQUIP && EQUIP.armor)  ? EQUIP.armor  : "—";
   html += `<div style="margin-top:6px;color:#555;">— 装備 —</div>`;
   html += formatLine("武器", weaponName);
-
-  const armorName = (typeof EQUIP !== "undefined" && EQUIP && EQUIP.armor) ? EQUIP.armor : "—";
   html += formatLine("防具", armorName);
-  box.innerHTML = html;
+
+  statusBox.innerHTML = html;
 }
 
-// ステータス切り替え
-function toggleStatusUI(){
-  const box = ensureStatusBox();
-  const isOpen = box.classList.contains("is-open");
+function toggleStatusUI() {
+  if (!statusBox) return;
+  const isOpen = statusBox.classList.contains("is-open");
   if (isOpen) {
-    box.classList.remove("is-open");
-    box.style.display = "none";
+    statusBox.classList.remove("is-open");
+    statusBox.style.display = "none";
   } else {
-    updateStatusUI();            // 開く直前に最新値で再描画
-    box.classList.add("is-open");
-    box.style.display = "block";
-  }
-}
-
-// ステータスボタン、コマンドボタン関連
-if (statusBtn) {
-  statusBtn.addEventListener("click", toggleStatusUI);
-}
-if(battleToggleBtn && commandPanel){
-  battleToggleBtn.addEventListener("click",()=>{
-    commandPanel.classList.toggle("is-open");
-    battleToggleBtn.textContent=commandPanel.classList.contains("is-open")?"閉じる":"戦う";
-  });
-}
-function refreshStatusIfOpen(){
-  const box = document.getElementById("status_box");
-  if (box && box.classList.contains("is-open")) {
     updateStatusUI();
+    statusBox.classList.add("is-open");
+    statusBox.style.display = "block";
   }
 }
-
-// アイテム管理
-function rollDrop(){
-  if(Math.random()>=DROP_RATE)return null;
-  return weightedPick(DROP_TABLE).name;
+function refreshStatusIfOpen() {
+  if (statusBox && statusBox.classList.contains("is-open")) updateStatusUI();
 }
 
-function weightedPick(table){
-  const total=table.reduce((s,it)=>s+it.weight,0);
-  let r=Math.random()*total;
-  for(const it of table){
-    r-=it.weight;
-    if(r<=0)return it;
-  }
-  return table[table.length-1];
-}
-
-function ensureMPUI(){
-}
-
-function updatePlayerMP(){
-  refreshStatusIfOpen();
-}
-
-function ensureStatusUI(){
-  if(document.getElementById("status_bar")) return;
-  const bar=document.createElement("div");
-  const host = document.querySelector(".command_list") || document.body;
-  const playerHpNode = document.getElementById("player_hp");
-  host.insertBefore(bar, playerHpNode || host.firstChild);
-}
-
-// 能力値ボーナスの適用/解除
-// 意味確認
+// ===== 装備・成長 =====
 function applyBonus(bonus, sign) {
   if (!bonus) return;
   for (const [k, v] of Object.entries(bonus)) {
     if (typeof stats[k] === "number") stats[k] += sign * v;
   }
 }
-
-// 装着
-// 意味確認
 function equipItem(slot, itemName) {
   const prev = EQUIP[slot];
-  if (prev && EQUIP_BONUS[slot]?.[prev]) {
-    applyBonus(EQUIP_BONUS[slot][prev], -1); 
-  }
+  if (prev && EQUIP_BONUS[slot]?.[prev]) applyBonus(EQUIP_BONUS[slot][prev], -1);
   EQUIP[slot] = itemName;
-  if (EQUIP_BONUS[slot]?.[itemName]) {
-    applyBonus(EQUIP_BONUS[slot][itemName], +1); 
-  }
+  if (EQUIP_BONUS[slot]?.[itemName]) applyBonus(EQUIP_BONUS[slot][itemName], +1);
   addLog(`${itemName}を装備した！`);
-  updateLevelExpUI();
   updateStatusUI();
 }
 
-function updateLevelExpUI() {
-  ensureStatusUI();
-  const lv = document.getElementById("player_lv_label");
-  const ex = document.getElementById("player_exp_label");
-  const gd = document.getElementById("player_gold_label");
-  if (lv) lv.textContent = `Lv.${playerLevel}`;
-  if (ex) ex.textContent = `EXP: ${playerExp}/${playerNextExp}`;
-  if (gd) gd.textContent = `G:${gold}`;  
-  refreshStatusIfOpen();
-}
-
-// 意味確認
 function showLevelUpPanel(before, after, gainsText) {
-  const ov = document.getElementById("lvup_overlay");
-  const ok = document.getElementById("lv_ok_btn");
-  if (!ov || !ok) return;
-
+  if (!lvupOverlay || !lvOkBtn) return;
   setText("lv_from",  get(before, "level"));
   setText("lv_to",    get(after,  "level"));
   setText("hp_from",  get(before, "maxHP"));
@@ -300,367 +236,64 @@ function showLevelUpPanel(before, after, gainsText) {
   setText("luk_to",   get(after,  "LUCK"));
   setText("lv_gains", gainsText || "—");
 
-  openOverlay(ov, ok);
-
-  const onClose = () => closeOverlay(ov);
-  ok.onclick = onClose;
-
+  openOverlay(lvupOverlay, lvOkBtn);
+  const onClose = () => closeOverlay(lvupOverlay, lvOkBtn);
+  lvOkBtn.onclick = onClose;
   const onKey = (e) => { if (e.key === "Escape") onClose(); };
-  const onBg  = (e) => { if (e.target === ov) onClose(); };
-
-  document.addEventListener("keydown", onKey);
-  ov.addEventListener("click", onBg);
-
-  function closeOverlay(el) {
-    el.classList.remove("is-open");
-    el.setAttribute("aria-hidden", "true");
-    ok.onclick = null;
-    document.removeEventListener("keydown", onKey);
-    ov.removeEventListener("click", onBg);
-  }
+  const onBg  = (e) => { if (e.target === lvupOverlay) onClose(); };
+  document.addEventListener("keydown", onKey, { once:true });
+  lvupOverlay.addEventListener("click", onBg, { once:true });
 }
 
-// 小道具
-function setText(id, value) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = String(value ?? "");
-}
-function openOverlay(overlay, focusEl) {
-  overlay.classList.add("is-open");
-  overlay.setAttribute("aria-hidden", "false");
-  requestAnimationFrame(() => focusEl?.focus());
-}
-function get(obj, key) {
-  return (obj && key in obj) ? obj[key] : "";
-}
+function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = String(value ?? ""); }
+function get(obj, key) { return (obj && key in obj) ? obj[key] : ""; }
+function openOverlay(overlay, focusEl) { overlay.classList.add("is-open"); overlay.setAttribute("aria-hidden","false"); requestAnimationFrame(() => focusEl?.focus()); }
+function closeOverlay(overlay) { overlay.classList.remove("is-open"); overlay.setAttribute("aria-hidden","true"); }
 
-const rand = (min, max) => Math.floor(Math.random()*(max-min+1))+min;
-
+// ===== EXP/レベルアップ =====
 function gainExp(amount) {
   addLog(`経験値を${amount}手に入れた！`);
   playerExp += amount;
-  while (playerExp >= playerNextExp) {
-    levelUp();
-  }
-  updateLevelExpUI();
+  while (playerExp >= playerNextExp) levelUp();
   refreshStatusIfOpen();
 }
-
 function levelUp() {
-  const before = {
-    level: playerLevel,
-    maxHP: playerMaxHP,
-    STR: stats.STR,
-    MAG: stats.MAG,
-    AGL: stats.AGL,
-    GRD: stats.GRD,
-
-    LUCK: stats.LUCK
-  };
-
+  const before = { level: playerLevel, maxHP: playerMaxHP, STR: stats.STR, MAG: stats.MAG, AGL: stats.AGL, GRD: stats.GRD, LUCK: stats.LUCK };
   playerLevel += 1;
 
-  // ステータス成長
   const grew = [];
   for (const key of Object.keys(GROWTH)) {
-    if (Math.random() < GROWTH[key]) {
-      stats[key] += 1;
-      grew.push(`${key}+1`);
-    }
+    if (Math.random() < GROWTH[key]) { stats[key] += 1; grew.push(`${key}+1`); }
   }
-// HP成長
-  const hpGain = rand(4,7);
+  const hpGain = rand(4, 7);
   playerMaxHP += hpGain;
 
   playerExp -= playerNextExp;
   playerNextExp = Math.floor(playerNextExp * 1.35) + 2;
 
-  const after = {
-    level: playerLevel,
-    maxHP: playerMaxHP,
-    STR: stats.STR,
-    MAG: stats.MAG,
-    GRD: stats.GRD,
-    AGL: stats.AGL,
-    LUCK: stats.LUCK
-  };
+  const after = { level: playerLevel, maxHP: playerMaxHP, STR: stats.STR, MAG: stats.MAG, GRD: stats.GRD, AGL: stats.AGL, LUCK: stats.LUCK };
 
   addLog(`レベルが上がった！ Lv.${before.level} → Lv.${after.level}`);
   addLog(`最大HP ${before.maxHP} → ${after.maxHP}`);
   grew.forEach(g => addLog(`ステータス上昇：${g}`));
-  updatePlayerHP();
-  updateLevelExpUI();
 
+  updatePlayerHP();
   showLevelUpPanel(before, after, grew.join(" / "));
   refreshStatusIfOpen();
 }
 
-function getExpReward(enemy, stage) {
-  const s = stage || 1;
-  const base = 6 + s * 2;           
-  const variance = rand(0, 3);     
-  return base + variance;
+// ===== 敵生成・画像 =====
+function getEnemyImage(name) { return ENEMY_IMAGES[name] || ENEMY_IMAGES._default; }
+function makeEnemy(stage) {
+  if (stage === BOSS_STAGE) return { ...BOSS };
+  const name   = ENEMY_NAMES[(stage - 1) % ENEMY_NAMES.length];
+  const hp     = 20 + stage * 2;
+  const atkMin = 1  + stage * 1;
+  const atkMax = 2  + stage * 1;
+  const agl    = 6  + stage * 0.4;
+  return { name, hp, atkMin, atkMax, agl, img: getEnemyImage(name) };
 }
-
-// HP表示
-function updateEnemyHP(){
-  let txt = document.getElementById("enemy_hp_text");
-  if (!txt) {
-    const box = document.getElementById("enemy_hp");
-    txt = document.createElement("span");
-    txt.id = "enemy_hp_text";
-    box?.prepend(txt);
-  }
-  txt.textContent = "敵のHP:" + enemyHP;
-};
-function updatePlayerHP(){
-  document.getElementById("player_hp").textContent = "あなたのHP:" + playerHP + "/" + playerMaxHP;
-  if (playerHP <= 0)  { disableCommands(); showGameOver(); } 
-};
-
-window.alert=(msg)=>{
-  addLog(msg);
-};
-
-function addToInventory(itemName){
-  invAdd(itemName, 1);
-  addLog(`${itemName}を手に入れた！`);
-  }
-
-function useItem(li,itemName){
-  switch (itemName) {
-    case "薬草":
-      playerHP = Math.min(playerMaxHP, playerHP + 20);
-      addLog("薬草を使ってHPが20回復した!");
-      break;
-    case "癒しの果実":
-      playerHP = Math.min(playerMaxHP, playerHP + 50);
-      addLog("癒しの果実を使ってHPが50回復した!");
-      break;
-    case "魔力丸":
-      playerMP = Math.min(playerMaxMP, playerMP + 20);
-      addLog("魔力丸を使ってMPが20回復した!");
-      updatePlayerMP();
-      break;
-    case "レイピア":
-      equipItem("weapon","レイピア");
-      break;
-    case "棘の鎧":
-      equipItem("armor","棘の鎧");
-      break;
-    default:
-      addLog(itemName+"を使った!");
-      break;
-  }
-  updatePlayerHP();
-  li.remove();
-  invRemove(itemName, 1);
-  renderInventoryList();  
-  if(inventoryBox) inventoryBox.classList.remove("is-open");
-  endPlayerAction();
-}
-
-function endPlayerAction(){
-  if(enemyHP>0){
-    enemyTurn();
-  }
-}
-
-function randomInt(min,max){
-  return Math.floor(Math.random()*(max-min+1))+min;
-}
-
-function enemyTurn(){
-  const base=currentEnemy
-  ?randomInt(currentEnemy.atkMin,currentEnemy.atkMax)
-  :randomInt(5,15);
-  let dmg=base;
-addLog("敵の攻撃!");
-// 回避LUCK
-const evasion = calcEvasionChance();
-if (Math.random() < evasion) {
-  addLog("素早く身をかわした！ 攻撃を回避した。");
-  return; 
-}
-// 回避できなければガード
-if (isGuarding) {
-  dmg = Math.ceil(dmg / 2);
-  isGuarding = false;
-  addLog("守りでダメージを軽減した！");
-}
-playerHP = Math.max(0, playerHP - dmg);
-addLog("あなたは" + dmg + "のダメージを受けた。");
-updatePlayerHP();
-  // とげの鎧の効果ダメージ反射
-if (EQUIP.armor === "棘の鎧" && dmg > 0) {
-  const thorns = Math.ceil(dmg * 0.5); 
-  enemyHP = Math.max(0, enemyHP - thorns);
-  addLog(`棘の鎧が反撃！ 敵に${thorns}のダメージを与えた！`);
-  updateEnemyHP();
-  if (enemyHP <= 0) {
-    addLog("敵は棘の鎧の反撃で倒れた！");
-    const g = getGoldReward(currentEnemy, stage);
-      gold += g; updateGoldUI(); addLog(`${g}G 手に入れた！（所持金：${gold}G）`);
-
-      const exp = getExpReward(currentEnemy, stage);
-      gainExp(exp);
-
-      const item = rollDrop();
-      if (item){ addToInventory(item); addLog("戦利品:"+item+"を手に入れた！"); }
-      else { addLog("戦利品はなかった"); }
-      spawnNextEnemy();
-  }
-}
-if (playerHP <= 0) {
-  addLog("目の前が真っ暗になった……。");
-  disableCommands();
-  showGameOver(); 
-  return;
-}
-
-}
-function setCommandsEnabled(on){
-  [attackBtn, guardBtn, spellBtn, itemBtn].forEach(b=>{
-    if (b) b.disabled = !on;
-  });
-}
-function disableCommands(){ setCommandsEnabled(false); }
-function enableCommands(){ setCommandsEnabled(true); }
-
-// 攻撃
-document.getElementById("command1").addEventListener("click", function(){
-actWithInitiative(function playerAttack(){
-  const str = (typeof stats?.STR === "number") ? stats.STR : 0;
-  const base = Math.floor(Math.random()*20)+5;   // 5〜24
-  const strBonus = Math.floor(str * 0.7);
-  const damage = base + strBonus;
-  enemyHP = Math.max(0, enemyHP - damage);
-
-  if (enemyHP <= 0) {
-    updateEnemyHP();
-    alert("攻撃！ 敵に" + damage + "のダメージ！");
-    alert("敵を倒した！");
-    if (stage === BOSS_STAGE) {
-      addLog("★ ボスを打ち倒した！ 世界に平和が訪れた…");
-// ボス報酬
-      const bonus = 500;
-      gold += bonus; updateGoldUI();
-      addLog(`特別報酬 ${bonus}G を手に入れた！（所持金：${gold}G）`);
-    }
-    const g = getGoldReward(currentEnemy, stage);
-    gold += g; updateGoldUI(); addLog(`${g}G 手に入れた！（所持金：${gold}G）`);
-    const exp = getExpReward(currentEnemy, stage);
-    gainExp(exp);
-    const item = rollDrop();
-    if (item){ addToInventory(item); addLog("戦利品:"+item+"を手に入れた！"); }
-    else { addLog("戦利品はなかった"); }
-    spawnNextEnemy();
-  } else {
-    updateEnemyHP();
-    alert("攻撃！ 敵に" + damage + "のダメージ！");
-  }
-});
-});
-    
-window.addEventListener("DOMContentLoaded",()=>{
-  updateEnemyHP();
-  updatePlayerHP();
-});
-
-// 防御
-document.getElementById("command2").addEventListener("click", function(){
-actWithInitiative(function playerGuard(){
-  isGuarding = true;
-  addLog("防御！次の被ダメージを軽減する準備をした。");
-  // 先手プレイヤーでも、このターンは攻撃しない想定の単発行動
-});
-});
-
-// 呪文
-document.getElementById("command3").addEventListener("click", function(){
-actWithInitiative(function playerCast(){
-  if (playerMP < SPELL_COST) { addLog("MPが足りない!"); return; }
-  playerMP -= SPELL_COST; updatePlayerMP();
-  const damage = calcSpellDamage();
-  enemyHP = Math.max(0, enemyHP - damage);
-  if (enemyHP <= 0) {
-    updateEnemyHP();
-    alert(`呪文！ 火炎に包まれ${damage}のダメージ!（MP-${SPELL_COST}）`);
-    alert("敵を倒した！");
-    if (stage === BOSS_STAGE) {
-      addLog("★ ボスを打ち倒した！ 世界に平和が訪れた…");
-// ボス報酬
-      const bonus = 500;
-      gold += bonus; updateGoldUI();
-      addLog(`特別報酬 ${bonus}G を手に入れた！（所持金：${gold}G）`);
-    }
-    const g = getGoldReward(currentEnemy, stage);
-    gold += g; updateGoldUI(); addLog(`${g}G 手に入れた！（所持金：${gold}G）`);
-    const exp = getExpReward(currentEnemy, stage);
-    gainExp(exp);
-    const item = rollDrop();
-    if (item){ addToInventory(item); addLog("戦利品:" + item + "を手に入れた！"); }
-    else { addLog("戦利品はなかった"); }
-    spawnNextEnemy();
-    } else {
-      updateEnemyHP();
-      alert(`呪文！ 火炎に包まれ${damage}のダメージ!（MP-${SPELL_COST}）`);
-    }
-  });
-});
-
-// 魔法攻撃のダメージ判定
-function calcSpellDamage(){
-  const magStat = (typeof stats?.MAG === "number") ? stats.MAG : 0;
-  const base = Math.floor(Math.random() * 11) + 15;
-  return base + magStat * 3;
-}
-function calcEvasionChance(){
-  const luck = (typeof stats?.LUCK === "number") ? stats.LUCK : 0;
-  const chance = 0.05 + luck * 0.005;
-  return Math.min(chance, 0.35);
-}
-// 素早さ判定
-function rollInitiativeScore(agl){
-    return (typeof agl === "number" ? agl : 0) + rand(-2, 2);
-}
-
-function shouldPlayerActFirst(){
-  const pAGL = (typeof stats?.AGL === "number") ? stats.AGL : 0;
-  const eAGL = (currentEnemy && typeof currentEnemy.agl === "number") ? currentEnemy.agl : 0;
-  return rollInitiativeScore(pAGL) >= rollInitiativeScore(eAGL);
-}
-
-function actWithInitiative(playerAct){
-  if (shouldPlayerActFirst()) {
-    playerAct();
-    if (enemyHP > 0) enemyTurn();
-  } else {
-    enemyTurn();
-    if (playerHP > 0) playerAct();
-  }
-}
-function endPlayerAction(){}
-
-  // アイテム
-document.getElementById("command4").addEventListener("click",function(){
-  if(!inventoryBox)return;
-  inventoryBox.classList.toggle("is-open");
-  });
-
-function makeEnemy(stage){
-  if (stage === BOSS_STAGE) {
-  return { ...BOSS }; // ボスは定義通り固定
-  }
-  const name=ENEMY_NAMES[(stage-1)%ENEMY_NAMES.length];
-  const hp=20+stage*2;
-  const atkMin=1+stage*1;
-  const atkMax=2+stage*1;
-  const agl = 6 + stage*0.4;  
-  return{name,hp,atkMin,atkMax,agl,img:getEnemyImage(name)};
-}
-
-function loadEnemy(enemy){
+function loadEnemy(enemy) {
   currentEnemy = enemy;
   enemyHP = enemy.hp;
   isGuarding = false;
@@ -680,61 +313,139 @@ function loadEnemy(enemy){
     addLog(`${enemy.name}が現れた！(Lv.${stage})`);
   }
 }
-
-function getEnemyImage(name){
-  const src = ENEMY_IMAGES[name];
-  if (src) return src;
-  addLog(`画像未定義の敵名「${name}」 → フォールバックを使用`);
-  return ENEMY_IMAGES._default;
-
+function preloadEnemyImages() {
+  Object.values(ENEMY_IMAGES).forEach(src => { if (!src) return; const img = new Image(); img.src = src; });
 }
 
-// 画像ちらつき対策
-function preloadEnemyImages(){
-  Object.values(ENEMY_IMAGES).forEach(src=>{
-    if(!src) return;
-    const img = new Image();
-    img.src = src;
+// ===== 戦闘 =====
+function setCommandsEnabled(on) { [attackBtn, guardBtn, spellBtn, itemBtn].forEach(b => { if (b) b.disabled = !on; }); }
+function disableCommands() { setCommandsEnabled(false); }
+function enableCommands()  { setCommandsEnabled(true);  }
+
+function calcSpellDamage() { const magStat = (typeof stats?.MAG === "number") ? stats.MAG : 0; const base = Math.floor(Math.random()*11) + 15; return base + magStat * 3; }
+function calcEvasionChance(){ const luck = (typeof stats?.LUCK === "number") ? stats.LUCK : 0; const chance = 0.05 + luck * 0.005; return Math.min(chance, 0.35); }
+function rollInitiativeScore(agl){ return (typeof agl === "number" ? agl : 0) + rand(-2,2); }
+function shouldPlayerActFirst(){
+  const pAGL = (typeof stats?.AGL === "number") ? stats.AGL : 0;
+  const eAGL = (currentEnemy && typeof currentEnemy.agl === "number") ? currentEnemy.agl : 0;
+  return rollInitiativeScore(pAGL) >= rollInitiativeScore(eAGL);
+}
+function actWithInitiative(playerAct){
+  if (shouldPlayerActFirst()) { playerAct(); if (enemyHP > 0) enemyTurn(); }
+  else { enemyTurn(); if (playerHP > 0) playerAct(); }
+}
+
+function enemyTurn(){
+  const base = currentEnemy ? rand(currentEnemy.atkMin, currentEnemy.atkMax) : rand(5,15);
+  let dmg = base;
+  addLog("敵の攻撃!");
+
+  const evasion = calcEvasionChance();
+  if (Math.random() < evasion) { addLog("素早く身をかわした！ 攻撃を回避した。"); return; }
+
+  if (isGuarding) { dmg = Math.ceil(dmg/2); isGuarding = false; addLog("守りでダメージを軽減した！"); }
+
+  playerHP = Math.max(0, playerHP - dmg);
+  addLog(`あなたは${dmg}のダメージを受けた。`);
+  updatePlayerHP();
+
+  if (EQUIP.armor === "棘の鎧" && dmg > 0) {
+    const thorns = Math.ceil(dmg * 0.5);
+    enemyHP = Math.max(0, enemyHP - thorns);
+    addLog(`棘の鎧が反撃！ 敵に${thorns}のダメージを与えた！`);
+    updateEnemyHP();
+    if (enemyHP <= 0) handleEnemyDefeated();
+  }
+
+  if (playerHP <= 0) { addLog("目の前が真っ暗になった……。"); disableCommands(); showGameOver(); }
+}
+
+function handleEnemyDefeated(){
+  addLog("敵を倒した！");
+  if (stage === BOSS_STAGE) {
+    addLog("★ ボスを打ち倒した！ 世界に平和が訪れた…");
+    const bonus = 500; gold += bonus; updateGoldUI(); addLog(`特別報酬 ${bonus}G を手に入れた！（所持金：${gold}G）`);
+  }
+  const g = getGoldReward(currentEnemy, stage); gold += g; updateGoldUI(); addLog(`${g}G 手に入れた！（所持金：${gold}G）`);
+  const exp = getExpReward(currentEnemy, stage); gainExp(exp);
+
+  const item = rollDrop();
+  if (item){ addToInventory(item); addLog(`戦利品:${item}を手に入れた！`); }
+  else { addLog("戦利品はなかった"); }
+
+  spawnNextEnemy();
+}
+
+function getGoldReward(enemy, stage){
+  const s = stage || 1;
+  const base = 5 + s * 5;
+  const variance = rand(0,4);
+  return base + variance;
+}
+function getExpReward(enemy, stage){
+  const s = stage || 1;
+  const base = 6 + s * 2;
+  const variance = rand(0,3);
+  return base + variance;
+}
+
+function attack() {
+  actWithInitiative(() => {
+    const str = (typeof stats?.STR === "number") ? stats.STR : 0;
+    const base = Math.floor(Math.random()*20) + 5;
+    const strBonus = Math.floor(str * 0.7);
+    const damage = base + strBonus;
+
+    enemyHP = Math.max(0, enemyHP - damage);
+    updateEnemyHP();
+    alert(`攻撃！ 敵に${damage}のダメージ！`);
+
+    if (enemyHP <= 0) handleEnemyDefeated();
   });
 }
-document.addEventListener("DOMContentLoaded", preloadEnemyImages);
+
+function guard() {
+  actWithInitiative(() => {
+    isGuarding = true;
+    addLog("防御！次の被ダメージを軽減する準備をした。");
+  });
+}
+
+function castSpell() {
+  actWithInitiative(() => {
+    if (playerMP < SPELL_COST) { addLog("MPが足りない!"); return; }
+    playerMP -= SPELL_COST; updatePlayerMP();
+    const damage = calcSpellDamage();
+
+    enemyHP = Math.max(0, enemyHP - damage);
+    updateEnemyHP();
+    alert(`呪文！ 火炎に包まれ${damage}のダメージ!（MP-${SPELL_COST}）`);
+
+    if (enemyHP <= 0) handleEnemyDefeated();
+  });
+}
+
+// ===== ドロップ・インベントリ =====
+function weightedPick(table){
+  const total = table.reduce((s,it)=>s+it.weight,0);
+  let r = Math.random()*total;
+  for (const it of table){ r-=it.weight; if(r<=0) return it; }
+  return table[table.length-1];
+}
+function rollDrop(){ if(Math.random()>=DROP_RATE) return null; return weightedPick(DROP_TABLE).name; }
 
 function renderInventoryList(){
-  const ul = document.getElementById("inventory_list");
-  if(!ul) return;
-  ul.innerHTML = "";
+  if(!inventoryList) return;
+  inventoryList.innerHTML = "";
   const items = Array.from(INV.entries()).sort((a,b)=>a[0].localeCompare(b[0],'ja'));
   for(const [name,count] of items){
     const li = document.createElement("li");
     li.textContent = `${name} ×${count}`;
-    li.addEventListener("click", ()=>{
-      useItem(li, name); 
-    });
-    ul.appendChild(li);
+    li.addEventListener("click", ()=> useItem(li, name));
+    inventoryList.appendChild(li);
   }
 }
-
-function spawnNextEnemy(delayMs=800){
-  const next=makeEnemy(++stage);
-  setTimeout(()=>loadEnemy(next),delayMs);
-}
-
-// 名前→メタ（price等）検索
-function findItemByName(name){
-  return SHOP_ITEMS.find(it => it.name === name) || null;
-}
-
-// 売値（デフォルトは買値の50% / 無登録は10G）
-function getSellPrice(name){
-  const meta = findItemByName(name);
-  if (meta) return Math.max(1, Math.floor(meta.price * 0.5));
-  return 10;
-}
-
-function invAdd(name, n=1){
-  INV.set(name, (INV.get(name)||0) + n);
-  renderInventoryList();
-}
+function invAdd(name, n=1){ INV.set(name, (INV.get(name)||0) + n); renderInventoryList(); }
 function invRemove(name, n=1){
   const cur = INV.get(name)||0;
   const next = Math.max(0, cur - n);
@@ -743,270 +454,190 @@ function invRemove(name, n=1){
 }
 function invCount(name){ return INV.get(name)||0; }
 
+function addToInventory(itemName){ invAdd(itemName, 1); addLog(`${itemName}を手に入れた！`); }
+
+function useItem(li, itemName){
+  switch(itemName){
+    case "薬草":
+      playerHP = Math.min(playerMaxHP, playerHP + 20);
+      addLog("薬草を使ってHPが20回復した!"); break;
+    case "癒しの果実":
+      playerHP = Math.min(playerMaxHP, playerHP + 50);
+      addLog("癒しの果実を使ってHPが50回復した!"); break;
+    case "魔力丸":
+      playerMP = Math.min(playerMaxMP, playerMP + 20);
+      addLog("魔力丸を使ってMPが20回復した!"); updatePlayerMP(); break;
+    case "レイピア":
+      equipItem("weapon","レイピア"); break;
+    case "棘の鎧":
+      equipItem("armor","棘の鎧"); break;
+    default:
+      addLog(`${itemName}を使った!`); break;
+  }
+  updatePlayerHP();
+  li.remove();
+  invRemove(itemName, 1);
+  if(inventoryBox) inventoryBox.classList.remove("is-open");
+}
+
+// ===== ショップ =====
+function findItemByName(name){ return SHOP_ITEMS.find(it => it.name === name) || null; }
+function getSellPrice(name){ const m = findItemByName(name); return m ? Math.max(1, Math.floor(m.price*0.5)) : 10; }
+
 function renderShopList(){
-  const ul = document.getElementById("shop_list");
-  if(!ul) return;
-  ul.innerHTML = "";
+  if (!shopList) return;
+  shopList.innerHTML = "";
 
-  if (SHOP_MODE === "buy") {
+  if (SHOP_MODE === "buy"){
     SHOP_ITEMS.forEach(it => {
-      const li = document.createElement("li");
-      li.dataset.key = it.key;
-
+      const li = document.createElement("li"); li.dataset.key = it.key;
       const info = document.createElement("div");
-      const name = document.createElement("div");
-      name.className = "shop_item_name";
-      name.textContent = it.name;
-      const price = document.createElement("div");
-      price.className = "shop_item_price";
-      price.textContent = `${it.price}G`;
-      info.appendChild(name); info.appendChild(price);
+      const nm = document.createElement("div"); nm.className = "shop_item_name"; nm.textContent = it.name;
+      const pr = document.createElement("div"); pr.className = "shop_item_price"; pr.textContent = `${it.price}G`;
+      info.appendChild(nm); info.appendChild(pr);
 
       const btn = document.createElement("button");
-      btn.className = "shop_buy"; btn.type = "button";
-      btn.dataset.key = it.key; btn.textContent = "購入";
+      btn.className = "shop_buy"; btn.type = "button"; btn.dataset.key = it.key; btn.textContent = "購入";
 
-      li.appendChild(info); li.appendChild(btn); ul.appendChild(li);
+      li.appendChild(info); li.appendChild(btn); shopList.appendChild(li);
 
-      li.addEventListener("mouseenter", () => updateShopDetail(it.key));
-      li.addEventListener("mouseleave", () => updateShopDetail(null));
-      li.addEventListener("focusin",    () => updateShopDetail(it.key));
-      li.addEventListener("focusout",   () => updateShopDetail(null));
+      li.addEventListener("mouseenter", ()=> updateShopDetail(it.key));
+      li.addEventListener("mouseleave", ()=> updateShopDetail(null));
+      li.addEventListener("focusin",    ()=> updateShopDetail(it.key));
+      li.addEventListener("focusout",   ()=> updateShopDetail(null));
     });
-    ensureShopDetailBox();
     updateShopDetail(null);
-
   } else {
     const entries = Array.from(INV.entries()).filter(([,cnt])=>cnt>0);
     if (entries.length === 0) {
-      const li = document.createElement("li");
-      li.textContent = "売れるアイテムがありません。";
-      ul.appendChild(li);
-      return;
+      const li = document.createElement("li"); li.textContent = "売れるアイテムがありません。"; shopList.appendChild(li); return;
     }
-    entries.sort((a,b)=>a[0].localeCompare(b[0], 'ja'));
-    entries.forEach(([name, cnt])=>{
+    entries.sort((a,b)=>a[0].localeCompare(b[0],'ja'));
+    entries.forEach(([name, cnt]) => {
       const li = document.createElement("li");
       const info = document.createElement("div");
-      const nm = document.createElement("div");
-      nm.className = "shop_item_name";
-      nm.textContent = `${name} ×${cnt}`;
-      const price = document.createElement("div");
-      const sp = getSellPrice(name);
-      price.className = "shop_item_price";
-      price.textContent = `${sp}G で売却`;
-      info.appendChild(nm); info.appendChild(price);
+      const nm = document.createElement("div"); nm.className = "shop_item_name"; nm.textContent = `${name} ×${cnt}`;
+      const pr = document.createElement("div"); pr.className = "shop_item_price"; pr.textContent = `${getSellPrice(name)}G で売却`;
+      info.appendChild(nm); info.appendChild(pr);
 
       const btn = document.createElement("button");
-      btn.className = "shop_sell"; btn.type = "button";
-      btn.dataset.name = name; btn.textContent = "売る";
+      btn.className = "shop_sell"; btn.type = "button"; btn.dataset.name = name; btn.textContent = "売る";
 
-      li.appendChild(info); li.appendChild(btn); ul.appendChild(li);
+      li.appendChild(info); li.appendChild(btn); shopList.appendChild(li);
     });
-    ensureShopDetailBox();
-    updateShopDetail(null, /*showHintIfNull=*/false);
+    updateShopDetail(null, false);
   }
 }
 
-function ensureShopDetailBox() {
-  const box = document.getElementById("shop_box");
-  if (!box) return null;
-
-  let detail = document.getElementById("shop_detail");
-  if (!detail) {
-    detail = document.createElement("div");
-    detail.id = "shop_detail";
-    detail.style.cssText = `
-      margin-top:10px;padding:10px;border:1px solid #ccc;border-radius:8px;
-      background:#fff; font-size:10px; line-height:1.5;height:90px
-    `;
-    detail.innerHTML = `
-      <div id="sd_name" style="font-weight:700;margin-bottom:4px;">—</div>
-      <div id="sd_price" style="color:#555;margin-bottom:4px;">—</div>
-      <div id="sd_desc">カーソルを合わせると詳細が表示されます。</div>
-      <div id="sd_effect" style="margin-top:6px;color:#2a5;"> </div>
-    `;
-    box.appendChild(detail);
-  }
-  return detail;
-}
-
-function updateShopDetail(key, showHintIfNull = true) {
-  const detail = ensureShopDetailBox();
-  if (!detail) return;
-  const nameEl = detail.querySelector("#sd_name");
-  const priceEl = detail.querySelector("#sd_price");
-  const descEl = detail.querySelector("#sd_desc");
-  const effEl = detail.querySelector("#sd_effect");
-
-  if (!key) {
-    nameEl.textContent = "—";
-    priceEl.textContent = "—";
-    descEl.textContent = showHintIfNull ? "カーソルを合わせると詳細が表示されます。" : "";
-    effEl.textContent = "";
+function updateShopDetail(key, showHintIfNull = true){
+  if (!sdName || !sdPrice || !sdDesc || !sdEffect) return;
+  if (!key){
+    sdName.textContent = "—";
+    sdPrice.textContent = "—";
+    sdDesc.textContent = showHintIfNull ? "カーソルを合わせると詳細が表示されます。" : "";
+    sdEffect.textContent = "";
     return;
   }
-
   const item = SHOP_ITEMS.find(i => i.key === key);
   const meta = SHOP_DETAIL[key];
-  nameEl.textContent = item ? item.name : key;
-  priceEl.textContent = item ? `${item.price}G` : "";
-  descEl.textContent = meta?.desc || "";
-  effEl.textContent = meta?.effect ? `効果：${meta.effect}` : "";
+  sdName.textContent = item ? item.name : key;
+  sdPrice.textContent = item ? `${item.price}G` : "";
+  sdDesc.textContent = meta?.desc || "";
+  sdEffect.textContent = meta?.effect ? `効果：${meta.effect}` : "";
 }
 
-function toggleShop(force) {
-  const box = document.getElementById("shop_box");
-  if (!box) return;
-  const willOpen = (force === true) || (force !== false && !box.classList.contains("is-open"));
-  box.classList.toggle("is-open", willOpen);
-  box.setAttribute("aria-hidden", willOpen ? "false" : "true");
-
-  // 所持金の最新表示
-  const gEl = document.getElementById("shop_gold");
-  if (gEl) gEl.textContent = `${(typeof gold !== "undefined" ? gold : 0)}G`;
-
-  if (willOpen) {
-    ensureShopDetailBox();
-    updateShopDetail(null);
-  }
+function toggleShop(force){
+  if (!shopBox) return;
+  const willOpen = (force === true) || (force !== false && !shopBox.classList.contains("is-open"));
+  shopBox.classList.toggle("is-open", willOpen);
+  shopBox.setAttribute("aria-hidden", willOpen ? "false" : "true");
+  if (shopGoldLabel) shopGoldLabel.textContent = `${gold}G`;
+  if (willOpen) updateShopDetail(null);
 }
-
-function buyItem(item) {
-  if (typeof gold === "undefined") { console.warn("gold が未定義です"); return; }
-  if (gold < item.price) {
-    if (typeof addLog === "function") addLog("お金が足りない！");
-    return;
-  }
-  gold -= item.price;
-  if (typeof updateGoldUI === "function") updateGoldUI(); 
-  if (typeof addToInventory === "function") addToInventory(item.name);
-  if (typeof addLog === "function") addLog(`${item.name}を購入した！（-${item.price}G / 所持金：${gold}G）`);
-  const gEl = document.getElementById("shop_gold");
-  if (gEl) gEl.textContent = `${gold}G`;
+function buyItem(item){
+  if (gold < item.price) { addLog("お金が足りない！"); return; }
+  gold -= item.price; updateGoldUI();
+  addToInventory(item.name);
+  addLog(`${item.name}を購入した！（-${item.price}G / 所持金：${gold}G）`);
+  if (shopGoldLabel) shopGoldLabel.textContent = `${gold}G`;
 }
 function sellItem(name){
-  if (EQUIP.weapon === name || EQUIP.armor === name) {
-    addLog(`${name}は装備中のため売れません。装備を外してください。`);
-    return;
-  }
-  if (invCount(name) <= 0){ addLog(`${name}は持っていない。`); return; }
+  if (EQUIP.weapon === name || EQUIP.armor === name) { addLog(`${name}は装備中のため売れません。装備を外してください。`); return; }
+  if (invCount(name) <= 0) { addLog(`${name}は持っていない。`); return; }
   const price = getSellPrice(name);
-  invRemove(name, 1);
-  gold += price;
-  updateGoldUI?.();
-  renderShopList();
+  invRemove(name, 1); gold += price; updateGoldUI(); renderShopList();
   addLog(`${name}を${price}Gで売った！（所持金：${gold}G）`);
   refreshStatusIfOpen();
 }
-
-function wireShopEvents() {
-  document.getElementById("shop_btn")?.addEventListener("click", () => {
-    SHOP_MODE = "buy"; setShopTabUI(); renderShopList(); toggleShop(true);
-  });
-  document.getElementById("shop_close")?.addEventListener("click", () => toggleShop(false));
-  const tabBuy  = document.getElementById("shop_tab_buy");
-  const tabSell = document.getElementById("shop_tab_sell");
-  tabBuy?.addEventListener("click", ()=>{ SHOP_MODE="buy";  setShopTabUI(); renderShopList(); });
-  tabSell?.addEventListener("click", ()=>{ SHOP_MODE="sell"; setShopTabUI(); renderShopList(); });
-  // 買う
-  document.getElementById("shop_list")?.addEventListener("click", (e) => {
-    const buyBtn = e.target.closest("button.shop_buy");
-    if (buyBtn) {
-      const key = buyBtn.dataset.key;
-      const item = SHOP_ITEMS.find(i => i.key === key);
-      if (item) buyItem(item);
-      return;
-    }
-    // 売る
-    const sellBtn = e.target.closest("button.shop_sell");
-    if (sellBtn) {
-      const name = sellBtn.dataset.name;
-      sellItem(name);
-      return;
-    }
-  });
-}
-
 function setShopTabUI(){
-  document.getElementById("shop_tab_buy")?.classList.toggle("is-active", SHOP_MODE==="buy");
-  document.getElementById("shop_tab_sell")?.classList.toggle("is-active", SHOP_MODE==="sell");
+  shopTabBuy?.classList.toggle("is-active", SHOP_MODE==="buy");
+  shopTabSell?.classList.toggle("is-active", SHOP_MODE==="sell");
+}
+function updateGoldUI(){ refreshStatusIfOpen(); }
+
+// ===== 敵の切替 =====
+function spawnNextEnemy(delayMs=800){
+  const next = makeEnemy(++stage);
+  setTimeout(()=> loadEnemy(next), delayMs);
 }
 
-function ensureGameOverOverlay(){
-  let ov = document.getElementById("gameover_overlay");
-  if (ov) return ov;
+// ===== イベント束ね =====
+document.addEventListener("DOMContentLoaded", () => {
+  // タイトル戻る
+  backBtn?.addEventListener("click", () => { window.location.href = "index.html"; });
 
-  ov = document.createElement("div");
-  ov.id = "gameover_overlay";
-  ov.className = "overlay";     
-  ov.setAttribute("aria-hidden", "true");
+  // コマンド
+  attackBtn?.addEventListener("click", attack);
+  guardBtn?.addEventListener("click", guard);
+  spellBtn?.addEventListener("click", castSpell);
+  itemBtn?.addEventListener("click", ()=> inventoryBox?.classList.toggle("is-open"));
 
-  ov.innerHTML = `
-     <div class="overlay-panel" role="dialog" aria-labelledby="go_title">
-    <div id="go_title" style="font-size:20px;font-weight:700;margin-bottom:8px;">ゲームオーバー</div>
-    <div style="margin-bottom:12px;color:#555;">あなたは倒れてしまった…</div>
-    <div style="display:flex; gap:8px; justify-content:center;">
-      <button id="go_retry"  type="button">リトライ</button>
-      <button id="go_close"  type="button">閉じる</button>
-      <button id="go_index"  type="button">タイトルへ戻る</button>
-    </div>
-  </div>
-`;
-  document.body.appendChild(ov);
-  return ov;
-}
+  // ステータス
+  statusBtn?.addEventListener("click", toggleStatusUI);
 
-function showGameOver(){
-  const ov = ensureGameOverOverlay();
-  const retry = ov.querySelector("#go_retry");
-  const closeBtn = ov.querySelector("#go_close");
-  const indexBtn= ov.querySelector("#go_index");
-
-  retry.onclick = () => {
-    closeGameOverOverlay();
-    restartBattle();      
-  };
-  closeBtn.onclick = closeGameOverOverlay;
-  indexBtn.onclick = () => {
-    window.location.href = "index.html";   
-  };
-
-  function closeGameOverOverlay(){
-    ov.classList.remove("is-open");
-    ov.setAttribute("aria-hidden", "true");
+  // バトルパネル開閉
+  if (battleToggleBtn && commandPanel){
+    battleToggleBtn.addEventListener("click", () => {
+      commandPanel.classList.toggle("is-open");
+      battleToggleBtn.textContent = commandPanel.classList.contains("is-open") ? "閉じる" : "戦う";
+    });
   }
-  openOverlay(ov, retry); 
-}
 
-function restartBattle(){
-  playerHP = Math.min(playerMaxHP, Math.max(1, Math.floor(playerMaxHP * 0.5))); // 最大HPの50%で復帰
-  playerMP = playerMaxMP;
-  isGuarding = false;
-  currentEnemy = makeEnemy(stage);
-  loadEnemy(currentEnemy);
+  // ショップ
+  shopBtn?.addEventListener("click", () => { SHOP_MODE="buy"; setShopTabUI(); renderShopList(); toggleShop(true); });
+  shopCloseBtn?.addEventListener("click", () => toggleShop(false));
+  shopTabBuy?.addEventListener("click",  ()=> { SHOP_MODE="buy";  setShopTabUI(); renderShopList(); });
+  shopTabSell?.addEventListener("click", ()=> { SHOP_MODE="sell"; setShopTabUI(); renderShopList(); });
+  shopList?.addEventListener("click", (e) => {
+    const buyBtn = e.target.closest("button.shop_buy");
+    if (buyBtn){ const key = buyBtn.dataset.key; const item = SHOP_ITEMS.find(i => i.key === key); if (item) buyItem(item); return; }
+    const sellBtn = e.target.closest("button.shop_sell");
+    if (sellBtn){ const name = sellBtn.dataset.name; sellItem(name); return; }
+  });
+
+  // ゲームオーバー
+  goRetry?.addEventListener("click", () => { closeOverlay(goOverlay); restartBattle(); });
+  goClose?.addEventListener("click", () => closeOverlay(goOverlay));
+  goIndex?.addEventListener("click", () => { window.location.href = "index.html"; });
+
+  // 初期セットアップ
+  preloadEnemyImages();
+  loadEnemy(makeEnemy(stage));
+  renderShopList();
+  renderInventoryList();
+  updateEnemyHP();
   updatePlayerHP();
+  updateGoldUI();
   updatePlayerMP();
   enableCommands();
+});
+
+// ===== ゲームオーバーUI・再挑戦 =====
+function showGameOver(){ openOverlay(goOverlay, goRetry); }
+function restartBattle(){
+  playerHP = Math.min(playerMaxHP, Math.max(1, Math.floor(playerMaxHP * 0.5)));
+  playerMP = playerMaxMP; isGuarding = false;
+  currentEnemy = makeEnemy(stage); loadEnemy(currentEnemy);
+  updatePlayerHP(); updatePlayerMP(); enableCommands();
   addLog("気力を振り絞って立ち上がった！（再挑戦）");
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderShopList();
-  wireShopEvents();
-  const gEl = document.getElementById("shop_gold");
-  if (gEl && typeof gold !== "undefined") gEl.textContent = `${gold}G`;
-});
-
-window.addEventListener("DOMContentLoaded",()=>{
-  loadEnemy(makeEnemy(stage))
-  updatePlayerHP();
-  updateLevelExpUI();
-  updateGoldUI();  
-  updatePlayerMP();
-  enableCommands(); 
-document.addEventListener("DOMContentLoaded", () => {
-document.getElementById("player_mp")?.remove();
-document.getElementById("player_gold")?.remove();
-});
-});
