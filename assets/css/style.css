@@ -576,12 +576,12 @@
 
   .main1{
   background-image: url(../img/back1.jpg);
-background-size: contain;
-height: 79vh;
+background-size: cover;
+height: 87vh;
   }
 
   .index_foot{
-    height: 16vh;
+    height: 8vh;
     
   }
 
