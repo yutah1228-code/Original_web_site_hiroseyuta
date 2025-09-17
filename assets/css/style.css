@@ -578,6 +578,7 @@
   background-image: url(../img/back1.jpg);
 background-size: cover;
 height: 87vh;
+width: 100vw;
   }
 
   .index_foot{
