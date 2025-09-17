@@ -575,7 +575,7 @@
   }
 
   .main1{
-  background-image: url(/assets/img/back1.jpg);
+  background-image: url(../img/back1.jpg);
 background-size: contain;
 height: 79vh;
   }
