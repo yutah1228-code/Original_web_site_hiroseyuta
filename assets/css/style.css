@@ -628,7 +628,7 @@ height: 87vh;
   .inventory_box{
     width: 270px;
     position: fixed;
-    top: 470px;
+    top: 370px;
     left: 12px;
   }
   .shop_detail{
@@ -1175,6 +1175,7 @@ img, video { max-width: 100%; height: auto; }
     font-size: 15px;
     padding: 0px;
     top: 50px;
+    height: 300px;
   }
   #shop_btn{
     width: 60px;
@@ -1219,9 +1220,9 @@ img, video { max-width: 100%; height: auto; }
   }
 
   #battle_toggle{
-    width: 75px;
-    height: 40px;
-    font-size: 12px;
+    width: 70px;
+    height: 30px;
+    font-size: 10px;
     left: 40%;
   }
 
@@ -1239,10 +1240,10 @@ img, video { max-width: 100%; height: auto; }
 
   #status_box{
     width: 130px;
+    height: 30px;
     position: fixed;
     left: 68%;
-    top: 8%;
-    font-size: 11px;
+    font-size: 10px;
   }
 
   #player_hp{
