@@ -7,6 +7,19 @@
   <link rel="stylesheet" href="./assets/css/reset.css" />
   <link rel="stylesheet" href="./assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
+
+  <style>
+  html, body {
+  height: 100%;
+  overflow: hidden;     /* ページスクロール停止 */
+  overscroll-behavior: none; /* 引っ張ってバウンドも抑制 */
+}
+
+.game_main {
+  height: 100vh;
+  overflow: hidden;     /* 念のため */
+}
+</style>
 </head>
 <body>
   <div class="game_main">
@@ -123,18 +136,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="./assets/js/script.js"></script>
 
-<style>
-  html, body {
-  height: 100%;
-  overflow: hidden;     /* ページスクロール停止 */
-  overscroll-behavior: none; /* 引っ張ってバウンドも抑制 */
-}
 
-.game_main {
-  height: 100vh;
-  overflow: hidden;     /* 念のため */
-}
-</style>
 
 
 </html>
