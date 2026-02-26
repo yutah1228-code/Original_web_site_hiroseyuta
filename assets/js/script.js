@@ -141,7 +141,8 @@ function updatePlayerMP() {
 
 // ===== ステータスUI =====
 function formatLine(label, value) {
-  return `<div><span style="display:inline-block;min-width:90px;color:#555;">${label}</span>${value}</div>`;
+  return `<div><span style="display:inline-block;min-width:90px;color: var(--ui-text);
+  ">${label}</span>${value}</div>`;
 }
 
 function updateStatusUI() {
@@ -441,7 +442,7 @@ function renderInventoryList(){
   for(const [name,count] of items){
     const li = document.createElement("li");
     li.textContent = `${name} ×${count}`;
-    li.addEventListener("click", ()=> useItem(li, name));
+    li.dataset.name = name; 
     inventoryList.appendChild(li);
   }
 }
@@ -456,7 +457,7 @@ function invCount(name){ return INV.get(name)||0; }
 
 function addToInventory(itemName){ invAdd(itemName, 1); addLog(`${itemName}を手に入れた！`); }
 
-function useItem(li, itemName){
+function useItem(itemName){
   switch(itemName){
     case "薬草":
       playerHP = Math.min(playerMaxHP, playerHP + 20);
@@ -475,7 +476,7 @@ function useItem(li, itemName){
       addLog(`${itemName}を使った!`); break;
   }
   updatePlayerHP();
-  li.remove();
+  
   invRemove(itemName, 1);
   if(inventoryBox) inventoryBox.classList.remove("is-open");
 }
@@ -583,6 +584,14 @@ function spawnNextEnemy(delayMs=800){
 
 // ===== イベント束ね =====
 document.addEventListener("DOMContentLoaded", () => {
+
+  inventoryList?.addEventListener("click", (e) => {
+    const li = e.target.closest("li");
+    if (!li || !inventoryList.contains(li)) return;
+    const name = li.dataset.name;
+    if (!name) return;
+    useItem(name);  // ★ liを渡さない形に変更
+  });
   // タイトル戻る
   backBtn?.addEventListener("click", () => { window.location.href = "index.html"; });
 
