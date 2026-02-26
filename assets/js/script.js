@@ -592,6 +592,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!name) return;
     useItem(name);  // ★ liを渡さない形に変更
   });
+
+  const allowScrollSel = [".rog_box", ".inventory_box", ".shop_box", ".status_box"];
+
+document.addEventListener("touchmove", (e) => {
+  // スクロール許可エリア内なら止めない
+  if (allowScrollSel.some(sel => e.target.closest(sel))) return;
+  e.preventDefault();
+}, { passive: false });
+
   // タイトル戻る
   backBtn?.addEventListener("click", () => { window.location.href = "index.html"; });
 
