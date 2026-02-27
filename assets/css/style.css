@@ -293,6 +293,7 @@
   top: 550px;
   right: 370px;
   z-index: 2000;
+  
 }
 
 .command_all.is-open{
@@ -1689,6 +1690,8 @@ img, video { max-width: 100%; height: auto; }
   .command_all{
     width: min(330px, 94vw);
     padding: 12px 12px 10px;
+    
+    
   }
   .command_1, .command_2{ gap: 8px; }
   .command_all button{ font-size: 11px; }
@@ -1703,6 +1706,7 @@ img, video { max-width: 100%; height: auto; }
     left: auto;
     right: 24px;
     transform: none;
+    
   }
 }
 

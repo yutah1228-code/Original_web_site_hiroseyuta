@@ -1,0 +1,861 @@
+@charset "UTF-8";
+* {
+    font-family: sans-serif;
+}
+
+html, body{
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html, body{
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.command_list{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#enemy_hp{
+  width: 200px;
+  height: 400px;
+}
+
+.enemy_hp{
+  position: absolute;
+  left: 60px;   
+  top:  700px;
+  width: 260px;
+  height: 260px;
+  z-index: 2;
+}
+
+#player_hp{
+  width: 150px;
+  height: 100px;
+  background-image: url(../img/530537444_749750834336152_7863546310926926073_n.png);
+  background-size: cover;
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+  position: fixed;
+  right: 100px;
+  top: 500px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+
+.game_main{
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../img/530556201_740928238647808_5784113294969287064_n.jpg);
+}
+
+.rog_box{
+  width: 500px;
+  height: 400px;
+  background-color: rgba(0, 0, 0,.20);
+  max-height: 400px;
+  overflow-y: auto;
+  border: 2px black solid;
+  padding: 4px;
+  position: fixed;
+  top: 10px;
+  left: 100px;
+}
+
+.game.html{
+  font-size: 100px;
+}
+
+.blanc{
+  width: 100vw;
+  height: 50vh;
+}
+
+.command_list{
+  position: relative;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+.inventory_box{
+  max-height: 160px;
+  overflow-y: auto;
+  border: 1px black solid;
+  display: none;
+  position: fixed;
+  top: 680px;
+  right: 387px;
+  background-color:rgba(0, 0, 0,.20) ;
+}
+
+.inventory_box.is-open{
+  display: block;
+}
+
+#inventory_list{
+  list-style-type: disc;
+}
+#inventory_list li{
+  display: flex;
+  justify-content: space-between;
+}
+
+.command_all{
+  display: none;
+  margin: 8px 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  position: fixed;
+  top: 550px;
+  right: 370px;
+  z-index: 2000;
+  
+}
+
+.command_all.is-open{
+  display: block;
+}
+
+.battle_btn{
+  margin: 8px 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid black;
+  cursor: pointer;
+  position: fixed;
+  top: 500px;
+  right: 400px;
+  z-index: 2000;
+}
+
+.status_box{ 
+  display:none; 
+  position: fixed;
+  top: 80px;
+  right: 600px;
+  background-color:rgba(0, 0, 0,.20) ;
+}
+
+.status_box.is-open{ display:block; }
+
+.status_btn{ margin:8px 0; }
+
+#shop_btn { 
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  width: 70px;
+  height: 70px;
+  background-image: url(../img/shop.jpg);
+  background-size: cover;
+}
+
+.shop_box {
+  display: none;
+  position: fixed; 
+  right: 10px; 
+  top: 10px;
+  width: 200px; 
+  height: 370px;
+  background: #fff; 
+  border: 1px solid #ccc; 
+  border-radius: 10px;
+  padding: 10px; 
+  line-height: 1.7; 
+  font-size: 10px; 
+  z-index: 9000;
+}
+
+.shop_box.is-open { display: block; }
+
+.shop_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.shop_title { font-weight: 600; }
+
+.shop_wallet { margin: 6px 0; color: #555; }
+
+.shop_list { list-style: none; padding-left: 0; margin: 0; }
+
+.shop_list li {
+  padding: 6px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px dashed #ddd;
+  width: 150px;
+}
+
+.shop_list li:first-child { border-top: none; }
+
+.shop_detail { 
+  margin-top:10px; 
+  padding:10px; 
+  border:1px solid #ccc; 
+  border-radius:8px; 
+  background:#fff; 
+  font-size:10px; 
+  line-height:1.5; 
+  height:90px; 
+}
+.shop_detail_name { 
+  font-weight:700; 
+  margin-bottom:4px; 
+}
+.shop_detail_price { 
+  color:#555; 
+  margin-bottom:4px; 
+}
+.shop_detail_effect {
+  margin-top:6px;
+  color:#2a5; }
+
+.shop_item_name { font-weight: 600; }
+
+.shop_item_price { font-size: 10px; color: #555; }
+
+.shop_buy, .shop_close {
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed; 
+  inset: 0;
+  display: none;              
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.5);
+  z-index: 9999;
+}
+
+.overlay.is-open { display: flex; }
+
+.lvup_modal {
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  min-width: 280px;
+  max-width: 90vw;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  font-size: 14px;
+}
+
+.overlay-panel {
+  background: #fff; padding: 16px 20px; border-radius: 12px;
+  min-width: 280px; max-width: 90vw; box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  font-size: 14px;
+}
+
+.lvup_title {
+  font-size: 18px;
+  margin: 0 0 8px;
+  
+}
+.lvup_body { line-height: 1.7; 
+  
+}
+
+.lv_row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  
+}
+.lv_label { color: #555; min-width: 120px; }
+
+.lv_val b { font-weight: 700; }
+
+.lv_row.gains { margin-top: 8px; color: #444; }
+
+.lvup_actions { text-align: right; margin-top: 12px; }
+
+.lv_ok_btn { padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+
+.game_picture {
+  width: 240px;         
+  height: 240px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; 
+  position: fixed;
+  top: 650px;
+}
+
+#back_index{
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9000;                  
+  width: 70px;
+  height: 70px;
+  padding: 0;                     
+  border: none;
+  background: transparent url(../img/return.png) no-repeat center / cover;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.go_title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.go_msg { margin-bottom: 12px; color: #555; }
+.go_actions { display:flex; gap:8px; justify-content:center; }
+
+#enemy_hp_text {
+  display: block;
+  margin-bottom: 6px;
+  color: red;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  position: fixed;
+  top: 500px;
+  z-index: 2000;
+}
+
+.index_foot{
+  height:25px;
+  background-color:rgba(0,0,0,.60);
+  position: fixed;
+  bottom: 0px;
+  color: white;
+  text-align: right ;
+  left: 0;
+  right: 0;
+  width: auto;
+}
+
+#enemy_picture{
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: contain;          /* ← cover を確実に上書き */
+  width: clamp(160px, 22vw, 240px);  /* デスクトップの見た目を保ちつつ可変 */
+  aspect-ratio: 1 / 1;               /* 正方形の見栄えで安定 */
+  /* 位置は既存の .game_picture の fixed を引き継ぐ */
+}
+
+/* 念のためボスでも拡大しない */
+#enemy_picture.is-boss{
+  background-size: contain !important;
+  transform:scale(2)!important;
+  bottom: 80px;
+
+}
+
+
+.rpg_window,
+.command_all,
+.status_box,
+.inventory_box,
+.rog_box{
+  background: linear-gradient(180deg, var(--ui-bg), var(--ui-bg2));
+  color: var(--ui-text);
+  border: 3px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  box-shadow: var(--ui-shadow);
+  position: relative;
+}
+
+/* 内枠 */
+.command_all::before,
+.status_box::before,
+.inventory_box::before,
+.rog_box::before{
+  content:"";
+  position:absolute;
+  inset: 6px;
+  border-radius: calc(var(--ui-radius) - 6px);
+  border: 1px solid var(--ui-border2);
+  pointer-events:none;
+}
+
+/* ==============================
+   コマンドウィンドウ（下部中央）
+   ============================== */
+.command_all{
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: min(340px, 92vw);
+  padding: 14px 14px 12px;
+}
+
+/* 「ステータス」ボタンを上に1列 */
+.status_btn{
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* 2×2のコマンド配置 */
+.command_1,
+.command_2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ボタンの高さを揃えてRPG感UP */
+#command1,#command2,#command3,#command4,.status_btn{
+  min-height: 44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.command_2{ margin-bottom: 0; }
+
+/* RPG風ボタン */
+.command_all button,
+#battle_toggle,
+.shop_btn,
+#shop_close,
+#lv_ok_btn,
+.go_actions button{
+  font-family: 'Press Start 2P', system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: .03em;
+  color: #1b1403;
+  background: linear-gradient(180deg, #fff6d4, #e7d28a);
+  border: 2px solid rgba(70, 45, 5, .85);
+  border-radius: 10px;
+  padding: 10px 10px;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0,0,0,.35);
+  user-select: none;
+}
+
+/* 押し込み感 */
+.command_all button:active,
+#battle_toggle:active,
+.go_actions button:active{
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.35);
+}
+
+/* hover/focus（キラッと） */
+.command_all button:hover,
+#battle_toggle:hover,
+.go_actions button:hover{
+  filter: brightness(1.05);
+}
+.command_all button:focus-visible,
+#battle_toggle:focus-visible,
+.go_actions button:focus-visible{
+  outline: 3px solid var(--ui-accent);
+  outline-offset: 2px;
+}
+
+/* コマンド名を少し読みやすく（スマホで潰れにくい） */
+#command1,#command2,#command3,#command4,.status_btn{
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==============================
+   「戦う」ボタン（ウィンドウの上に置く想定）
+   ============================== */
+#battle_toggle{
+  position: absolute;
+  left: 16px;
+  bottom: 160px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border-radius: 999px;
+  padding: 10px 14px;
+
+
+}
+
+/* ==============================
+   ステータス表示枠（左下）
+   JSが中身を差し込む想定
+   ============================== */
+#status_box.status_box{
+  position: absolute;
+  left: 210px;
+  bottom: 24px;
+  width: min(210px, 56vw);
+  padding: 12px 12px 10px;
+  font-family: 'Press Start 2P', system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+/* aria-hiddenで表示/非表示 */
+#status_box[aria-hidden="true"]{
+  display: none;
+}
+#status_box[aria-hidden="false"]{
+  display: block;
+}
+
+/* status_box内の見出し/行（HTMLがどう差し込まれても崩れにくいように） */
+#status_box h3,
+#status_box .title{
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--ui-accent);
+}
+#status_box .row{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 2px 0;
+  border-bottom: 1px dashed rgba(255,255,255,.18);
+}
+
+
+#status_box .row:last-child{ border-bottom: 0; }
+
+/* ==============================
+   持ち物（右下）
+   ============================== */
+.inventory_box{
+  position: absolute;
+  right: 16px;
+  bottom: 24px;
+  width: min(170px, 45vw);
+  padding: 10px 10px 8px;
+  font-family: 'Press Start 2P', system-ui, sans-serif;
+  font-size: 11px;
+}
+.inventory_box > p{
+  margin: 0 0 8px;
+  color: var(--ui-accent);
+}
+#inventory_list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#inventory_list li{
+  padding: 4px 0;
+  border-bottom: 1px dashed rgba(255,255,255,.18);
+}
+#inventory_list li:last-child{ border-bottom: 0; }
+
+/* ==============================
+   戦闘ログ（左上寄り）
+   ============================== */
+.rog_box{
+  position: absolute;
+  padding: 10px;
+  width: 200px;
+  top: 90px;
+  max-height: 170px;
+  overflow: auto;
+  font-family: 'Press Start 2P', system-ui, sans-serif;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.rog_box .rog{
+  color: var(--ui-accent);
+}
+.rog_box ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:root{
+  --ui-bg: rgba(10,12,16,.62);
+  --ui-bg2: rgba(10,12,16,.42);
+  --ui-border: rgba(248,242,210,.95);
+  --ui-border2: rgba(255,255,255,.25);
+  --ui-text: #f7f3da;
+  --ui-accent: #ffe27a;
+  --ui-radius: 14px;
+  --ui-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+/* コマンド枠 */
+.command_all{
+  background: linear-gradient(180deg, var(--ui-bg), var(--ui-bg2));
+  border: 3px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  box-shadow: var(--ui-shadow);
+  padding: 12px 12px 10px;
+  position: fixed;           /* 既存通り */
+}
+
+/* 内枠（RPG感の肝） */
+.command_all::before{
+  content:"";
+  position:absolute;
+  inset:6px;
+  border-radius: calc(var(--ui-radius) - 6px);
+  border: 1px solid var(--ui-border2);
+  pointer-events:none;
+}
+
+/* “角の飾り”っぽいハイライト */
+.command_all::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(120px 60px at 18px 18px, rgba(255,255,255,.12), transparent 60%),
+    radial-gradient(120px 60px at calc(100% - 18px) 18px, rgba(255,255,255,.08), transparent 60%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .game_picture {
+    width: 160px;
+    height: 160px;
+    top: auto;
+    bottom: 20px;
+  }
+
+  #player_hp {
+    right: 20px;
+    top: auto;
+    bottom: 120px;
+    width: 140px;
+    height: 200px;
+  }
+
+  .enemy_hp {
+    left: 20px;
+    top: auto;
+    bottom: 300px;
+    width: 160px;
+    height: 160px;
+    position: fixed; /* 既存に合わせる */
+    z-index: 2;
+  }
+
+  .rog_box {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .shop_box {
+    width: 80%;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .main1{
+  background-image: url(../img/back1.jpg);
+background-size: cover;
+height: 87vh;
+  }
+
+  .index_foot{
+    height: 7vh;
+    
+  }
+
+  /* 敵画像のモバイルサイズ（常に contain で収まる） */
+  #enemy_picture{
+    width: 160px;
+    height: 160px;
+    top: auto;
+    bottom: 360px;
+    background-size: contain;
+  }
+  #enemy_picture.is-boss{
+  background-size: contain !important;
+  transform:scale(2)!important;
+  bottom: 400px;
+  left: 50px;
+
+  
+
+}
+
+
+
+
+}
+
+@media (max-width: 480px){
+
+  /* 共通：横幅を左右10pxで収める */
+  .command_all,
+  .battle_btn,
+  .status_box,
+  .inventory_box{
+    left: 10px;
+    right: 10px;
+    width: auto;
+    position: fixed;
+  }
+
+  /* 戻るボタン（最後に書かれてた方が勝つ） */
+  #back_index{
+    width: 40px;
+    height: 40px;
+  }
+
+  /* 持ち物（最後に書かれてた値が勝つ） */
+  .inventory_box{
+    width: 130px;
+    height: 80px;
+    top: 320px;
+    left: 240px;
+    font-size: 12px;
+  }
+
+  /* 敵表示 */
+  #enemy_picture{
+    width: 100px;
+    height: 160px;
+  }
+  #enemy_hp{
+    width: 140px;
+    height: 140px;
+    bottom: 12px;
+  }
+
+  /* ログ */
+  .rog_box{
+    width: 270px;
+    height: 200px;
+    top: 50px;
+    left: 30%;
+    position: fixed;
+    font-size: 12px;
+    padding: 0;
+    background-color: rgba(0, 0, 0,.20);
+    overflow-y: auto;
+  border: 2px black solid;
+  }
+
+  /* ショップ */
+  #shop_btn{
+    width: 60px;
+    height: 60px;
+  }
+  .shop_box{
+    width: 120px;
+    left: 60%;
+    position: fixed;
+  }
+  .shop_header{ height: 50px; }
+  #shop_tab_buy,
+  #shop_tab_sell{
+    width: 50px;
+    height: 20px;
+    font-size: 9px;
+  }
+  .shop_title{ display: none; }
+  .shop_wallet{ font-size: 9px; }
+  .shop_list{ font-size: 9px; }
+  .shop_buy,
+  .shop_sell{
+    position: fixed;
+    right: 10px;
+  }
+  .shop_detail{
+    font-size: 8px;
+    height: 100px; /* 最後に書かれてた方(100px)が勝つ */
+  }
+
+  /* 戦うボタン */
+  #battle_toggle{
+    width: 70px;
+    height: 30px;
+    font-size: 10px;
+    left: 10%;
+    
+  }
+  .battle_btn{
+    top: 75%;
+  }
+
+  /* コマンド */
+  .command_all{
+    width: 200px;
+    left: 25%;
+    top: 68%;
+    font-size: 12px;
+    height: 200px;
+  }
+
+  /* ステータス */
+  #status_box{
+    
+    width: 80px;
+    height: 280px;
+    
+    right: 5% ;
+    font-size: 10px !important;
+    /* RPG風 */
+  background: linear-gradient(
+    180deg,
+    rgba(10,12,16,.65),
+    rgba(10,12,16,.45)
+  );
+
+  color: #f7f3da;
+
+  border: 3px solid rgba(248,242,210,.95);
+  border-radius: 12px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.35),
+    inset 0 0 0 2px rgba(255,255,255,.15);
+
+  padding: 10px;
+  }
+
+  /* HPテキスト */
+  #player_hp{
+    position: fixed;
+    top: 45%;
+    font-size: 13px;
+  }
+  #enemy_hp_text{
+    position: fixed;
+    top: 60%;
+    font-size: 13px;
+  }
+}
+
+
+.command_list button,
+.command_list a,
+.command_list input,
+.command_list .inventory_box,
+.command_list .inventory_box *,
+.command_list .status_box,
+.command_list .status_box *,
+.command_list .rog_box,
+.command_list .rog_box *{
+  pointer-events: auto;
+}
