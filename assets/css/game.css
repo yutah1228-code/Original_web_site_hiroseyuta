@@ -36,8 +36,8 @@ html, body{
 }
 
 #player_hp{
-  width: 150px;
-  height: 100px;
+  width: 300px;
+  height: 450px;
   background-image: url(../img/530537444_749750834336152_7863546310926926073_n.png);
   background-size: cover;
   color: red;
@@ -45,7 +45,7 @@ html, body{
   font-weight: bold;
   position: fixed;
   right: 100px;
-  top: 500px;
+  top: 450px;
   text-shadow: 0 1px 2px rgba(0,0,0,.6);
 }
 
@@ -61,7 +61,7 @@ html, body{
   width: 500px;
   height: 400px;
   background-color: rgba(0, 0, 0,.20);
-  max-height: 400px;
+  max-height: 300px;
   overflow-y: auto;
   border: 2px black solid;
   padding: 4px;
@@ -115,7 +115,7 @@ html, body{
   border-radius: 8px;
   position: fixed;
   top: 550px;
-  right: 370px;
+  right: 500px !important;
   z-index: 2000;
   
 }
@@ -136,13 +136,7 @@ html, body{
   z-index: 2000;
 }
 
-.status_box{ 
-  display:none; 
-  position: fixed;
-  top: 80px;
-  right: 600px;
-  background-color:rgba(0, 0, 0,.20) ;
-}
+
 
 .status_box.is-open{ display:block; }
 
@@ -388,7 +382,7 @@ html, body{
    ============================== */
 .command_all{
   position: absolute;
-  left: 50%;
+  left: 70%;
   bottom: 24px;
   transform: translateX(-50%);
   width: min(340px, 92vw);
@@ -489,14 +483,16 @@ html, body{
    JSが中身を差し込む想定
    ============================== */
 #status_box.status_box{
-  position: absolute;
-  left: 210px;
-  bottom: 24px;
+  position: fixed;
+  right: 10px !important;
+  bottom: 15px;
   width: min(210px, 56vw);
   padding: 12px 12px 10px;
   font-family: 'Press Start 2P', system-ui, sans-serif;
   font-size: 11px;
   line-height: 1.55;
+  height: 300px;
+  background-color:rgba(0, 0, 0,.20) ;
 }
 
 /* aria-hiddenで表示/非表示 */
@@ -529,9 +525,9 @@ html, body{
    持ち物（右下）
    ============================== */
 .inventory_box{
-  position: absolute;
+  position: fixed;
   right: 16px;
-  bottom: 24px;
+  top: 400px;
   width: min(170px, 45vw);
   padding: 10px 10px 8px;
   font-family: 'Press Start 2P', system-ui, sans-serif;
@@ -556,14 +552,15 @@ html, body{
    戦闘ログ（左上寄り）
    ============================== */
 .rog_box{
-  position: absolute;
+  position:fixed;
   padding: 10px;
-  width: 200px;
-  top: 90px;
-  max-height: 170px;
+  width: 400px;
+  
+  top: 10% ;
+  max-height: 300px;
   overflow: auto;
   font-family: 'Press Start 2P', system-ui, sans-serif;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.6;
 }
 
@@ -710,7 +707,7 @@ height: 87vh;
   .battle_btn,
   .status_box,
   .inventory_box{
-    left: 10px;
+    
     right: 10px;
     width: auto;
     position: fixed;
@@ -750,7 +747,7 @@ height: 87vh;
     top: 50px;
     left: 35%;
     position: fixed;
-    font-size: 12px;
+    font-size: 10px;
     padding: 5;
     background-color: rgba(0, 0, 0,.20);
     overflow-y: auto;
@@ -811,10 +808,11 @@ height: 87vh;
   /* ステータス */
   #status_box{
     
+    
     width: 170px !important;
     height: 250px;
     
-    right: 5% ;
+    
     font-size: 9px !important;
     /* RPG風 */
   background: linear-gradient(
@@ -833,6 +831,7 @@ height: 87vh;
     inset 0 0 0 2px rgba(255,255,255,.15);
 
   padding: 10px;
+  right: 10px !important;
   }
 
   /* HPテキスト */
