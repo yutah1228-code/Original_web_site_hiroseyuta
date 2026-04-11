@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./assets/css/reset.css" />
   <link rel="stylesheet" href="./assets/css/game.css" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
 
   <style>
   html, body {
@@ -22,6 +23,34 @@
 </style>
 </head>
 <body>
+<!-- ユニット選択オーバーレイ（stage31到達で表示） -->
+<div id="unit_overlay" class="overlay" aria-hidden="true">
+  <div class="lvup_modal" role="dialog" aria-modal="true" aria-labelledby="unit_title">
+    <h3 id="unit_title" class="lvup_title">新しいユニットを選択</h3>
+    <div class="lvup_body">
+      <div class="lv_row">
+        <span class="lv_label">解放条件</span>
+        <span class="lv_val">stage 31 以上</span>
+      </div>
+
+      <div class="lv_row gains">
+        <span class="lv_label">説明</span>
+        <span class="lv_val">選択したユニットに切り替わり、初期ステータスになります。</span>
+      </div>
+
+      <div style="margin-top:12px;">
+        <ul id="unit_list" style="list-style:none; padding:0; margin:0; display:grid; gap:10px;"></ul>
+      </div>
+    </div>
+
+    <div class="lvup_actions">
+      <button id="unit_cancel_btn" class="lv_ok_btn" type="button">後で</button>
+    </div>
+  </div>
+</div>
+
+<button id="formation_btn" class="shop_btn" type="button" aria-label="編成を開く" style="display:none;">編成</button>
+<button id="clear_save_btn" type="button">セーブ削除</button>
   <div class="game_main">
     <div class="blanc">
       <div id="lvup_overlay" class="overlay" aria-hidden="true">
@@ -83,20 +112,43 @@
       </div>
     </div>
 
+    <button id="map_btn" class="top_ui_btn" type="button">MAP</button>
+
+<div id="map_overlay" class="map_overlay" aria-hidden="true">
+  <div class="map_window">
+    <div class="map_header">
+      <div id="map_title"></div>
+      <button id="map_close" type="button">閉じる</button>
+    </div>
+
+    <div id="map_body"></div>
+
+    <div id="map_event_log" class="map_event_log"></div>
+  </div>
+</div>
+
+    
+
     <div class="command_list">
       <div id="enemy_hp">
+        <div id="enemy_area" class="enemy_area"></div>
         <span id="enemy_hp_text"></span>
         <div class="game_picture" id="enemy_picture" role="img" aria-label="敵"></div>
       </div>
 
+
       <div class="rog_box">
         <ul><li class="rog">戦闘ログ</li></ul>
       </div>
+      
 
-      <button id="battle_toggle" class="battle_btn">戦う</button>
+      
 
       <div class="command_all">
-        <button id="status_btn" class="status_btn">ステータス</button>
+        <div style="display:flex; gap:8px; margin-bottom:8px;">
+          
+          <button id="skill_btn" class="status_btn" type="button" >スキル</button>
+        </div>
         <div class="command_1">
           <button id="command1">攻撃</button>
           <button id="command2">防御</button>
@@ -112,9 +164,26 @@
         <ul id="inventory_list"></ul>
       </div>
 
-      <div id="player_hp"></div>
+      <!-- 編成：前衛/後衛 表示 -->
+<div id="party_view" class="party_view" aria-label="編成表示">
+  <div class="party_slot1">
+    <div class="party_labe">前衛</div>
+    <button id="front_unit_name" class="party_name party_name_btn" type="button"></button>
+    <div id="front_unit_img" class="party_img" role="img" aria-label="前衛ユニット"></div>
+    
+  </div>
 
-      <div id="status_box" class="status_box" aria-hidden="true"></div>
+  <div class="party_slot2">
+    <div class="party_label">後衛</div>
+    <button id="back_unit_name" class="party_name party_name_btn" type="button">—</button>
+    <div id="back_unit_img" class="party_img" role="img" aria-label="後衛ユニット"></div>
+    
+  </div>
+</div>
+
+      <!-- <div id="player_hp"></div> -->
+
+
     </div>
   </div>
 
@@ -129,12 +198,199 @@
       </div>
     </div>
   </div>
+  <div class="bottom_box">
+  <div id="status_box" class="status_box" ></div>
+<div id="skill_box" class="status_box"  style="display:none;"></div>
+  <button id="status_switch_btn" type="button" aria-label="ステータス切替">←ステータス切り替え→</button>
+
+  </div>
+  <button id="story_btn">ストーリー</button>
+  <div id="story_overlay" class="overlay" aria-hidden="true">
+
+  <div class="story_window">
+
+    <div class="story_header">
+      ストーリー
+      <button id="story_close">閉じる</button>
+    </div>
+
+    <div id="story_map">
+      
+
+      <button class="map_node" data-map="village">カルム村</button>
+      <button class="map_node" data-map="plain">アルディア平原</button>
+      <button class="map_node" data-map="forest">精霊の森ルミナ</button>
+      <button class="map_node" data-map="castle">エストリア王城</button>
+      <button class="map_node" data-map="castle2">レオニス王城</button>
+      <button class="map_node" data-map="desert">デザリア砂漠</button>
+      <button class="map_node" data-map="volcano">ヴォルカノ火山</button>
+      <button class="map_node" data-map="marcia">マルシア商業都市</button>
+      <button class="map_node" data-map="labyrinth">封印迷宮</button>
+      <button class="map_node" data-map="gladio">グラディオ廃城</button>
+      <button class="map_node" data-map="lumenia">海上都市ルーメリア</button>
+      <button class="map_node" data-map="kansho">蛇神の環礁</button>
+      <button class="map_node" data-map="frost_peak">氷上都市ニーベリア</button>
+
+      <button class="map_node shop_node" data-map="shop">商店</button>
+      
+
+    </div>
+    <div id="story_rog"></div>
+
+  </div>
+
+</div>
+
+<div id="story_scene_overlay" class="story_scene_overlay" aria-hidden="true">
+  <div class="story_scene_bg"></div>
+
+  <div class="story_scene_inner">
+    <div id="story_summary_box" class="story_summary_box"></div>
+
+    <div id="story_event_image_area" class="story_event_image_area" style="display:none;">
+      <img id="story_event_image" src="" alt="イベント画像">
+    </div>
+
+    <div id="story_dialogue_area" class="story_dialogue_area" style="display:none;">
+      <img id="story_face_left" class="story_face left" src="" alt="" style="display:none;">
+      <img id="story_face_right" class="story_face right" src="" alt="" style="display:none;">
+
+      <div class="story_dialogue_window">
+        <div id="story_dialogue_name" class="story_dialogue_name"></div>
+        <div id="story_dialogue_text" class="story_dialogue_text"></div>
+      </div>
+    </div>
+
+    <div id="story_scene_next" class="story_scene_next">▼クリックで次へ</div>
+  </div>
+</div>
+
+<div id="town_overlay" class="town_overlay" aria-hidden="true">
+  <div class="town_map">
+    <button class="town_btn weapon" id="town_weapon_btn">武器屋</button>
+    <button class="town_btn item" id="town_item_btn">道具屋</button>
+    <button class="town_btn arena" id="town_arena_btn">闘技場</button>
+    <button class="town_btn merudi" id="town_merudi_btn">メルディの屋敷</button>
+    <button class="town_btn casino" id="townCasinoBtn" type="button">賭博場</button>
+    <button id="town_info_btn" class="town_btn info">情報屋</button>
+<button id="town_house_btn" class="town_btn house">民家</button>
+<button id="town_mix_btn" class="town_btn mix">合成屋</button>
+    <button class="town_btn exit" id="town_exit_btn">都市を出る</button>
+  </div>
+</div>
+<!-- 武器屋 -->
+<div id="weapon_overlay" class="facility_overlay" aria-hidden="true">
+  <div class="facility_panel">
+    <div class="facility_header">
+      <h3>武器屋</h3>
+      <button id="weapon_close" type="button">閉じる</button>
+    </div>
+    <div id="weapon_gold" class="facility_gold">所持金: 0G</div>
+    <ul id="weapon_list" class="facility_list"></ul>
+  </div>
+</div>
+
+<div id="casinoOverlay" class="facility_overlay casino_overlay" aria-hidden="true">
+  <div class="facility_panel casino_panel">
+    <div class="casino_owner_block">
+      <img src="./assets/img/casino_owner.png" alt="賭博場の主" class="casino_owner_img">
+      <div class="casino_owner_name">賭博場の主</div>
+    </div>
+
+    <h2 class="casino_title">賭博場</h2>
+    <p id="casinoText" class="casino_text"></p>
+
+    <div class="casino_info">
+      <div>賭け金：500G</div>
+      <div>勝率：50% + 前衛ユニットのLUCK%</div>
+      <div>最大純利益：50000G</div>
+    </div>
+
+    <div class="casino_choice_row">
+      <button id="casinoHeadsBtn" type="button" class="casino_choice_btn">表</button>
+      <button id="casinoTailsBtn" type="button" class="casino_choice_btn">裏</button>
+    </div>
+
+    <div class="casino_close_row">
+      <button id="casinoCloseBtn" type="button" class="casino_close_btn">閉じる</button>
+    </div>
+  </div>
+</div>
+<div id="unit_detail_overlay" class="overlay" aria-hidden="true">
+  <div class="overlay_inner">
+    
+    <div id="unit_detail_box"></div>
+  </div>
+</div>
+
+<div id="equip_select_overlay" class="overlay" aria-hidden="true">
+  <div class="overlay_inner">
+    <div id="equip_select_title">装備を選択</div>
+    <div id="equip_select_list"></div>
+    <button id="equip_select_close" type="button">閉じる</button>
+  </div>
+</div>
+
+<!-- 道具屋 -->
+<div id="item_overlay" class="facility_overlay" aria-hidden="true">
+  <div class="facility_panel">
+    <div class="facility_header">
+      <h3>道具屋</h3>
+      <button id="item_close" type="button">閉じる</button>
+    </div>
+    <div id="item_gold" class="facility_gold">所持金: 0G</div>
+    <ul id="item_list" class="facility_list"></ul>
+  </div>
+</div>
+
+<!-- 闘技場 -->
+<div id="arena_overlay" class="facility_overlay" aria-hidden="true">
+  <div class="facility_panel">
+    <div class="facility_header">
+      <h3>闘技場</h3>
+      <button id="arena_close" type="button">閉じる</button>
+    </div>
+
+    <div class="arena_menu">
+      <button id="arena_beginner" type="button">初級の間</button>
+      <button id="arena_middle" type="button">中級の間</button>
+      <button id="arena_advanced" type="button">上級の間</button>
+      <button id="arena_master" type="button">覇者の間</button>
+      <button id="arena_shop_btn" type="button">景品交換所</button>
+    </div>
+  </div>
+</div>
+
+<!-- 闘技場ショップ -->
+<div id="arena_shop_overlay" class="facility_overlay" aria-hidden="true">
+  <div class="facility_panel arena_shop_panel">
+    <div class="facility_header">
+      <h3>闘技場ショップ</h3>
+      <button id="arena_shop_close" type="button">閉じる</button>
+    </div>
+
+    <div id="arena_shop_points">所持ポイント: 0pt</div>
+    <ul id="arena_shop_list"></ul>
+  </div>
+</div>
+
+<!-- メルディの屋敷 -->
+<div id="merudi_overlay" class="facility_overlay" aria-hidden="true">
+  <div class="facility_panel">
+    <div class="facility_header">
+      <h3>メルディの屋敷</h3>
+      <button id="merudi_close" type="button">閉じる</button>
+    </div>
+    <div id="merudi_body" class="facility_body"></div>
+  </div>
+</div>
+
   <footer class="game_foot">
 @2025 hiroseyuta RPG
   </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="./assets/js/script.js"></script>
+<script src="./assets/js/script.js" defer></script>
 
 
 

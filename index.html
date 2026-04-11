@@ -33,12 +33,36 @@
 
     <main>
          <div class="main1">
-            <!-- <img class="start" src="./assets/img/531984937_1065672889014416_53595589730337324_n.jpg" alt=""> -->
-            
-                <button class="hazimeru">
-                        <a href="./game.html">PRESS TO START</a>
-                </button>
-            </div>
+  <button class="hazimeru" id="press_to_start" type="button">
+    PRESS TO START
+  </button>
+</div>
+
+<div id="intro_overlay" aria-hidden="true">
+  <div class="intro_panel">
+
+    <div id="summary_box" class="summary_box"></div>
+    <div id="event_image_area" class="event_image_area">
+  <img id="event_image" src="" alt="">
+    </div>
+
+    <div id="dialogue_area" class="dialogue_area">
+      <div class="intro_faces">
+        <img id="face_left" class="face left" src="" alt="">
+        <img id="face_right" class="face right" src="" alt="">
+      </div>
+
+      
+
+      <div class="dialogue_box">
+        <div id="dialogue_name" class="dialogue_name"></div>
+        <div id="dialogue_text" class="dialogue_text"></div>
+      </div>
+    </div>
+
+    <div id="intro_next">▼クリックで次へ</div>
+  </div>
+</div>
         
         
     </main>
@@ -48,22 +72,464 @@
 
     
     <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.querySelector('.hamburger');
-  const nav = document.getElementById('global-nav');
-  if (!hamburger || !nav) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.querySelector(".hamburger");
+  const nav = document.getElementById("global-nav");
 
-  hamburger.addEventListener('click', () => {
-    const opened = hamburger.classList.toggle('open');
-    nav.classList.toggle('open', opened);
-    hamburger.setAttribute('aria-expanded', opened ? 'true' : 'false');
-  });
+  if (hamburger && nav) {
+    hamburger.addEventListener("click", () => {
+      const opened = hamburger.classList.toggle("open");
+      nav.classList.toggle("open", opened);
+      hamburger.setAttribute("aria-expanded", opened ? "true" : "false");
+    });
+  }
+
+  const introOverlay = document.getElementById("intro_overlay");
+  const summaryBox = document.getElementById("summary_box");
+  const dialogueArea = document.getElementById("dialogue_area");
+  const faceLeft = document.getElementById("face_left");
+  const faceRight = document.getElementById("face_right");
+  const nameBox = document.getElementById("dialogue_name");
+  const textBox = document.getElementById("dialogue_text");
+  const introNext = document.getElementById("intro_next");
+  const startBtn = document.getElementById("press_to_start");
+  const eventImageArea = document.getElementById("event_image_area");
+  const eventImage = document.getElementById("event_image");
+
+  const INTRO_SEQUENCE = [
+    {
+      type: "summary",
+      text: `📖 第一章「裏切りの王城」
+
+舞台：エストリア王城`
+    },
+    {
+      type: "summary",
+      text: `エストリア王国――
+長い歴史と繁栄を誇る王国。
+
+その王城に生まれた第一王子
+クレス・エストリアは
+民に慕われる穏やかな王子だった。`
+    },
+    {
+      type: "summary",
+      text: `だが王国の裏では
+貴族や大臣たちによる
+激しい権力争いが続いていた。
+
+そしてある夜――`
+    },
+    {
+      type: "summary",
+      text: `王国を支える大臣の一人
+ヴァルドレインが
+突如としてクーデターを起こす。`
+    },
+    {
+      type: "summary",
+      text: `王城は反乱軍に包囲され
+王は命を落とした。
+
+そしてヴァルドレインは
+その罪をすべて
+王子クレスに押し付けた。`
+    },
+    {
+      type: "summary",
+      text: `「王を殺した反逆者」
+
+そう宣言された瞬間
+王城の兵士たちは敵となった。`
+    },
+    {
+      type: "summary",
+      image: "./assets/img/castle.burn.png",
+      text: `王子を逃がすため
+忠臣たちは命を賭けて戦う。
+
+炎に包まれる王城。
+崩れゆく王国。`
+    },
+    {
+      type: "summary",
+      text: `多くの仲間を失いながら
+クレスはただ一人の味方――
+軍師セリオスと共に
+王城を脱出する。`
+    },
+    {
+      type: "summary",
+      text: `王国は奪われた。
+
+だが――
+
+王子の戦いは
+ここから始まる。`
+    },
+
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "セリオス……これはどういうことだ"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "……王城が反乱軍に包囲されています"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "反乱軍だと……？"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "大臣ヴァルドレインが兵を挙げました"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "そんな……父上は無事なのか！？"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "……王は、すでに……"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "まさか……"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "殿下、時間がありません。今はここを離れるべきです"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "逃げろというのか……？　この城を捨てて……！"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "今ここで死ねば、王国は本当に終わります"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "あなたは生き延び、必ずこの国を取り戻さねばなりません"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "……わかった"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "必ず王国を取り戻す。父上のためにも……そして倒れた皆のためにも"
+    }
+    ,
+    {
+      type: "summary",
+      text: `王城を脱出したクレスとセリオスは
+    追撃を振り切りながら
+    王都近くの小さな村――
+    カルム村へと辿り着いた。`
+    },
+    {
+      type: "summary",
+      text: `カルム村の人々は
+    傷ついた王子をかくまい
+    食料や衣服、そして最低限の装備を
+    密かに与えてくれた。`
+    },
+    {
+      type: "summary",
+      text: `だが王国軍の追跡は
+    止まらなかった。
+    
+    王都から放たれた追手は
+    ついにカルム村へと
+    迫っていた。`
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "……すまない。俺のせいで、村の人たちまで危険に晒してしまった"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "殿下、それでも彼らはあなたを見捨てなかった。それが答えです"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "だが……これ以上は……"
+    },
+    {
+      type: "summary",
+      text: `その時――
+    
+    村の外れから
+    荒々しい馬の足音と
+    兵士たちの怒号が響いた。`
+    },
+    {
+      type: "dialogue",
+      name: "村人",
+      side: "left",
+      face: "./assets/img/murabito.dia.png",
+      text: "大変だ！　王国の兵士たちが来たぞ！"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "……殿下、追手です"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "もうここまで来たのか……！"
+    },
+    {
+      type: "summary",
+      text: `追手の兵士たちは
+    村へ踏み込み
+    クレスの居場所を吐けと
+    村人たちを脅し始めた。`
+    },
+    {
+      type: "dialogue",
+      name: "追手兵",
+      side: "left",
+      face: "./assets/img/tsuite.dia.png",
+      text: "反逆者クレスを匿った罪、その身で償ってもらう"
+    },
+    {
+      type: "dialogue",
+      name: "村人",
+      side: "left",
+      face: "./assets/img/murabito.dia.png",
+      text: "わ、わしらは何も知らん……！"
+    },
+    {
+      type: "dialogue",
+      name: "追手兵",
+      side: "left",
+      face: "./assets/img/tsuite.dia.png",
+      text: "ならば見せしめだ。王子に味方する愚か者がどうなるか教えてやる"
+    },
+    {
+      type: "summary",
+      text: `兵士の刃が
+    無抵抗の村人へと振り上げられる。
+    
+    その光景を見た瞬間、
+    クレスの中で何かが
+    音を立てて切れた。`
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "やめろッ！！"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "殿下――！"
+    },
+    {
+      type: "summary",
+      text: `怒りに震える手で
+    クレスは剣を抜く。
+    
+    それは王子としてではなく、
+    守るべき者のために戦う
+    一人の剣士としての決意だった。`
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "俺を捕らえたいのなら来い……！　だが、この村の人々には指一本触れさせない！"
+    },
+    {
+      type: "dialogue",
+      name: "追手兵",
+      side: "left",
+      face: "./assets/img/tsuite.dia.png",
+      text: "反逆者め……ようやく姿を現したか！"
+    },
+    {
+      type: "dialogue",
+      name: "セリオス",
+      side: "left",
+      face: "./assets/img/seriosu.dia.png",
+      text: "殿下、ここは私も出ます。村人たちを下がらせてください"
+    },
+    {
+      type: "dialogue",
+      name: "クレス",
+      side: "right",
+      face: "./assets/img/kuresu.dia.png",
+      text: "……ああ。ここで止める"
+    },
+    {
+      type: "summary",
+      text: `クレスとセリオスは
+    襲い来る追手を迎え撃つ。
+    
+    小さな村を守るための戦いが、
+    今、始まる。`
+    }
+    
+    
+      ];
+
+  let introPageIndex = 0;
+  let introPlaying = false;
+
+  function openIntroStory() {
+    introPageIndex = 0;
+    introPlaying = true;
+    introOverlay.classList.add("is-open");
+    introOverlay.setAttribute("aria-hidden", "false");
+    renderIntroPage();
+  }
+
+  function showSummary(page) {
+  summaryBox.style.display = "block";
+  dialogueArea.style.display = "none";
+
+  summaryBox.textContent = page.text;
+
+  if (page.image) {
+    eventImageArea.style.display = "flex";
+    eventImage.src = page.image;
+    eventImage.alt = "イベント画像";
+  } else {
+    eventImageArea.style.display = "none";
+    eventImage.src = "";
+    eventImage.alt = "";
+  }
+  
+}
+
+  function showDialogue(page) {
+  summaryBox.style.display = "none";
+  dialogueArea.style.display = "block";
+  eventImageArea.style.display = "none";
+
+  nameBox.textContent = page.name;
+  textBox.textContent = page.text;
+
+  faceLeft.classList.remove("active");
+  faceRight.classList.remove("active");
+
+  if (page.side === "left") {
+    faceLeft.src = page.face;
+    faceLeft.alt = page.name;
+    faceLeft.style.display = "block";
+    faceLeft.classList.add("active");
+
+    faceRight.style.display = "none";
+    faceRight.src = "";
+    faceRight.alt = "";
+  } else {
+    faceRight.src = page.face;
+    faceRight.alt = page.name;
+    faceRight.style.display = "block";
+    faceRight.classList.add("active");
+
+    faceLeft.style.display = "none";
+    faceLeft.src = "";
+    faceLeft.alt = "";
+  }
+}
+
+  function renderIntroPage() {
+  const page = INTRO_SEQUENCE[introPageIndex];
+  if (!page) return;
+
+  if (page.type === "summary") {
+    showSummary(page);
+  } else if (page.type === "dialogue") {
+    showDialogue(page);
+  }
+
+  introNext.textContent =
+    introPageIndex >= INTRO_SEQUENCE.length - 1
+      ? "▼クリックでゲーム開始"
+      : "▼クリックで次へ";
+}
+
+  function nextIntroPage() {
+    if (!introPlaying) return;
+
+    if (introPageIndex < INTRO_SEQUENCE.length - 1) {
+      introPageIndex++;
+      renderIntroPage();
+      return;
+    }
+
+    introPlaying = false;
+    window.location.href = "./game.html";
+  }
+
+  
+
+
+
+  startBtn?.addEventListener("click", openIntroStory);
+  introOverlay?.addEventListener("click", nextIntroPage);
 });
 </script>
-
-
-
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="./assets/js/script.js"></script>
 </body>
 </html>

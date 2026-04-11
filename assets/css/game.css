@@ -54,7 +54,7 @@ html, body{
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url(../img/530556201_740928238647808_5784113294969287064_n.jpg);
+  
 }
 
 .rog_box{
@@ -140,6 +140,14 @@ html, body{
 
 .status_box.is-open{ display:block; }
 
+#status_box {
+  display: block !important;
+}
+
+#skill_box {
+  display: none;
+}
+
 .status_btn{ margin:8px 0; }
 
 #shop_btn { 
@@ -152,6 +160,7 @@ html, body{
   height: 70px;
   background-image: url(../img/shop.jpg);
   background-size: cover;
+  display: none;
 }
 
 .shop_box {
@@ -614,9 +623,2039 @@ html, body{
     radial-gradient(120px 60px at 18px 18px, rgba(255,255,255,.12), transparent 60%),
     radial-gradient(120px 60px at calc(100% - 18px) 18px, rgba(255,255,255,.08), transparent 60%);
 }
+.unit_item {
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.25);
+}
+.unit_item:hover {
+  border-color: rgba(255,255,255,0.6);
+}
+.unit_name {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.unit_stats {
+  font-size: 12px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+.unit_growth {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+.party_view{
+  position: fixed;
+  display:flex;
+  gap:12px;
+  margin:10px 0;
+}
+.party_slot1{
+  position: fixed;
+  top: 320px;
+  right: 70px;
+  flex:1;
+  z-index: 1;
+  
+  
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.party_slot2{
+  position: fixed;
+  top: 250px;
+  right: 20px;
+  flex:1;
+  
+  
+  border-radius: 12px;
+  padding: 10px;
+}
+.party_label1{
+  font-size:12px;
+  opacity:.9;
+  margin-bottom:6px;
+}
 
 
 
+.party_img{
+  position: fixed;
+  right: 10px;
+  width: 180px;
+  height: 300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10px;
+  background-color: rgba(255,255,255,0.06);
+}
+.party_name{
+  background-color:var(--ui-text) ;
+  margin-top:6px;
+  font-size:12px;
+  text-align:center;
+  opacity:.95;
+  width: 50px;
+}
+
+#status_switch_btn{
+  position: fixed;
+  top: 550px;
+  right: 30px;
+  font-size: 10px;
+  width: 140px;
+  height: 20px;
+  border-radius: 20px;
+  background-color:var(--ui-text) ;
+
+
+}
+#formation_btn{
+  position: fixed;
+  align-items: center;
+  top: 300px;
+  right: 20px;
+  width: 60px;
+  height: 30px;
+
+}
+
+/* スキル画面 */
+#skill_box{
+  position: absolute;
+  right: 20px;
+  bottom: 120px;
+
+  width: 260px;
+  max-height: 320px;
+
+  padding: 14px;
+
+  background: rgba(0,0,0,0.6);
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.25);
+
+  color: #fff;
+
+  overflow-y: auto;
+
+  backdrop-filter: blur(4px);
+  
+
+  font-size: 14px;
+}
+
+/* スキル1個 */
+.skill_item{
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+.skill_name{
+  font-weight:bold;
+  color:#ffd76a;
+}
+
+.skill_cost{
+  font-size:12px;
+  opacity:0.8;
+}
+
+.skill_type{
+  font-size:12px;
+  opacity:0.7;
+}
+
+#skill_box::-webkit-scrollbar{
+  width:6px;
+}
+
+#skill_box::-webkit-scrollbar-thumb{
+  background:#888;
+  border-radius:4px;
+}
+
+.skill_title{
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+  padding-bottom:4px;
+}
+
+.bottom_box{
+
+  position:fixed;
+  bottom:0;
+  width:100vw;
+  height:35vh;
+
+  padding:18px;
+
+  background:
+  linear-gradient(
+    to bottom,
+    rgba(45,35,20,0.95),
+    rgba(20,15,8,0.98)
+  );
+
+  border-top:4px solid #c9a75a;
+
+  box-shadow:
+    0 -6px 20px rgba(0,0,0,0.7),
+    inset 0 0 20px rgba(0,0,0,0.6);
+
+  font-family:'MedievalSharp', cursive;
+
+}
+
+.bottom_box::before{
+
+  content:"";
+
+  position:absolute;
+  inset:8px;
+
+  border:2px solid #e6c06b;
+
+  border-radius:10px;
+
+  pointer-events:none;
+
+}
+
+
+
+
+
+/* !ストーリー画面 */
+#story_overlay{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(0,0,0,0.9) 45%, rgba(0,0,0,0.8) 100%);
+}
+
+#story_overlay.is-open{
+  display:flex;
+}
+
+.story_window{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 18px;
+  color: #f5f1dc;
+  background:
+    linear-gradient(to bottom, rgba(16,18,28,0.92), rgba(7,8,14,0.96));
+  overflow: hidden;
+}
+
+/* 画面全体にうっすら模様 */
+.story_window::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255,255,255,0.05), transparent 18%),
+    radial-gradient(circle at 78% 30%, rgba(255,255,255,0.04), transparent 14%),
+    radial-gradient(circle at 50% 70%, rgba(255,255,255,0.03), transparent 18%);
+  opacity: 0.5;
+}
+
+#story_rog{
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: min(92vw, 1100px);
+  height: 30vh;
+  min-height: 250px;
+  background:
+    linear-gradient(to bottom, rgba(39,28,16,0.96), rgba(18,12,8,0.98));
+  border: 3px solid #9f8350;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 2px #2b1f12 inset,
+    0 8px 18px rgba(0,0,0,0.35);
+  color: #f3ead0;
+  padding: 16px 18px;
+}
+
+
+
+
+.story_header{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  color: #f7e7a8;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  border: 2px solid #8f7642;
+  border-radius: 10px;
+  background:
+    linear-gradient(to bottom, rgba(62,48,27,0.95), rgba(30,22,12,0.95));
+  box-shadow:
+    0 0 0 2px rgba(20,13,5,0.7) inset,
+    0 6px 18px rgba(0,0,0,0.35);
+}
+
+
+#story_close{
+  background: linear-gradient(to bottom, #5a4630, #2f2418);
+  border: 1px solid #b99a5b;
+  color: #fff6d3;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.35);
+}
+
+#story_close:hover{
+  background: linear-gradient(to bottom, #755b3e, #3b2d1d);
+}
+
+#story_map{
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 1100px);
+  height: min(58vh, 620px);
+  margin: 0 auto;
+  border: 4px solid #8d7443;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(5, 10, 20, 0.18), rgba(5, 10, 20, 0.35)),
+    url("../img/island.png") center center / cover no-repeat;
+  box-shadow:
+    0 0 0 3px #2a2113 inset,
+    0 0 0 8px rgba(18, 12, 6, 0.55) inset,
+    0 12px 32px rgba(0,0,0,0.45);
+}
+
+#story_map::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(145, 198, 224, 0.12), rgba(14, 44, 64, 0.25)),
+    radial-gradient(circle at 30% 35%, rgba(255,255,255,0.08), transparent 25%),
+    radial-gradient(circle at 70% 60%, rgba(255,220,120,0.05), transparent 22%);
+  mix-blend-mode: screen;
+}
+
+/* 四隅の vignette */
+#story_map::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at center, transparent 45%, rgba(0,0,0,0.18) 72%, rgba(0,0,0,0.42) 100%);
+}
+
+/* マップ地点 */
+.map_node{
+  position: absolute;
+  min-width: 96px;
+  padding: 10px 14px;
+  background:
+    linear-gradient(to bottom, rgba(59,78,99,0.95), rgba(26,34,48,0.95));
+  color: #f6f4ea;
+  border: 2px solid #b9d6ff;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  box-shadow:
+    0 0 0 2px rgba(14,20,30,0.75) inset,
+    0 0 14px rgba(112, 180, 255, 0.25);
+}
+
+.map_node:hover{
+  transform: translateY(-2px) scale(1.04);
+  background:
+    linear-gradient(to bottom, rgba(84,113,142,0.98), rgba(38,52,71,0.98));
+  box-shadow:
+    0 0 0 2px rgba(14,20,30,0.75) inset,
+    0 0 18px rgba(145, 210, 255, 0.55);
+}
+
+.map_node::after{
+  content: "";
+}
+
+/* 地点ごとの色分け */
+.map_node[data-map="village"]{
+  top: 37%;
+  left: 2%;
+  
+  border-color: #cde7b7;
+  font-size: 7px;
+}
+
+.map_node[data-map="forest"]{
+  top: 20%;
+  left: 2%;
+  background:
+    linear-gradient(to bottom, rgba(57,101,68,0.98), rgba(24,55,35,0.98));
+  border-color: #9fd9ad;
+  font-size: 7px;
+}
+
+.map_node[data-map="castle2"]{
+  top: 40%;
+  left: 80%;
+  background:
+    linear-gradient(to bottom, rgba(57,101,68,0.98), rgba(24,55,35,0.98));
+  border-color: #9fd9ad;
+  font-size: 7px;
+}
+
+.map_node[data-map="desert"]{
+  top: 53%;
+  left: 65%;
+  background:
+    linear-gradient(to bottom, rgba(57,101,68,0.98), rgba(24,55,35,0.98));
+  border-color: #9fd9ad;
+  font-size: 7px;
+}
+
+.map_node[data-map="plain"]{
+  top: 63%;
+  left: 40%;
+  background:
+    linear-gradient(to bottom, rgba(57,101,68,0.98), rgba(24,55,35,0.98));
+  border-color: #9fd9ad;
+  font-size: 7px;
+}
+
+.map_node[data-map="marcia"]{
+  top: 42%;
+  left: 40%;
+  background:
+    linear-gradient(to bottom, rgba(57,101,68,0.98), rgba(24,55,35,0.98));
+  border-color: #9fd9ad;
+  font-size: 7px;
+}
+
+.map_node[data-map="volcano"]{
+  top: 2%;
+  left: 80%;
+  background:
+    linear-gradient(to bottom, rgba(57,101,68,0.98), rgba(24,55,35,0.98));
+  border-color: #9fd9ad;
+  font-size: 7px;
+}
+
+.map_node[data-map="labyrinth"]{
+  top: 80%;
+  left: 10%;
+  background:
+    linear-gradient(to bottom, rgba(57,101,68,0.98), rgba(24,55,35,0.98));
+  border-color: #9fd9ad;
+  font-size: 7px;
+}
+
+.map_node[data-map="castle"]{
+  top: 1%;
+  left: 10%;
+  background:
+    linear-gradient(to bottom, rgba(122,122,138,0.98), rgba(55,55,68,0.98));
+  border-color: #d3d8e2;
+  font-size: 8px;
+}
+
+.map_node[data-map="lumenia"]{
+  top: 70%;
+  left: 70%;
+  background:
+    linear-gradient(to bottom, rgba(122,122,138,0.98), rgba(55,55,68,0.98));
+  border-color: #d3d8e2;
+  font-size: 8px;
+}
+
+.map_node[data-map="frost_peak"]{
+  top: 10%;
+  left: 40%;
+  background:
+    linear-gradient(to bottom, rgba(122,122,138,0.98), rgba(55,55,68,0.98));
+  border-color: #d3d8e2;
+  font-size: 8px;
+}
+
+
+
+.map_node[data-map="gladio"]{
+  top: 47%;
+  left: 76%;
+  background:
+    linear-gradient(to bottom, rgba(122,122,138,0.98), rgba(55,55,68,0.98));
+  border-color: #d3d8e2;
+  font-size: 8px;
+}
+
+.map_node[data-map="kansho"]{
+  top: 85%;
+  left: 40%;
+  background:
+    linear-gradient(to bottom, rgba(122,122,138,0.98), rgba(55,55,68,0.98));
+  border-color: #d3d8e2;
+  font-size: 8px;
+}
+
+.map_node[data-map="shop"]{
+  top: 76%;
+  left: 60%;
+}
+
+/* 商店だけ金色 */
+.shop_node{
+  background:
+    linear-gradient(to bottom, rgba(120,86,26,0.98), rgba(62,42,10,0.98));
+  border-color: #f2d36c;
+  box-shadow:
+    0 0 0 2px rgba(35,22,5,0.7) inset,
+    0 0 18px rgba(255, 201, 68, 0.35);
+}
+
+.shop_node:hover{
+  box-shadow:
+    0 0 0 2px rgba(35,22,5,0.7) inset,
+    0 0 22px rgba(255, 212, 88, 0.65);
+}
+
+/* 未解放地点 */
+.map_node.locked{
+  opacity: 0.38;
+  filter: grayscale(0.7);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* 現在地マーカーを付けたい場合 */
+.map_node.current{
+  box-shadow:
+    0 0 0 2px rgba(14,20,30,0.75) inset,
+    0 0 0 3px rgba(255, 244, 179, 0.65),
+    0 0 18px rgba(255, 236, 133, 0.65);
+}
+
+/* ストーリーボタン */
+#story_btn{
+  position: fixed;
+  width: 200px;
+  top: 300px;
+  left: 10px;
+  z-index: 1001;
+  background:
+    linear-gradient(to bottom, #5a4630, #2e2218);
+  color: #fff1bf;
+  border: 2px solid #bda06b;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow:
+    0 0 0 2px rgba(29,18,8,0.8) inset,
+    0 6px 14px rgba(0,0,0,0.35);
+}
+
+#story_btn:hover{
+  background:
+    linear-gradient(to bottom, #72583b, #3d2d1d);
+}
+
+.story_scene_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  background-image: url(../img/530678560_2005189683349741_7609845033930916312_n.jpg) ;
+  background-size: cover;
+}
+
+.story_scene_overlay.is-open {
+  display: block;
+}
+
+.story_scene_bg {
+  position: absolute;
+  inset: 0;
+  background: url("./assets/img/story_bg.jpg") center center / cover no-repeat;
+  filter: brightness(0.95);
+}
+
+.story_scene_inner {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 430px);
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 16px 36px;
+  box-sizing: border-box;
+}
+
+.story_summary_box,
+.story_dialogue_window {
+  background: linear-gradient(180deg, rgba(45,20,8,0.96), rgba(20,8,4,0.96));
+  border: 2px solid #c89a3c;
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 2px rgba(80,45,10,0.5) inset,
+    0 8px 24px rgba(0,0,0,0.4);
+  color: #f5e7c8;
+}
+
+.story_summary_box {
+  min-height: 220px;
+  padding: 28px 24px 56px;
+  white-space: pre-line;
+  font-size: 24px;
+  line-height: 1.9;
+  font-weight: 700;
+}
+
+.story_event_image_area {
+  width: 100%;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.story_event_image_area img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 2px solid #c89a3c;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.story_dialogue_area {
+  position: relative;
+  display: flex;
+  
+  
+  min-height: 300px;
+}
+
+.story_face {
+  position: absolute;
+  bottom: 250px;
+  
+  width: 200px;
+  max-height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45));
+}
+
+.story_face.left {
+  left: 0;
+}
+
+.story_face.right {
+  right: 0;
+}
+
+.story_face.active {
+  transform: scale(1.03);
+}
+
+.story_dialogue_window {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 250px;
+  padding: 18px 20px 48px;
+  box-sizing: border-box;
+}
+
+.story_dialogue_name {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #ffd98a;
+}
+
+.story_dialogue_text {
+  white-space: pre-line;
+  font-size: 22px;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.story_scene_next {
+  position: absolute;
+  right: 28px;
+  bottom: 48px;
+  color: #d8a53c;
+  font-size: 16px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  pointer-events: none;
+}
+
+.town_overlay{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 999;
+  background: rgba(0,0,0,.35);
+}
+
+.town_overlay.is-open{
+  display: block;
+}
+
+.town_map{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/marcia.map.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.town_btn{
+  position: absolute;
+  padding: 12px 18px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.town_btn.weapon{ left: 70%; top: 70%; }
+.town_btn.item{ left: 50%; top: 60%; }
+.town_btn.arena{ left: 68%; top: 36%; }
+.town_btn.merudi{ left: 2%; top: 12%; }
+.town_btn.exit{ right: 4%; bottom: 6%; }
+.town_btn.casino{ right: 70%; top:55%; }
+.town_btn.info{ right: 70%; top:35%; }
+.town_btn.house{ left: 68%; top:22%; }
+.town_btn.mix{ left: 75%; top:55%; }
+
+.facility_overlay{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1200;
+  background: rgba(0,0,0,.45);
+  
+}
+
+.facility_overlay.is-open{
+  display: block;
+}
+
+.facility_panel{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: min(43vw, 420px);
+  max-height: 100vh;
+  overflow-y: auto;
+  margin: 40px auto;
+  background: #f6f0df;
+  border: 3px solid #5b4328;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  font-size: 12px;
+}
+
+.facility_header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.facility_gold{
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.facility_list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.facility_list li{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 2px solid #7c6542;
+  border-radius: 10px;
+  background: #fffaf0;
+}
+
+.facility_body{
+  line-height: 1.8;
+}
+
+.arena_menu{
+  display: grid;
+  gap: 12px;
+}
+
+#weapon_overlay{
+  background-image: url(../img/weapons.png);
+  background-size: cover;
+}
+
+#item_overlay{
+  background-image: url(../img/item.png);
+  background-size: cover;
+}
+
+#arena_overlay{
+  background-image: url(../img/arena.png);
+  background-size: cover;
+}
+
+#merudi_overlay{
+  background-image: url(../img/information.png);
+  background-size: cover;
+}
+
+.enemy_area{
+  position: fixed;
+  left: 50%;
+  top: 300px;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 700px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  z-index: 20;
+}
+
+.enemy_card{
+  width: 120px;
+  min-height: 200px;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  /* background: rgba(0,0,0,0.45);
+  border: 2px solid rgba(255,255,255,0.25); */
+  /* color: #fff; */
+   background: rgba(0,0,0,0.10);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.25);
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+  font-size: 11px;
+}
+
+.enemy_card.is-selected{
+  border-color: #ffe27a;
+  box-shadow: 0 0 12px rgba(255,226,122,0.75);
+  transform: translateY(-6px);
+}
+
+.enemy_card.is-dead{
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.enemy_card_img{
+  width: 100%;
+  height: 150px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  margin-bottom: 6px;
+}
+
+.enemy_pos_0{
+  position: fixed;
+  top: 80px;
+  left: 40px;
+  z-index: 100;
+}
+
+.enemy_pos_1{
+  position: fixed;
+  top: 20px;
+  left: -20px;
+}
+
+.enemy_pos_2{
+  position: fixed;
+  top: 30px;
+  left: 100px;
+
+}
+
+.party_name_btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.party_name_btn:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.top_right_buttons{
+  position:absolute;
+  top:10px;
+  right:10px;
+  display:flex;
+  gap:8px;
+  z-index:50;
+}
+
+.top_ui_btn{
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  width:64px;
+  height:64px;
+  border:2px solid #6b4f1f;
+  border-radius:12px;
+  background:#e8d2a4;
+  color:#5b3b11;
+  font-weight:bold;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+
+.map_overlay{
+  position:fixed;
+  
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  z-index:2000;
+}
+
+.map_overlay.is-open{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.map_window{
+  width:96vw;
+  height:96vh;
+  background:#1b1209;
+  border:3px solid #d6b16a;
+  border-radius:16px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  z-index: 10000;
+}
+
+.map_header{
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  background:#2c1d10;
+  color:#fff3d1;
+  font-weight:bold;
+}
+
+.map_body{
+  flex:1;
+  position:relative;
+}
+
+.map_hidden_spot {
+  width: 70px;
+  height: 70px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+/* / 開発中だけ当たり判定を見たい時 */
+.map_hidden_spot {
+  background: rgba(255, 0, 0, 0.15);
+  border: 1px dashed rgba(255, 0, 0, 0.35);
+}
+
+
+.map_hidden_spot:disabled {
+  pointer-events: none;
+}
+
+.map_event_log {
+
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+
+  width: 85%;
+  min-height: 60px;
+
+  padding: 12px 16px;
+
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  pointer-events: none;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.4);
+
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.map_event_log.is-show {
+  opacity: 1;
+}
+
+.map_overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 999;
+}
+
+.map_overlay.is-open {
+  display: block;
+}
+
+.map_window {
+  position: relative;
+  width: 95%;
+  max-width: 390px;
+  height: 92vh;
+  margin: 12px auto;
+  border: 3px solid #caa35a;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #2a1200;
+}
+
+.map_header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: rgba(60, 25, 0, 0.95);
+  color: #fff;
+  font-weight: 700;
+}
+
+#map_body {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 64px); /* ヘッダーぶん引く */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.enemy_card_img {
+  width: 120px;
+  height: 120px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.enemy_card_img.enemy_large {
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  width: 300px;
+  height: 300px;
+}
+
+.map_hidden_spot {
+  width: 64px;
+  height: 64px;
+  background: rgba(255, 0, 0, 0.15);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+.casino_overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+}
+
+.casino_overlay.is-open {
+  display: flex;
+}
+
+.casino_panel {
+  width: 100%;
+  
+  background:
+    linear-gradient(to bottom, #2b190d 0%, #120b06 100%);
+  border: 3px solid #d7b56d;
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,0.08) inset,
+    0 12px 30px rgba(0,0,0,0.5);
+  padding: 20px 18px 18px;
+  color: #f7f0d0;
+}
+
+.casino_title {
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #f3d98a;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.45);
+}
+
+.casino_text {
+  min-height: 110px;
+  margin: 0;
+  padding: 14px;
+  white-space: pre-line;
+  line-height: 1.8;
+  font-size: 15px;
+  background: rgba(255,255,255,0.06);
+  border: 2px solid rgba(215,181,109,0.65);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 8px rgba(0,0,0,0.35);
+}
+
+.casino_info {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(215,181,109,0.4);
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #f0e3b2;
+}
+
+.casino_choice_row {
+  display: flex;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.casino_choice_btn,
+.casino_close_btn {
+  appearance: none;
+  border: 2px solid #b8944f;
+  border-radius: 12px;
+  background:
+    linear-gradient(to bottom, #fff4cf 0%, #e4c977 100%);
+  color: #3b250e;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    0 4px 10px rgba(0,0,0,0.25);
+  transition: transform 0.08s ease, filter 0.15s ease;
+}
+
+.casino_choice_btn {
+  flex: 1;
+  min-height: 58px;
+}
+
+.casino_close_row {
+  margin-top: 16px;
+}
+
+.casino_close_btn {
+  width: 100%;
+  min-height: 48px;
+  font-size: 16px;
+}
+
+.casino_choice_btn:hover,
+.casino_close_btn:hover {
+  filter: brightness(1.03);
+}
+
+.casino_choice_btn:active,
+.casino_close_btn:active {
+  transform: translateY(1px);
+}
+
+.casino_choice_btn:disabled,
+.casino_close_btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+  filter: grayscale(0.2);
+}
+
+.town_btn_casino {
+  position: relative;
+  min-width: 110px;
+  min-height: 56px;
+  padding: 10px 18px;
+  border: 2px solid #f3d98a;
+  border-radius: 14px;
+  background:
+    linear-gradient(to bottom, rgba(40, 22, 10, 0.92), rgba(18, 10, 5, 0.96));
+  color: #fff4cf;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,0.08) inset,
+    0 6px 14px rgba(0,0,0,0.35);
+  transition: transform 0.12s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.town_btn_casino::before {
+  content: "♠ ♥ ♣ ♦";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 8px;
+  border: 1px solid #d7b56d;
+  border-radius: 999px;
+  background: rgba(25, 12, 6, 0.95);
+  color: #f3d98a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.town_btn_casino:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,0.1) inset,
+    0 8px 18px rgba(0,0,0,0.42),
+    0 0 14px rgba(243,217,138,0.22);
+}
+
+.town_btn_casino:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.town_btn_casino:disabled {
+  opacity: 0.5;
+  filter: grayscale(0.2);
+}
+
+.story_portrait_top_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 180px;
+  margin-bottom: 10px;
+  pointer-events: none;
+}
+
+.story_portrait_top {
+  max-width: 220px;
+  max-height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.45));
+}
+
+.casino_owner_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.casino_owner_img {
+  width: 140px;
+  max-width: 42vw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
+}
+
+.casino_owner_name {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f3d98a;
+  letter-spacing: 0.08em;
+}
+
+/* 闘技場ショップ全体 */
+#arena_shop_overlay {
+  position: fixed;
+  
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+}
+
+#arena_shop_overlay.is-open {
+  display: flex;
+}
+
+/* パネル本体 */
+#arena_shop_overlay .overlay_panel {
+  width: min(92vw, 720px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(255, 248, 235, 0.96);
+  border: 3px solid #5a3b1d;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  padding: 20px;
+  color: #2f1d0f;
+}
+
+/* タイトル */
+#arena_shop_overlay h2 {
+  margin: 0 0 12px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #3b220f;
+}
+
+/* 所持ポイント */
+#arena_shop_points {
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  background: #f3e3c4;
+  border: 1px solid #8b6a3f;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* リスト */
+#arena_shop_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+/* 各商品 */
+#arena_shop_list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #fffaf0;
+  border: 1px solid #b08a57;
+  border-radius: 10px;
+}
+
+/* 商品情報 */
+.arena_shop_info {
+  flex: 1;
+}
+
+.arena_shop_name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.arena_shop_price {
+  font-size: 15px;
+  color: #7a4b18;
+  margin-bottom: 4px;
+}
+
+.arena_shop_desc {
+  font-size: 14px;
+  color: #4d3a2a;
+}
+
+/* ボタン */
+#arena_shop_list button,
+#arena_shop_close {
+  border: 1px solid #7b5b35;
+  background: linear-gradient(to bottom, #f8e7bf, #d9b46b);
+  color: #2e1b0c;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#arena_shop_list button:hover,
+#arena_shop_close:hover {
+  filter: brightness(1.05);
+}
+
+#arena_shop_list button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#arena_shop_close {
+  margin-top: 16px;
+}
+
+.arena_menu {
+  display: grid;
+  gap: 10px;
+}
+
+.arena_shop_panel {
+  width: min(92vw, 760px);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+#arena_shop_points {
+  margin: 8px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid #8e6f45;
+  border-radius: 10px;
+  background: rgba(255, 248, 235, 0.9);
+  font-weight: bold;
+}
+
+#arena_shop_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+#arena_shop_list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid #9b7a4f;
+  border-radius: 12px;
+  background: rgba(255, 250, 240, 0.95);
+}
+
+.arena_shop_info {
+  flex: 1;
+}
+
+.arena_shop_name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.arena_shop_price {
+  font-size: 20px;
+  margin-bottom: 4px;
+  color: #6a4520;
+}
+
+.arena_shop_desc {
+  font-size: 18px;
+  color: #4c3928;
+}
+
+.status-name-link{
+  background: none;
+  border: none;
+  color: #f6e7b0;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+#unit_detail_overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:9999;
+}
+
+#unit_detail_overlay.is-open{
+  display:block;
+}
+
+#unit_detail_overlay .overlay_inner{
+  width:min(92vw, 420px);
+  margin:40px auto;
+  background:#111;
+  color:#fff;
+  border:2px solid #c9a85f;
+  border-radius:12px;
+  padding:16px;
+}
+
+.status-name-link{
+  background:none;
+  border:none;
+  color:#f6e7b0;
+  font:inherit;
+  font-weight:bold;
+  cursor:pointer;
+  padding:0;
+  text-decoration:underline;
+}
+
+#unit_detail_overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:9999;
+}
+
+#unit_detail_overlay.is-open{
+  display:block;
+}
+
+#unit_detail_overlay .overlay_inner{
+  width:min(92vw, 460px);
+  height:95vh;
+  margin:20px auto;
+  background:#111;
+  color:#fff;
+  border:2px solid #c9a85f;
+  border-radius:16px;
+  padding:12px;
+  box-sizing:border-box;
+}
+
+.unit-detail-layout{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  gap:10px;
+}
+
+.unit-detail-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.unit-detail-close{
+  background:#f2e2b0;
+  border:1px solid #8b6b2d;
+  border-radius:8px;
+  padding:6px 10px;
+  font:inherit;
+  cursor:pointer;
+}
+
+.unit-detail-name{
+  flex:1;
+  text-align:right;
+  font-weight:bold;
+  font-size:20px;
+  color:#f6e7b0;
+}
+
+.unit-detail-top{
+  flex:1 1 48%;
+  min-height:180px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #8b6b2d;
+  border-radius:12px;
+  background:rgba(255,255,255,0.03);
+  overflow:hidden;
+}
+
+.unit-detail-image{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.unit-detail-bottom{
+  flex:1 1 52%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  min-height:0;
+}
+
+.unit-detail-panel{
+  border:1px solid #8b6b2d;
+  border-radius:12px;
+  padding:10px;
+  overflow:auto;
+  background:rgba(255,255,255,0.02);
+}
+
+.unit-detail-title{
+  font-weight:bold;
+  color:#f6e7b0;
+  margin-bottom:8px;
+  border-bottom:1px solid rgba(201,168,95,.4);
+  padding-bottom:4px;
+}
+
+#equip_select_overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  z-index:10000;
+}
+
+#equip_select_overlay.is-open{
+  display:block;
+}
+
+#equip_select_overlay .overlay_inner{
+  width:min(92vw, 420px);
+  max-height:80vh;
+  margin:40px auto;
+  padding:16px;
+  background:#111;
+  color:#fff;
+  border:2px solid #c9a85f;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+  overflow:auto;
+}
+
+#equip_select_title{
+  font-size:18px;
+  font-weight:700;
+  color:#f6e7b0;
+  margin-bottom:12px;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(201,168,95,.45);
+}
+
+#equip_select_list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.equip-choice-btn{
+  width:100%;
+  text-align:left;
+  padding:12px 14px;
+  border:1px solid #8b6b2d;
+  border-radius:10px;
+  background:#1a1a1a;
+  color:#fff;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.equip-choice-btn:hover{
+  background:#2a2114;
+  border-color:#f0cf7a;
+}
+
+.equip-choice-btn.is-dragon-gem{
+  background:linear-gradient(180deg, #162033 0%, #111 100%);
+  border-color:#7cb7ff;
+}
+
+.equip-choice-name{
+  font-weight:700;
+}
+
+.equip-choice-meta{
+  font-size:12px;
+  opacity:.85;
+  color:#f6e7b0;
+}
+
+.equip-empty-message{
+  padding:14px;
+  border:1px solid #8b6b2d;
+  border-radius:10px;
+  color:#ddd;
+  text-align:center;
+}
+
+
+
+
+
+
+
+/* パネル（もっと質素） */
+.arena-menu-panel{
+  position: absolute;
+  top: 20px;
+  left: 12px;
+  width: 150px;
+  padding: 10px 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #8b7a58;
+  background: rgba(240,235,215,0.92);
+  box-shadow: 0 4px 10px rgba(0,0,0,.18);
+}
+
+/* タイトル */
+.arena-title{
+  font-size: 18px;
+  font-weight: 700;
+  color: #3c2f1b;
+  margin-bottom: 8px;
+}
+
+/* 閉じるボタン */
+#arena_close{
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #8b7a58;
+  background: #e6ddc3;
+  color: #3c2f1b;
+  font-weight: 600;
+}
+
+/* ボタン共通（シンプル） */
+#arena_beginner,
+#arena_middle,
+#arena_advanced,
+#arena_master,
+#arena_shop_btn{
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  border: 1px solid #8b7a58;
+  background: #ece6d2;
+  color: #3c2f1b;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,.12);
+}
+
+/* ホバー（軽く） */
+#arena_beginner:hover,
+#arena_middle:hover,
+#arena_advanced:hover,
+#arena_master:hover,
+#arena_shop_btn:hover{
+  background: #e0d8bf;
+}
+
+/* 押した感 */
+#arena_beginner:active,
+#arena_middle:active,
+#arena_advanced:active,
+#arena_master:active,
+#arena_shop_btn:active{
+  transform: translateY(1px);
+}
+
+/* 色差をかなり弱くする */
+#arena_middle{
+  background: #e7e7e7;
+}
+
+#arena_advanced{
+  background: #e9dccb;
+}
+
+#arena_master{
+  background: #dcd2f0;
+}
+
+#arena_shop_btn{
+  background: #d7e7da;
+}
+#status_box {
+  position: relative;
+}
+
+#status_box {
+  position: relative;
+  overflow: visible;
+}
+/* スキルパネル全体 */
+#skill_box {
+  position: absolute;
+  left: 75%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 50%;
+  height: 300px;
+  max-width: 320px;
+  min-height: 180px;
+
+  background:
+    linear-gradient(180deg, rgba(30, 22, 12, 0.98) 0%, rgba(8, 8, 10, 0.98) 100%);
+  border: 2px solid #d7b15a;
+  border-radius: 16px;
+  padding: 14px;
+
+  z-index: 20;
+  box-shadow:
+    0 0 0 2px rgba(255, 223, 150, 0.18) inset,
+    0 0 0 5px rgba(70, 45, 10, 0.95) inset,
+    0 10px 24px rgba(0, 0, 0, 0.5),
+    0 0 18px rgba(220, 170, 70, 0.18);
+}
+#status_panel_inner {
+  position: relative;
+}
+#skill_box::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 225, 160, 0.45);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+#skill_box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 16px 16px, rgba(255, 220, 120, 0.95) 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 16px) 16px, rgba(255, 220, 120, 0.95) 0 2px, transparent 3px),
+    radial-gradient(circle at 16px calc(100% - 16px), rgba(255, 220, 120, 0.95) 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 16px) calc(100% - 16px), rgba(255, 220, 120, 0.95) 0 2px, transparent 3px);
+}
+
+/* #skill_box {
+  position: absolute;
+  inset: 10px;
+  z-index: 30;
+} */
+
+/* タイトル */
+#skill_box h2,
+#skill_box .skill_title {
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #f4c65d;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(215, 177, 90, 0.45);
+  padding-bottom: 8px;
+
+}
+
+/* スキル一覧 */
+#skill_box ul,
+#skill_box .skill_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  
+  
+  
+}
+
+/* 各スキル行 */
+#skill_box li,
+#skill_box .skill_item {
+  background: rgba(255, 245, 220, 0.05);
+  border: 1px solid rgba(215, 177, 90, 0.35);
+  border-radius: 12px;
+  padding: 12px 12px 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+/* ホバー */
+#skill_box li:hover,
+#skill_box .skill_item:hover {
+  transform: translateY(-1px);
+  border-color: #f0c96a;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+}
+
+/* スキル名 */
+#skill_box .skill_name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffe08a;
+  margin-bottom: 6px;
+}
+
+/* スキル詳細 */
+#skill_box .skill_meta,
+#skill_box .skill_desc,
+#skill_box .skill_cost,
+#skill_box .skill_type {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #f5eddc;
+}
+
+/* MP消費を見やすく */
+#skill_box .skill_cost {
+  color: #86c8ff;
+  font-weight: 700;
+}
+
+/* タイプ表示 */
+#skill_box .skill_type {
+  color: #d8c38f;
+}
+
+/* 閉じるボタンがある場合 */
+#skill_box .close_btn,
+#skill_box button.close,
+#skill_box .skill_close {
+  display: block;
+  margin: 16px auto 0;
+  min-width: 120px;
+  padding: 10px 16px;
+
+  border: 1px solid #b88a34;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f2dfab 0%, #d4af59 100%);
+  color: #3a2a11;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#skill_box .close_btn:hover,
+#skill_box button.close:hover,
+#skill_box .skill_close:hover {
+  filter: brightness(1.05);
+}
+
+
+
+
+/* スマホ向け */
+@media (max-width: 768px){
+  .story_window{
+    padding: 12px;
+  }
+
+  .story_header{
+    font-size: 16px;
+    padding: 8px 10px;
+  }
+
+  #story_map{
+    width: 100%;
+    height: 48vh;
+    border-radius: 14px;
+  }
+
+  #story_rog{
+    width: calc(100% - 24px);
+    height: 24vh;
+    bottom: 12px;
+    padding: 12px;
+  }
+
+  .map_node{
+    min-width: 74px;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  #story_btn{
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+.enemy_card {
+  position: absolute;   /* すでに absolute ならそのままでOK */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transform: translateX(-50%); /* 中央基準にする */
+  top: 50%;  
+}
+
+.enemy_card_img {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
 
 
 
@@ -859,3 +2898,4 @@ height: 87vh;
 .command_list .rog_box *{
   pointer-events: auto;
 }
+
