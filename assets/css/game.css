@@ -1168,13 +1168,13 @@ html, body{
 
 /* ストーリーボタン */
 #story_btn{
-  position: fixed;
-  width: 200px;
-  top: 300px;
-  left: 10px;
-  z-index: 1001;
-  background:
-    linear-gradient(to bottom, #5a4630, #2e2218);
+  position: static;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  z-index: auto;
+
+  background: linear-gradient(to bottom, #5a4630, #2e2218);
   color: #fff1bf;
   border: 2px solid #bda06b;
   padding: 10px 16px;
@@ -1188,8 +1188,7 @@ html, body{
 }
 
 #story_btn:hover{
-  background:
-    linear-gradient(to bottom, #72583b, #3d2d1d);
+  background: linear-gradient(to bottom, #72583b, #3d2d1d);
 }
 
 .story_scene_overlay {
@@ -2849,7 +2848,7 @@ height: 87vh;
     
     
     width: 170px !important;
-    height: 250px;
+    height: 230px !important;
     
     
     font-size: 9px !important;
