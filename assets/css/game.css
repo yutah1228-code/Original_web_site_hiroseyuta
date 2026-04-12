@@ -656,7 +656,7 @@ html, body{
 }
 .party_slot1{
   position: fixed;
-  top: 320px;
+  top: 250px;
   right: 70px;
   flex:1;
   z-index: 1;
@@ -668,7 +668,7 @@ html, body{
 
 .party_slot2{
   position: fixed;
-  top: 250px;
+  top: 200px;
   right: 20px;
   flex:1;
   
@@ -686,6 +686,7 @@ html, body{
 
 .party_img{
   position: fixed;
+  top: 40%;
   right: 10px;
   width: 180px;
   height: 300px;
@@ -706,7 +707,7 @@ html, body{
 
 #status_switch_btn{
   position: fixed;
-  top: 550px;
+  top: 65%;
   right: 30px;
   font-size: 10px;
   width: 140px;
@@ -1458,7 +1459,7 @@ html, body{
 
 .enemy_area{
   position: fixed;
-  left: 50%;
+  left: 60%;
   top: 300px;
   transform: translateX(-50%);
   width: 90vw;
@@ -1512,21 +1513,21 @@ html, body{
 
 .enemy_pos_0{
   position: fixed;
-  top: 80px;
-  left: 40px;
+  top: 80px !important;
+  left: 40px !important;
   z-index: 100;
 }
 
 .enemy_pos_1{
   position: fixed;
-  top: 20px;
-  left: -20px;
+  top: 20px !important;
+  left: -20px !important;
 }
 
 .enemy_pos_2{
   position: fixed;
-  top: 30px;
-  left: 100px;
+  top: 30px !important;
+  left: 100px !important;
 
 }
 
@@ -2846,7 +2847,7 @@ height: 87vh;
   /* ステータス */
   #status_box{
     
-    
+    top: 67% !important;
     width: 170px !important;
     height: 240px !important;
     
