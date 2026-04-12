@@ -2838,9 +2838,9 @@ height: 87vh;
   .command_all{
     width: 200px;
     left: 25%;
-    top: 68%;
+    top: 66%;
     font-size: 12px;
-    height: 200px;
+    height: 240px;
   }
 
   /* ステータス */
@@ -2848,7 +2848,7 @@ height: 87vh;
     
     
     width: 170px !important;
-    height: 230px !important;
+    height: 240px !important;
     
     
     font-size: 9px !important;
