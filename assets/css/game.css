@@ -1513,20 +1513,20 @@ html, body{
 
 .enemy_pos_0{
   position: fixed;
-  top: -40px !important;
+  top: -60px !important;
   left: 0px !important;
   z-index: 100;
 }
 
 .enemy_pos_1{
   position: fixed;
-  top: -60px !important;
+  top: -80px !important;
   left: -20px !important;
 }
 
 .enemy_pos_2{
   position: fixed;
-  top: -60px !important;
+  top: -80px !important;
   left: 100px !important;
 
 }
