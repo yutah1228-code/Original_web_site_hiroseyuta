@@ -373,9 +373,9 @@ const SHOP_ITEMS = [
   { key: "steel_shield",     name: "鋼の盾",       price: 3000, kind: "shield", stat: { GRD: 12 }, durability: 4 },
 
   // HP回復
-  { key: "herb",             name: "薬草",         price: 300,  kind: "consumable", effectType: "heal_hp", value: 20, usesPerBuy: 3 },
-  { key: "fruit",            name: "癒しの果実",   price: 1500, kind: "consumable", effectType: "heal_hp", value: 40, usesPerBuy: 3 },
-  { key: "great_fruit",      name: "癒しの雫", price: 3000, kind: "consumable", effectType: "heal_hp", value: 60, usesPerBuy: 3 },
+  { key: "herb",             name: "薬草",         price: 300,  kind: "consumable", effectType: "heal_hp", value: 30, usesPerBuy: 3 },
+  { key: "fruit",            name: "癒しの果実",   price: 1500, kind: "consumable", effectType: "heal_hp", value: 70, usesPerBuy: 3 },
+  { key: "great_fruit",      name: "癒しの雫", price: 3000, kind: "consumable", effectType: "heal_hp", value: 150, usesPerBuy: 3 },
   { key: "elixir",           name: "エリクサー",   price: 100000, kind: "consumable", effectType: "revive", value: 1, usesPerBuy: 1 },
 
   // MP回復
@@ -536,7 +536,7 @@ const MARCIA_HEAL_ITEMS = [
     price: 300,
     type: "item",
     effectType: "heal_hp",
-    value: 20,
+    value: 30,
     uses: 3
   },
   {
@@ -545,7 +545,7 @@ const MARCIA_HEAL_ITEMS = [
     price: 1500,
     type: "item",
     effectType: "heal_hp",
-    value: 40,
+    value: 70,
     uses: 3
   },
   {
@@ -554,7 +554,7 @@ const MARCIA_HEAL_ITEMS = [
     price: 3000,
     type: "item",
     effectType: "heal_hp",
-    value: 60,
+    value: 150,
     uses: 3
   },
   {
@@ -661,9 +661,9 @@ sea_crystal: { desc: "海底で生成される魔力結晶。", effect: "合成�
   iron_shield:     { desc: "鉄製の盾。", effect: "GRD+7 / 耐久4" },
   steel_shield:    { desc: "鋼製の盾。", effect: "GRD+12 / 耐久4" },
 
-  herb:            { desc: "一般的な回復薬。", effect: "HP+20 / 1個で3回使用" },
-  fruit:           { desc: "濃い生命力を宿す果実。", effect: "HP+40 / 1個で3回使用" },
-  great_fruit:     { desc: "非常に希少な果実。", effect: "HP+60 / 1個で3回使用" },
+  herb:            { desc: "一般的な回復薬。", effect: "HP+50 / 1個で3回使用" },
+  fruit:           { desc: "濃い生命力を宿す果実。", effect: "HP+100 / 1個で3回使用" },
+  great_fruit:     { desc: "非常に希少な果実。", effect: "HP+200 / 1個で3回使用" },
   elixir:          { desc: "究極の秘薬。", effect: "戦闘不能を回復 / 1回のみ" },
 
   mana_fragment:   { desc: "砕けた魔石。", effect: "MP+5" },
@@ -914,7 +914,7 @@ const IMG_BASE = "./assets/img/";
 const ENEMIES = {
   slime: {
     name: "スライム",
-    hp: 70,
+    hp: 50,
     atkMin: 1,
     atkMax: 2,
     agl: 9,
@@ -925,7 +925,7 @@ const ENEMIES = {
   },
   goblin: {
     name: "ゴブリン",
-    hp: 80,
+    hp: 60,
     atkMin: 3,
     atkMax: 5,
     agl: 8,
@@ -937,17 +937,17 @@ const ENEMIES = {
   
   dragon: {
     name: "ドラゴン",
-    hp: 1500,
-    atkMin: 22,
-    atkMax: 30,
+    hp: 1000,
+    atkMin: 17,
+    atkMax:25,
     agl: 18,
-    grd: 41,
+    grd: 36,
     imgSize: 260,
     img: `${IMG_BASE}boss.png`
   },
   zombie: {
     name: " ゾンビ",
-    hp: 420,
+    hp: 200,
     atkMin: 20,
     atkMax: 24 ,
     agl: 14,
@@ -958,7 +958,7 @@ const ENEMIES = {
   },
   graceMummy: {
   name: "グレイスマミー",
-  hp: 500,
+  hp: 300,
   atkMin: 10,
   atkMax: 14,
   agl: 18,
@@ -969,7 +969,7 @@ const ENEMIES = {
 },
 behimosu: {
   name: "ベヒーモス",
-  hp: 300,
+  hp: 150,
   atkMin: 15,
   atkMax: 18,
   agl: 5,
@@ -982,7 +982,7 @@ behimosu: {
 },
 sandGoblin: {
   name: "サンドゴブリン",
-  hp: 150,
+  hp: 100,
   atkMin: 10,
   atkMax: 15,
   agl: 14,
@@ -994,7 +994,7 @@ sandGoblin: {
 },
 scorpion: {
   name: "デススコーピオン",
-  hp: 200,
+  hp: 170,
   atkMin: 11,
   atkMax: 16,
   agl: 16,
@@ -1032,7 +1032,7 @@ mimic: {
 },
 darkKnightShade: {
   name: "黒騎士の残影",
-  hp: 350,
+  hp: 250,
   atkMin: 20,
   atkMax: 30,
   agl: 16,
@@ -1046,7 +1046,7 @@ darkKnightShade: {
 pirate: {
     id: "pirate",
     name: "海賊",
-    hp: 120,
+    hp: 150,
     atkMin: 12,
     atkMax: 18,
     agl: 14,
@@ -1058,7 +1058,7 @@ pirate: {
   seaMage: {
     id: "seaMage",
     name: "海術師",
-    hp: 90,
+    hp: 120,
     atkMin: 8,
     atkMax: 14,
     agl: 12,
@@ -1070,7 +1070,7 @@ pirate: {
   mimic_beauty: {
   id: "mimic_beauty",
   name: "妖艶の擬態魔",
-  hp: 600,
+  hp: 300,
   atkMin: 35,
   atkMax: 55,
   agl: 24,
@@ -1097,9 +1097,9 @@ despair: {
 slime_big: {
   id: "slime_big",
   name: "スライムビック",
-  hp: 300,
-  atkMin: 20,
-  atkMax: 25,
+  hp: 260,
+  atkMin: 16,
+  atkMax: 20,
   agl: 16,
   grd: 16,
   imgSize: 170,
@@ -1109,9 +1109,9 @@ slime_big: {
 goblin_rider: {
   id: "goblin_rider",
   name: "ゴブリンライダー",
-  hp: 220,
-  atkMin: 25,
-  atkMax: 29,
+  hp: 190,
+  atkMin: 22,
+  atkMax: 24,
   agl: 10,
   grd: 20,
   imgSize: 170,
@@ -1121,7 +1121,7 @@ goblin_rider: {
 child_dragon: {
   id: "child_dragon",
   name: "子ドラゴン",
-  hp: 600,
+  hp: 500,
   atkMin: 18,
   atkMax: 26,
   agl: 16,
@@ -1133,7 +1133,7 @@ child_dragon: {
 dragon_hunter: {
   id: "dragon_hunter",
   name: "ドラゴンハンター",
-  hp: 300,
+  hp: 200,
   atkMin: 20,
   atkMax: 28,
   agl: 20,
@@ -1145,11 +1145,11 @@ dragon_hunter: {
 arena_cress: {
   id: "arena_cress",
   name: "勇者？？？",
-  hp: 1500,
-  atkMin: 66,
-  atkMax: 78,
+  hp: 1200,
+  atkMin: 43,
+  atkMax: 51,
   agl: 66,
-  grd: 65,
+  grd: 39,
   mag: 63,
   imgSize: 250,
   img: `${IMG_BASE}arena_cress.png`
@@ -1178,8 +1178,8 @@ const STORY_BATTLE_ENEMIES = {
     id:"zeek",
 name:"ジーク",
 hp:1200,
-atkMin:40,
-atkMax:60,
+atkMin:25,
+atkMax:35,
 agl:30,
 exp:150,
 gold:2000,
@@ -1190,7 +1190,7 @@ img:`${IMG_BASE}enemy_zeek.png`
   leviata: {
     id: "leviata",
     name: "水神竜レヴィアータ",
-    hp: 3500,
+    hp: 2200,
     atkMin: 25,
     atkMax: 40,
     agl: 18,
@@ -1202,7 +1202,7 @@ img:`${IMG_BASE}enemy_zeek.png`
   frostrain: {
   id: "frostrain",
   name: "氷神竜フロストレイン",
-  hp: 3500,
+  hp: 2200,
   atkMin: 35,
   atkMax: 65,
   agl: 34,
@@ -1216,7 +1216,7 @@ img:`${IMG_BASE}enemy_zeek.png`
 ignarion: {
   id: "ignarion",
   name: "炎神竜イグナリオン",
-  hp: 3500,
+  hp: 2200,
   atkMin: 40,
   atkMax: 70,
   agl: 32,
@@ -1230,7 +1230,7 @@ ignarion: {
 azrael: {
   id: "azrael",
   name: "蒼神竜アズラエル",
-  hp: 3500,
+  hp: 2200,
   atkMin: 35,
   atkMax: 65,
   agl: 38,
@@ -1244,7 +1244,7 @@ azrael: {
 granius: {
   id: "granius",
   name: "岩神竜グラニウス",
-  hp: 5000,
+  hp: 2700,
   atkMin: 30,
   atkMax: 55,
   agl: 20,
@@ -1276,7 +1276,7 @@ granius: {
   volcano_leonis_soldier: {
     id: "volcano_leonis_soldier",
     name: "レオニス兵",
-    hp: 900,
+    hp: 400,
     atkMin: 10,
     atkMax: 15,
     agl: 28,
@@ -1291,7 +1291,7 @@ granius: {
   volcano_commander: {
     id: "volcano_commander",
     name: "レオニス王国幹部",
-    hp: 3200,
+    hp: 1600,
     atkMin: 35,
     atkMax: 45,
     agl: 38,
@@ -1306,9 +1306,9 @@ granius: {
   volcano_beast: {
     id: "volcano_beast",
     name: "火山魔獣",
-    hp: 800,
-    atkMin: 15,
-    atkMax: 20,
+    hp: 400,
+    atkMin: 18,
+    atkMax: 22,
     agl: 26,
     grd: 20,
     mag: 15,
@@ -1389,26 +1389,26 @@ const DRAGON_GEMS = {
   fire: {
     key: "dragon_gem_fire",
     name: "竜玉(火)",
-    bonus: { STR: 18, MAG: 8 },
+    bonus: { STR: 20, MAG: 8 },
     crit: 0.10
   },
   water: {
     key: "dragon_gem_water",
     name: "竜玉(水)",
-    bonus: { HP: 100, MP: 40 },
-    regen: 10
+    bonus: { HP: 200, MP: 40 },
+    regen: 30
   },
   rock: {
     key: "dragon_gem_rock",
     name: "竜玉(岩)",
-    bonus: { GRD: 20, HP: 50 },
+    bonus: { GRD: 20, HP: 100 },
     damageCut: 0.15
   },
   ice: {
     key: "dragon_gem_ice",
     name: "竜玉(氷)",
     bonus: { AGL: 18, LUCK: 10 },
-    evasion: 0.10
+    evasion: 0.20
   },
   blue: {
     key: "dragon_gem_blue",
