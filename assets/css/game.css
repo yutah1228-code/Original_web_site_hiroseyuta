@@ -2903,3 +2903,28 @@ height: 87vh;
   pointer-events: auto;
 }
 
+#weapon_list,
+#item_list,
+#arena_shop_list,
+#shop_list {
+  max-height: 60vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding-bottom: 24px;
+}
+
+/* 所持アイテム一覧 */
+.inventory_box {
+  max-height: 55vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+#inventory_list {
+  max-height: 50vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 24px;
+}
