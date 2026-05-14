@@ -2928,3 +2928,33 @@ height: 87vh;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 24px;
 }
+/* スマホ用：武器屋・道具屋の商品リストをスクロール可能にする */
+@media (max-width: 600px) {
+  .facility_overlay.is-open {
+    overflow: hidden;
+  }
+
+  .facility_panel {
+    width: 92vw;
+    max-height: 88vh;
+    height: auto;
+    margin: 20px auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .facility_list {
+    flex: 1;
+    max-height: 62vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding-bottom: 40px;
+  }
+
+  .facility_body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
